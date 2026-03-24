@@ -68,7 +68,6 @@
     <section id="home-section">
         <div class="hero">
             <h1>ברק לב שלם</h1>
-            <p style="font-size: 1.5rem;">1982 - 2024</p>
         </div>
         <div class="container">
             <div id="random-joke-container"></div>
@@ -90,16 +89,14 @@
 </div>
 
 <script>
-    const CONFIG = {
-        CREATIONS_CSV: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSXdGMnIRS-ydFn4BRfngLIAbdveYx7L7eS96kCvpruVDca1-uGk3qyQY9Nh9C_eTpbjKoojzB2zlFn/pub?gid=1983290067&single=true&output=csv',
-        JOKES_CSV: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSR74JGStqevOMg4uFKqudbSRFEQVRisiEgSwTuxnLjsTUx7TShIVuzPkdRgOZiJq8Pz3H-zoa_3mK3/pub?output=csv',
-        PHOTOS_CSV: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSevdjPZljQNazIav8vcVOszHVu5iKOA-AtYUjwhZGuZUibJpjgnJHC_tsrZY11p9aAE_iQytePZsAZ/pub?output=csv',
-        COMMENTS_CSV: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRLoH5kw3YDw4HGqSflNsJfe-Gaq34n-5916WzKs-wFlAiCOUiit6ZqmkUiKprnAyJ6ezB0bwQhkGej/pub?output=csv',
-        APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbxnPbLI6SCffSvyfPZQ50v09o6rtXqptjSx36mLqSH8hVyFbWDnQk30PG2UEVW47hVS1Q/exec'
-    };
+    // הקישורים החדשים שלך
+    const CREATIONS_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSXdGMnIRS-ydFn4BRfngLIAbdveYx7L7eS96kCvpruVDca1-uGk3qyQY9Nh9C_eTpbjKoojzB2zlFn/pub?gid=1983290067&single=true&output=csv';
+    const JOKES_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSR74JGStqevOMg4uFKqudbSRFEQVRisiEgSwTuxnLjsTUx7TShIVuzPkdRgOZiJq8Pz3H-zoa_3mK3/pub?output=csv';
+    const PHOTOS_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSevdjPZljQNazIav8vcVOszHVu5iKOA-AtYUjwhZGuZUibJpjgnJHC_tsrZY11p9aAE_iQytePZsAZ/pub?output=csv';
+    const COMMENTS_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRLoH5kw3YDw4HGqSflNsJfe-Gaq34n-5916WzKs-wFlAiCOUiit6ZqmkUiKprnAyJ6ezB0bwQhkGej/pub?output=csv';
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxnPbLI6SCffSvyfPZQ50v09o6rtXqptjSx36mLqSH8hVyFbWDnQk30PG2UEVW47hVS1Q/exec';
 
     let store = { creations: [], jokes: [], photos: [], comments: [] };
-    let currentOpenItem = null;
 
     function fixDriveUrl(url) {
         if (!url) return '';
@@ -109,206 +106,37 @@
 
     async function init() {
         try {
-            const [creations, jokes, photos, comments] = await Promise.all([
-                fetchCSV(CONFIG.CREATIONS_CSV),
-                fetchCSV(CONFIG.JOKES_CSV),
-                fetchCSV(CONFIG.PHOTOS_CSV),
-                fetchCSV(CONFIG.COMMENTS_CSV)
+            const [c, j, p, com] = await Promise.all([
+                fetchCSV(CREATIONS_CSV), fetchCSV(JOKES_CSV), fetchCSV(PHOTOS_CSV), fetchCSV(COMMENTS_CSV)
             ]);
-            
-            store.creations = creations;
-            store.jokes = jokes;
-            store.photos = photos.map(p => ({
-                ...p, 
-                url: fixDriveUrl(p.url || p.webContentLink || p.WebViewLink),
-                id: p.id || Math.random().toString(36).substr(2, 9)
+            store.creations = c;
+            store.jokes = j;
+            store.photos = p.map(img => ({
+                ...img, 
+                url: fixDriveUrl(img.url || img.webContentLink),
+                id: img.id || Math.random().toString(36).substr(2, 9)
             }));
-            store.comments = comments;
-
-            handleRouting();
+            store.comments = com;
             renderHome();
-        } catch (error) {
-            console.error("Error initializing:", error);
-        }
+        } catch (e) { console.error(e); }
     }
 
     function fetchCSV(url) {
-        return new Promise(resolve => {
-            Papa.parse(url, { download: true, header: true, skipEmptyLines: true, complete: results => resolve(results.data) });
-        });
+        return new Promise(resolve => Papa.parse(url, { download: true, header: true, skipEmptyLines: true, complete: r => resolve(r.data) }));
     }
 
     function renderHome() {
         if(store.jokes.length) {
-            const joke = store.jokes[Math.floor(Math.random() * store.jokes.length)];
+            const rj = store.jokes[Math.floor(Math.random() * store.jokes.length)];
             document.getElementById('random-joke-container').innerHTML = `
                 <div style="background: #fff3e0; padding: 25px; border-radius: 12px; border-right: 5px solid var(--accent); margin: 20px 0;">
                     <h3 style="margin-top:0; color: var(--accent);">בדיחה של ברק</h3>
-                    <p style="font-size: 1.2rem; margin-bottom:0;">${joke['Joke Content'] || ""}</p>
+                    <p style="font-size: 1.2rem; margin-bottom:0;">${rj['Joke Content'] || ""}</p>
                 </div>`;
         }
-        
         const featured = store.creations.filter(i => i.id).slice(0, 3);
         document.getElementById('featured-creations').innerHTML = featured.map(i => createCard(i)).join('');
     }
 
     function createCard(item) {
-        const defaultImg = 'https://drive.google.com/uc?export=view&id=1JLmcif2XirD6hNg_5my6K8XxSKAxcgf4';
-        const img = item.type === 'image' ? fixDriveUrl(item.url) : defaultImg;
-        const category = item.category || item.Categories || 'כללי';
-        
-        return `
-            <div class="card" onclick="openItem('${item.id}', '${item.type || 'text'}')">
-                <span class="card-tag">${category}</span>
-                <img src="${img}" onerror="this.src='${defaultImg}'" loading="lazy">
-                <div class="card-content">
-                    <h3 style="margin:0 0 10px 0; color: var(--primary);">${item.title || 'ללא כותרת'}</h3>
-                    <p style="margin:0; font-size: 0.95rem; color: #666;">${item.summary || 'לחצו לקריאה וצפייה...'}</p>
-                </div>
-            </div>`;
-    }
-
-    function showSection(name) {
-        window.scrollTo(0, 0);
-        const home = document.getElementById('home-section');
-        const content = document.getElementById('content-section');
-        const grid = document.getElementById('section-grid');
-        const header = document.getElementById('section-header');
-        
-        home.classList.toggle('hidden', name !== 'home');
-        content.classList.toggle('hidden', name === 'home');
-        
-        if(name === 'home') return;
-
-        let items = [], title = '';
-        if(name === 'creations') { items = store.creations.filter(i => i.content_link && i.content_link.includes('creations')); title = 'היצירות של ברק'; }
-        if(name === 'memories') { items = store.creations.filter(i => i.content_link && i.content_link.includes('memories')); title = 'סיפורי זיכרון'; }
-        if(name === 'gallery') { items = store.photos.map(p => ({...p, type: 'image'})); title = 'גלריית תמונות'; }
-        if(name === 'jokes') { items = store.jokes; title = 'הבדיחות של ברק'; }
-
-        header.innerText = title;
-        renderFilters(items, name);
-        renderGrid(items, name);
-    }
-
-    function renderFilters(items, sectionName) {
-        const filterContainer = document.getElementById('filters-container');
-        let cats = [];
-        items.forEach(i => {
-            const raw = i.category || i.Categories || '';
-            raw.split(',').forEach(c => cats.push(c.trim()));
-        });
-        const uniqueCats = [...new Set(cats)].filter(Boolean);
-        
-        filterContainer.innerHTML = `<button class="filter-btn active" onclick="filterByTag('all', '${sectionName}', this)">הכל</button>` +
-            uniqueCats.map(c => `<button class="filter-btn" onclick="filterByTag('${c}', '${sectionName}', this)">${c}</button>`).join('');
-    }
-
-    function filterByTag(tag, sectionName, btn) {
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-
-        let source = [];
-        if(sectionName === 'creations') source = store.creations.filter(i => i.content_link.includes('creations'));
-        if(sectionName === 'memories') source = store.creations.filter(i => i.content_link.includes('memories'));
-        if(sectionName === 'gallery') source = store.photos.map(p => ({...p, type: 'image'}));
-        if(sectionName === 'jokes') source = store.jokes;
-
-        const filtered = tag === 'all' ? source : source.filter(i => (i.category || i.Categories || '').includes(tag));
-        renderGrid(filtered, sectionName);
-    }
-
-    function renderGrid(items, sectionName) {
-        const grid = document.getElementById('section-grid');
-        if(sectionName === 'jokes') {
-            grid.innerHTML = items.map(j => `
-                <div style="background: #fff3e0; padding: 25px; border-radius: 12px; border-right: 5px solid var(--accent);">
-                    <small style="color: var(--accent); font-weight: bold;">${j.Categories || 'כללי'}</small>
-                    <p style="font-size: 1.1rem; margin-top: 10px;">${j['Joke Content']}</p>
-                </div>`).join('');
-        } else {
-            grid.innerHTML = items.map(i => createCard(i)).join('');
-        }
-    }
-
-    function openItem(id, type) {
-        const modalInner = document.getElementById('modal-inner-content');
-        let item, bodyHtml = '';
-        
-        if(type === 'image') {
-            item = store.photos.find(p => p.id === id);
-            bodyHtml = `<div class="modal-body" style="background:#000; display:flex; align-items:center; justify-content:center;"><img src="${item.url}" style="max-height:100%; max-width:100%; object-fit:contain;"></div>`;
-        } else {
-            item = store.creations.find(c => c.id === id);
-            bodyHtml = `<div class="modal-body"><iframe src="${item.content_link}"></iframe></div>`;
-        }
-
-        currentOpenItem = { id, type };
-        modalInner.innerHTML = bodyHtml + renderCommentsArea(id);
-        document.getElementById('item-modal').style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-        
-        // Update URL
-        window.history.pushState({}, '', `#${type}=${id}`);
-    }
-
-    function renderCommentsArea(itemId) {
-        const relevant = store.comments.filter(c => c.item_id === itemId && c.status === 'מאושר');
-        const list = relevant.length ? relevant.map(c => `<div class="comment-item"><strong>${c.name} (${c.relation}):</strong><br>${c.content}</div>`).join('') : '<p>אין עדיין תגובות. תהיו הראשונים לכתוב מילה חמה.</p>';
-        
-        return `
-        <div class="comments-section">
-            <div style="display:flex; justify-content:space-between; align-items:center;">
-                <h3 style="margin:0">תגובות ומילים חמות</h3>
-                <button onclick="copyShareLink()" style="background:none; border:1px solid var(--primary); padding:5px 10px; cursor:pointer; border-radius:5px;">שתפו יצירה זו</button>
-            </div>
-            <div style="margin-top:20px;">${list}</div>
-            <div class="comment-form">
-                <input type="text" id="c-name" placeholder="שם מלא">
-                <input type="text" id="c-rel" placeholder="קשר לברק">
-                <textarea id="c-content" placeholder="כתבו מילה חמה..."></textarea>
-                <button class="submit-btn" onclick="submitComment('${itemId}')">שלח תגובה</button>
-            </div>
-        </div>`;
-    }
-
-    async function submitComment(itemId) {
-        const payload = {
-            name: document.getElementById('c-name').value,
-            relation: document.getElementById('c-rel').value,
-            content: document.getElementById('c-content').value,
-            item_id: itemId
-        };
-        if(!payload.name || !payload.content) return alert("נא למלא שם ותוכן");
-        
-        try {
-            await fetch(CONFIG.APPS_SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) });
-            alert("תודה! התגובה נשלחה ותופיע לאחר אישור.");
-            closeModal();
-        } catch(e) { alert("שגיאה בשליחה"); }
-    }
-
-    function closeModal() {
-        document.getElementById('item-modal').style.display = 'none';
-        document.body.style.overflow = 'auto';
-        window.history.pushState({}, '', window.location.pathname);
-    }
-
-    function copyShareLink() {
-        const link = window.location.href;
-        navigator.clipboard.writeText(link);
-        alert("הקישור הועתק!");
-    }
-
-    function handleRouting() {
-        const hash = window.location.hash;
-        if (hash) {
-            const [type, id] = hash.substring(1).split('=');
-            if (type && id) openItem(id, type);
-        }
-    }
-
-    init();
-</script>
-</body>
-</html>
+        const defaultImg =
