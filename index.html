@@ -14,19 +14,19 @@
         
         /* Hero & Home */
         .hero { text-align: center; padding: 60px 20px; background: #eee; border-radius: 0 0 50px 50px; margin-bottom: 30px; }
-        .random-gallery { display: flex; gap: 10px; overflow-x: auto; padding: 10px 0; margin: 20px 0; scrollbar-width: thin; }
+        .random-gallery { display: flex; gap: 10px; overflow-x: auto; padding: 10px 0; margin: 20px 0; }
         .random-gallery img { height: 180px; border-radius: 8px; flex-shrink: 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1); object-fit: cover; }
 
         /* Filter Tags */
         .filter-tags { margin-bottom: 25px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
-        .tag-btn { background: #e0e0e0; border: none; padding: 8px 18px; border-radius: 20px; cursor: pointer; transition: 0.2s; font-family: inherit; }
-        .tag-btn.active { background: var(--accent); color: white; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        .tag-btn { background: #e0e0e0; border: none; padding: 8px 18px; border-radius: 20px; cursor: pointer; transition: 0.2s; }
+        .tag-btn.active { background: var(--accent); color: white; }
 
         /* Grid & Cards */
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
         .card { background: var(--white); border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.08); cursor: pointer; transition: 0.3s; border: 1px solid #eee; }
-        .card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
-        .card img { width: 100%; height: 200px; object-fit: cover; }
+        .card:hover { transform: translateY(-5px); }
+        .card img { width: 100%; height: 200px; object-fit: cover; background: #eee; }
         .card-content { padding: 15px; text-align: right; }
 
         /* Modal */
@@ -35,7 +35,7 @@
         .close { position: absolute; top: 15px; left: 15px; font-size: 35px; color: #fff; cursor: pointer; z-index: 2100; background: rgba(0,0,0,0.3); width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
         iframe { width: 100%; height: 100%; border: none; }
         
-        .joke-box { background: #fff3e0; padding: 25px; border-radius: 15px; border-right: 6px solid var(--accent); margin: 20px 0; font-size: 1.1rem; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .joke-box { background: #fff3e0; padding: 25px; border-radius: 15px; border-right: 6px solid var(--accent); margin: 20px 0; }
         .hidden { display: none; }
     </style>
 </head>
@@ -56,17 +56,14 @@
     <section id="home-section" class="container">
         <div class="hero">
             <h1>ברק לב שלם</h1>
-            <p style="font-size: 1.2rem;">1982 - 2024</p>
+            <p>1982 - 2024</p>
         </div>
-        
         <h3>רגעים של ברק</h3>
         <div id="home-gallery" class="random-gallery"></div>
-
         <div class="joke-box">
             <h4 style="margin-top:0; color:var(--accent)">בדיחה של ברק</h4>
-            <p id="home-joke">טוען חיוך...</p>
+            <p id="home-joke">טוען...</p>
         </div>
-        
         <h3>מתוך היצירות</h3>
         <div id="home-creations" class="grid"></div>
     </section>
@@ -92,11 +89,12 @@
 
     let store = { creations: [], jokes: [], photos: [] };
 
-    // פונקציית תיקון תמונות ברזל - חילוץ ID נקי
+    // הפונקציה שמתקנת את קישורי התמונות מדרייב
     function fixDriveUrl(url) {
         if (!url || typeof url !== 'string') return '';
-        const match = url.match(/[-\w]{25,}/); // מחפש מחרוזת של לפחות 25 תווים של ID
-        if (match && url.includes('drive.google.com')) {
+        // מחלץ את ה-ID של הקובץ (רצף של אותיות ומספרים ארוך)
+        const match = url.match(/[-\w]{25,}/);
+        if (match) {
             return `https://drive.google.com/uc?export=view&id=${match[0]}`;
         }
         return url;
@@ -112,56 +110,50 @@
             
             store.creations = cData;
             store.jokes = jData;
+            // עוברים על כל שמות העמודות האפשריים לתמונה בגלריה
             store.photos = pData.map(p => ({
                 ...p, 
-                url: fixDriveUrl(p.url || p.webContentLink || p.WebViewLink)
+                url: fixDriveUrl(p.url || p.webContentLink || p.WebViewLink || p['קישור לתמונה'])
             })).filter(p => p.url);
 
             renderHome();
         } catch (e) {
-            console.error("שגיאה בטעינת הנתונים", e);
+            console.error("טעינה נכשלה", e);
         }
     }
 
     function fetchCSV(url) {
-        return new Promise(resolve => Papa.parse(url, { 
-            download: true, header: true, skipEmptyLines: true, complete: r => resolve(r.data) 
-        }));
+        return new Promise(resolve => Papa.parse(url, { download: true, header: true, skipEmptyLines: true, complete: r => resolve(r.data) }));
     }
 
     function renderHome() {
-        // גלריה אקראית בדף הבית
         if(store.photos.length) {
             const randomPhotos = [...store.photos].sort(() => 0.5 - Math.random()).slice(0, 10);
             document.getElementById('home-gallery').innerHTML = randomPhotos.map(p => `<img src="${p.url}" alt="Barak">`).join('');
         }
-        
-        // בדיחה אקראית
         if(store.jokes.length) {
-            const randomJoke = store.jokes[Math.floor(Math.random() * store.jokes.length)];
-            document.getElementById('home-joke').innerText = randomJoke['Joke Content'] || "לא נמצא תוכן לבדיחה";
+            const j = store.jokes[Math.floor(Math.random() * store.jokes.length)];
+            document.getElementById('home-joke').innerText = j['Joke Content'] || "טוען...";
         }
-        
-        // יצירות נבחרות (3 ראשונות מהגיליון)
         const latest = store.creations.filter(i => i.id).slice(0, 3);
         document.getElementById('home-creations').innerHTML = latest.map(i => createCard(i)).join('');
     }
 
     function createCard(item) {
-        const defaultImg = 'https://drive.google.com/uc?export=view&id=1JLmcif2XirD6hNg_5my6K8XxSKAxcgf4';
-        const img = item.type === 'image' ? fixDriveUrl(item.url) : defaultImg;
+        // בודק אם זו תמונה או טקסט ובוחר תמונה מתאימה
+        const imgUrl = (item.type === 'image' || item.url) ? fixDriveUrl(item.url) : 'https://drive.google.com/uc?export=view&id=1JLmcif2XirD6hNg_5my6K8XxSKAxcgf4';
         return `
             <div class="card" onclick="openItem('${item.id}', '${item.type || 'text'}')">
-                <img src="${img}" onerror="this.src='${defaultImg}'" loading="lazy">
+                <img src="${imgUrl}" loading="lazy">
                 <div class="card-content">
-                    <h3 style="margin:0 0 10px 0; color:var(--primary)">${item.title || 'ללא כותרת'}</h3>
-                    <p style="margin:0; font-size:0.9rem; color:#666">${item.summary || 'לחצו לקריאה...'}</p>
+                    <h3 style="margin:0 0 10px 0;">${item.title || 'ללא כותרת'}</h3>
+                    <p style="margin:0; font-size:0.9rem; color:#666">${item.summary || ''}</p>
                 </div>
             </div>`;
     }
 
     function showSection(name) {
-        window.scrollTo(0, 0);
+        window.scrollTo(0,0);
         const home = document.getElementById('home-section');
         const inner = document.getElementById('inner-section');
         home.classList.toggle('hidden', name !== 'home');
@@ -169,22 +161,10 @@
         if(name === 'home') return;
 
         let items = [], title = '';
-        if(name === 'creations') { 
-            items = store.creations.filter(i => i.content_link && i.content_link.includes('creations')); 
-            title = 'היצירות של ברק'; 
-        }
-        if(name === 'memories') { 
-            items = store.creations.filter(i => i.content_link && i.content_link.includes('memories')); 
-            title = 'סיפורי זיכרון'; 
-        }
-        if(name === 'gallery') { 
-            items = store.photos.map(p => ({...p, type: 'image', category: p.Categories || 'כללי'})); 
-            title = 'גלריית תמונות'; 
-        }
-        if(name === 'jokes') { 
-            items = store.jokes; 
-            title = 'הבדיחות של ברק'; 
-        }
+        if(name === 'creations') { items = store.creations.filter(i => i.content_link && i.content_link.includes('creations')); title = 'היצירות של ברק'; }
+        if(name === 'memories') { items = store.creations.filter(i => i.content_link && i.content_link.includes('memories')); title = 'סיפורי זיכרון'; }
+        if(name === 'gallery') { items = store.photos.map(p => ({...p, type: 'image', Categories: p.Categories || 'כללי'})); title = 'גלריית תמונות'; }
+        if(name === 'jokes') { items = store.jokes; title = 'הבדיחות של ברק'; }
 
         document.getElementById('section-title').innerText = title;
         renderFilters(items, name);
@@ -194,50 +174,36 @@
     function renderFilters(items, sectionName) {
         let allTags = [];
         items.forEach(i => {
-            const rawCat = i.Categories || i.category || '';
-            if (rawCat) {
-                const splitCats = rawCat.split(',').map(s => s.trim());
-                allTags = allTags.concat(splitCats);
-            }
+            const raw = i.Categories || i.category || '';
+            if (raw) raw.split(',').forEach(s => allTags.push(s.trim()));
         });
-
         const uniqueTags = [...new Set(allTags)].filter(Boolean);
         const container = document.getElementById('filter-container');
-        
-        let html = `<button class="tag-btn active" onclick="filterItems('all', '${sectionName}', this)">הכל</button>`;
-        html += uniqueTags.map(t => `<button class="tag-btn" onclick="filterItems('${t}', '${sectionName}', this)">${t}</button>`).join('');
-        container.innerHTML = html;
+        container.innerHTML = `<button class="tag-btn active" onclick="filterItems('all', '${sectionName}', this)">הכל</button>` + 
+            uniqueTags.map(t => `<button class="tag-btn" onclick="filterItems('${t}', '${sectionName}', this)">${t}</button>`).join('');
     }
 
     function filterItems(tag, sectionName, btn) {
-        // עדכון כפתור פעיל
         btn.parentElement.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-
+        
         let source = [];
         if(sectionName === 'creations') source = store.creations.filter(i => i.content_link.includes('creations'));
         if(sectionName === 'memories') source = store.creations.filter(i => i.content_link.includes('memories'));
-        if(sectionName === 'gallery') source = store.photos.map(p => ({...p, type: 'image', category: p.Categories || 'כללי'}));
+        if(sectionName === 'gallery') source = store.photos.map(p => ({...p, type: 'image', Categories: p.Categories || 'כללי'}));
         if(sectionName === 'jokes') source = store.jokes;
 
-        const filtered = (tag === 'all') 
-            ? source 
-            : source.filter(i => {
-                const val = i.Categories || i.category || '';
-                return val.split(',').map(s => s.trim()).includes(tag);
-            });
-
+        const filtered = (tag === 'all') ? source : source.filter(i => {
+            const val = i.Categories || i.category || '';
+            return val.split(',').map(s => s.trim()).includes(tag);
+        });
         renderGrid(filtered, sectionName);
     }
 
     function renderGrid(items, sectionName) {
         const grid = document.getElementById('inner-grid');
         if(sectionName === 'jokes') {
-            grid.innerHTML = items.map(j => `
-                <div class="joke-box">
-                    <small style="color:var(--accent)">${j.Categories || 'כללי'}</small>
-                    <p style="margin-top:10px">${j['Joke Content']}</p>
-                </div>`).join('');
+            grid.innerHTML = items.map(j => `<div class="joke-box"><small>${j.Categories || ''}</small><p>${j['Joke Content']}</p></div>`).join('');
         } else {
             grid.innerHTML = items.map(i => createCard(i)).join('');
         }
@@ -247,9 +213,7 @@
         const content = document.getElementById('modal-content');
         if(type === 'image') {
             const item = store.photos.find(p => p.id === id);
-            content.innerHTML = `<div style="height:100%; display:flex; align-items:center; justify-content:center; background:#000;">
-                <img src="${item.url}" style="max-width:100%; max-height:100%; object-fit:contain;">
-            </div>`;
+            content.innerHTML = `<div style="height:100%; display:flex; align-items:center; justify-content:center; background:#000;"><img src="${item.url}" style="max-width:100%; max-height:100%; object-fit:contain;"></div>`;
         } else {
             const item = store.creations.find(c => c.id === id);
             content.innerHTML = `<iframe src="${item.content_link}"></iframe>`;
@@ -258,10 +222,7 @@
         document.body.style.overflow = 'hidden';
     }
 
-    function closeModal() { 
-        document.getElementById('item-modal').style.display = 'none'; 
-        document.body.style.overflow = 'auto';
-    }
+    function closeModal() { document.getElementById('item-modal').style.display = 'none'; document.body.style.overflow = 'auto'; }
 
     init();
 </script>
