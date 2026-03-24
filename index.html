@@ -6,229 +6,182 @@
     <title>לזכרו של ברק לב שלם</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
     <style>
-        :root { --primary: #2c3e50; --accent: #e67e22; --bg: #fdfcfb; --white: #ffffff; --text: #333; }
-        body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); margin: 0; color: var(--text); line-height: 1.6; }
-        
-        nav { background: var(--primary); color: white; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; height: 65px; }
-        .nav-links { display: flex; gap: 20px; }
-        .nav-links a { color: white; text-decoration: none; font-weight: 500; cursor: pointer; }
-        
+        :root { --primary: #2c3e50; --accent: #e67e22; --bg: #fdfcfb; --white: #ffffff; }
+        body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); margin: 0; color: #333; direction: rtl; }
+        nav { background: var(--primary); color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
+        .nav-links a { color: white; text-decoration: none; margin: 0 10px; cursor: pointer; font-weight: 500; }
         .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
-        .hero { text-align: center; padding: 80px 20px; background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://drive.google.com/uc?export=view&id=1JLmcif2XirD6hNg_5my6K8XxSKAxcgf4'); background-size: cover; background-position: center; color: white; }
-        .hero h1 { font-size: 3.5rem; margin: 0; }
         
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; margin-top: 30px; }
-        .card { background: var(--white); border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.08); transition: 0.3s; cursor: pointer; position: relative; border: 1px solid #eee; }
+        /* Hero & Home */
+        .hero { text-align: center; padding: 60px 20px; background: #eee; border-radius: 0 0 50px 50px; margin-bottom: 30px; }
+        .random-gallery { display: flex; gap: 10px; overflow-x: auto; padding: 10px 0; margin: 20px 0; }
+        .random-gallery img { height: 150px; border-radius: 8px; flex-shrink: 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+
+        /* Filter Tags */
+        .filter-tags { margin-bottom: 20px; display: flex; gap: 10px; flex-wrap: wrap; }
+        .tag-btn { background: #e0e0e0; border: none; padding: 8px 15px; border-radius: 20px; cursor: pointer; transition: 0.2s; }
+        .tag-btn.active { background: var(--accent); color: white; }
+
+        /* Grid & Cards */
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
+        .card { background: var(--white); border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.08); cursor: pointer; transition: 0.3s; }
         .card:hover { transform: translateY(-5px); }
         .card img { width: 100%; height: 200px; object-fit: cover; }
-        .card-content { padding: 15px; }
-        .card-tag { position: absolute; top: 10px; right: 10px; background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; z-index: 5; }
+        .card-content { padding: 15px; text-align: right; }
 
-        #item-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 2000; justify-content: center; align-items: center; }
-        .modal-content { background: white; width: 95%; max-width: 1000px; height: 90vh; border-radius: 15px; display: flex; flex-direction: column; overflow: hidden; position: relative; }
-        .modal-body { flex: 1; overflow-y: auto; padding: 0; background: #fff; }
-        .close-modal { position: absolute; top: 15px; left: 15px; font-size: 2.5rem; cursor: pointer; color: #fff; z-index: 2100; background: rgba(0,0,0,0.5); width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
-        
-        .section-title { border-right: 5px solid var(--accent); padding-right: 15px; margin: 40px 0 20px; color: var(--primary); }
-        .random-box { background: #fff3e0; padding: 25px; border-radius: 12px; border-right: 5px solid var(--accent); margin: 20px 0; font-size: 1.2rem; }
-
-        .comments-section { background: #f1f1f1; padding: 25px; border-top: 1px solid #ddd; max-height: 300px; overflow-y: auto; }
-        .comment-form { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; background: white; padding: 15px; border-radius: 8px; }
-        .comment-form input, .comment-form textarea { padding: 12px; border: 1px solid #ccc; border-radius: 5px; font-family: inherit; }
-        .submit-btn { background: var(--primary); color: white; border: none; padding: 12px; border-radius: 5px; cursor: pointer; font-weight: bold; }
-        
+        /* Modal */
+        #item-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 2000; justify-content: center; align-items: center; }
+        .modal-inner { background: white; width: 90%; max-width: 1000px; height: 85vh; border-radius: 15px; overflow: hidden; position: relative; }
+        .close { position: absolute; top: 10px; left: 10px; font-size: 30px; color: #fff; cursor: pointer; z-index: 2100; }
         iframe { width: 100%; height: 100%; border: none; }
+        
+        .joke-box { background: #fff3e0; padding: 25px; border-radius: 15px; border-right: 6px solid var(--accent); margin: 20px 0; }
         .hidden { display: none; }
     </style>
 </head>
 <body>
 
 <nav>
-    <div style="font-weight: bold; font-size: 1.4rem;">לזכרו של ברק לב שלם</div>
+    <div style="font-weight: bold; font-size: 1.3rem;">ברק לב שלם ז"ל</div>
     <div class="nav-links">
         <a onclick="showSection('home')">בית</a>
-        <a onclick="showSection('creations')">יצירות של ברק</a>
-        <a onclick="showSection('memories')">סיפורי זיכרון</a>
+        <a onclick="showSection('creations')">יצירות</a>
+        <a onclick="showSection('memories')">סיפורים</a>
         <a onclick="showSection('gallery')">גלריה</a>
         <a onclick="showSection('jokes')">בדיחות</a>
     </div>
 </nav>
 
 <div id="main-content">
-    <section id="home-section">
+    <section id="home-section" class="container">
         <div class="hero">
             <h1>ברק לב שלם</h1>
-            <p style="font-size: 1.5rem;">1982 - 2024</p>
+            <p>1982 - 2024</p>
         </div>
-        <div class="container">
-            <div class="random-box" id="random-joke-box">
-                <h3 style="margin-top:0; color: var(--accent);">בדיחה של ברק</h3>
-                <p id="joke-text">טוען חיוך...</p>
-            </div>
-            
-            <h2 class="section-title">טעימה מהיצירות</h2>
-            <div id="featured-creations" class="grid"></div>
+        
+        <h3>רגעים של ברק</h3>
+        <div id="home-gallery" class="random-gallery"></div>
+
+        <div class="joke-box">
+            <h4 style="margin-top:0; color:var(--accent)">בדיחה של ברק</h4>
+            <p id="home-joke">טוען...</p>
         </div>
+        
+        <h3>מתוך היצירות</h3>
+        <div id="home-creations" class="grid"></div>
     </section>
 
-    <section id="content-section" class="container hidden">
-        <h2 id="section-header" class="section-title"></h2>
-        <div id="section-grid" class="grid"></div>
+    <section id="inner-section" class="container hidden">
+        <h2 id="section-title"></h2>
+        <div id="filter-container" class="filter-tags"></div>
+        <div id="inner-grid" class="grid"></div>
     </section>
 </div>
 
 <div id="item-modal">
-    <span class="close-modal" onclick="closeModal()">&times;</span>
-    <div class="modal-content">
-        <div class="modal-body" id="modal-inner"></div>
-        <div class="comments-section">
-            <h4 style="margin-top:0">תגובות ומילים חמות</h4>
-            <div id="comments-list"></div>
-            <div class="comment-form">
-                <input type="text" id="c-name" placeholder="שם מלא">
-                <input type="text" id="c-rel" placeholder="קשר לברק (חבר, משפחה וכד')">
-                <textarea id="c-content" rows="3" placeholder="כתבו כאן..."></textarea>
-                <button class="submit-btn" id="submit-btn">שליחת תגובה</button>
-            </div>
-        </div>
-    </div>
+    <span class="close" onclick="closeModal()">&times;</span>
+    <div class="modal-inner" id="modal-content"></div>
 </div>
 
 <script>
     const URLS = {
-        // הקישור ששלחת (גיליון פרסום סופי)
         creations: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSXdGMnIRS-ydFn4BRfngLIAbdveYx7L7eS96kCvpruVDca1-uGk3qyQY9Nh9C_eTpbjKoojzB2zlFn/pub?gid=1983290067&single=true&output=csv',
         jokes: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSR74JGStqevOMg4uFKqudbSRFEQVRisiEgSwTuxnLjsTUx7TShIVuzPkdRgOZiJq8Pz3H-zoa_3mK3/pub?output=csv',
-        photos: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSevdjPZljQNazIav8vcVOszHVu5iKOA-AtYUjwhZGuZUibJpjgnJHC_tsrZY11p9aAE_iQytePZsAZ/pub?output=csv',
-        comments: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRLoH5kw3YDw4HGqSflNsJfe-Gaq34n-5916WzKs-wFlAiCOUiit6ZqmkUiKprnAyJ6ezB0bwQhkGej/pub?output=csv',
-        appsScript: 'https://script.google.com/macros/s/AKfycbxnPbLI6SCffSvyfPZQ50v09o6rtXqptjSx36mLqSH8hVyFbWDnQk30PG2UEVW47hVS1Q/exec'
+        photos: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSevdjPZljQNazIav8vcVOszHVu5iKOA-AtYUjwhZGuZUibJpjgnJHC_tsrZY11p9aAE_iQytePZsAZ/pub?output=csv'
     };
 
-    let store = { creations: [], jokes: [], photos: [], comments: [] };
+    let store = { creations: [], jokes: [], photos: [] };
+
+    function fixDriveUrl(url) {
+        if (!url) return '';
+        const id = url.match(/id=([^&]+)/) || url.match(/\/d\/([^/]+)/);
+        return id ? `https://drive.google.com/uc?export=view&id=${id[1]}` : url;
+    }
 
     async function init() {
-        try {
-            const [c, j, p, com] = await Promise.all([
-                fetchCSV(URLS.creations), fetchCSV(URLS.jokes), fetchCSV(URLS.photos), fetchCSV(URLS.comments)
-            ]);
-            store = { creations: c, jokes: j, photos: p, comments: com };
-            renderHome();
-        } catch (e) { console.error("טעינה נכשלה", e); }
+        store.creations = await fetchCSV(URLS.creations);
+        store.jokes = await fetchCSV(URLS.jokes);
+        store.photos = (await fetchCSV(URLS.photos)).map(p => ({...p, url: fixDriveUrl(p.url || p.webContentLink)}));
+        renderHome();
     }
 
     function fetchCSV(url) {
-        return new Promise(resolve => {
-            Papa.parse(url, { download: true, header: true, complete: r => resolve(r.data) });
-        });
+        return new Promise(resolve => Papa.parse(url, { download: true, header: true, complete: r => resolve(r.data) }));
     }
 
     function renderHome() {
-        if(store.jokes.length) {
-            const randomJoke = store.jokes[Math.floor(Math.random() * store.jokes.length)];
-            document.getElementById('joke-text').innerText = randomJoke.joke || randomJoke.content;
-        }
-        const featured = store.creations.filter(i => i.id).slice(0, 3);
-        document.getElementById('featured-creations').innerHTML = featured.map(i => createCard(i)).join('');
+        // גלריה אקראית
+        const randomPhotos = [...store.photos].sort(() => 0.5 - Math.random()).slice(0, 8);
+        document.getElementById('home-gallery').innerHTML = randomPhotos.map(p => `<img src="${p.url}">`).join('');
+        
+        // בדיחה
+        const randomJoke = store.jokes[Math.floor(Math.random() * store.jokes.length)];
+        document.getElementById('home-joke').innerText = randomJoke['Joke Content'] || "לא נמצא תוכן";
+        
+        // יצירות אחרונות
+        const latest = store.creations.slice(0, 3);
+        document.getElementById('home-creations').innerHTML = latest.map(i => createCard(i)).join('');
     }
 
     function createCard(item) {
-        // אם אין תמונה ליצירה, משתמשים בתמונת פרופיל ברירת מחדל או צבע חלק
         const img = item.type === 'image' ? item.url : 'https://drive.google.com/uc?export=view&id=1JLmcif2XirD6hNg_5my6K8XxSKAxcgf4';
         return `
-            <div class="card" onclick="openItem('${item.id}', '${item.type}')">
-                <span class="card-tag">${item.category}</span>
-                <img src="${img}" loading="lazy">
+            <div class="card" onclick="openItem('${item.id}', '${item.type || 'text'}')">
                 <div class="card-content">
-                    <h3 style="margin:0">${item.title}</h3>
-                    <p style="font-size:0.9rem; color:#666">${item.summary || ''}</p>
+                    <img src="${img}" onerror="this.src='https://via.placeholder.com/300x200'">
+                    <h3>${item.title || 'ללא כותרת'}</h3>
+                    <p>${item.summary || ''}</p>
                 </div>
-            </div>
-        `;
+            </div>`;
     }
 
     function showSection(name) {
-        window.scrollTo(0,0);
         const home = document.getElementById('home-section');
-        const content = document.getElementById('content-section');
-        const grid = document.getElementById('section-grid');
-        const header = document.getElementById('section-header');
+        const inner = document.getElementById('inner-section');
+        home.classList.toggle('hidden', name !== 'home');
+        inner.classList.toggle('hidden', name === 'home');
+        if(name === 'home') return;
 
-        if(name === 'home') {
-            home.classList.remove('hidden');
-            content.classList.add('hidden');
-            return;
-        }
+        let items = [], title = '';
+        if(name === 'creations') { items = store.creations.filter(i => i.content_link.includes('creations')); title = 'יצירות של ברק'; }
+        if(name === 'memories') { items = store.creations.filter(i => i.content_link.includes('memories')); title = 'סיפורי זיכרון'; }
+        if(name === 'gallery') { items = store.photos.map(p => ({...p, type: 'image'})); title = 'גלריה'; }
+        if(name === 'jokes') { items = store.jokes; title = 'בדיחות'; }
 
-        home.classList.add('hidden');
-        content.classList.remove('hidden');
-        
-        let items = [];
-        if(name === 'creations') {
-            header.innerText = 'יצירות של ברק';
-            items = store.creations.filter(i => i.content_link && i.content_link.includes('creations/'));
-        } else if(name === 'memories') {
-            header.innerText = 'סיפורי זיכרון';
-            items = store.creations.filter(i => i.content_link && i.content_link.includes('memories/'));
-        } else if(name === 'gallery') {
-            header.innerText = 'גלריה';
-            items = store.photos.map(p => ({...p, type:'image', category: 'תמונה'}));
-        } else if(name === 'jokes') {
-            header.innerText = 'בדיחות של ברק';
-            grid.innerHTML = store.jokes.map(j => `<div class="random-box"><h3>${j.category || 'בדיחה'}</h3><p>${j.joke || j.content}</p></div>`).join('');
-            return;
+        document.getElementById('section-title').innerText = title;
+        renderFilters(items, name);
+        renderGrid(items, name);
+    }
+
+    function renderFilters(items, sectionName) {
+        const cats = [...new Set(items.map(i => i.Categories || i.category || 'כללי'))].filter(Boolean);
+        const container = document.getElementById('filter-container');
+        container.innerHTML = `<button class="tag-btn active" onclick="filterItems('all', '${sectionName}')">הכל</button>` + 
+            cats.map(c => `<button class="tag-btn" onclick="filterItems('${c}', '${sectionName}')">${c}</button>`).join('');
+    }
+
+    function renderGrid(items, sectionName) {
+        const grid = document.getElementById('inner-grid');
+        if(sectionName === 'jokes') {
+            grid.innerHTML = items.map(j => `<div class="joke-box"><strong>${j.Categories || ''}</strong><p>${j['Joke Content']}</p></div>`).join('');
+        } else {
+            grid.innerHTML = items.map(i => createCard(i)).join('');
         }
-        grid.innerHTML = items.filter(i => i.title).map(i => createCard(i)).join('');
     }
 
     function openItem(id, type) {
-        const inner = document.getElementById('modal-inner');
-        let item;
+        const content = document.getElementById('modal-content');
         if(type === 'image') {
-            item = store.photos.find(p => p.id === id);
-            inner.innerHTML = `<div style="padding:20px; text-align:center;"><img src="${item.url}" style="max-width:100%; max-height:70vh;"><h2 style="color:#2c3e50">${item.title}</h2></div>`;
+            const item = store.photos.find(p => p.id === id);
+            content.innerHTML = `<img src="${item.url}" style="width:100%; height:100%; object-fit:contain;">`;
         } else {
-            item = store.creations.find(c => c.id === id);
-            inner.innerHTML = `<iframe src="${item.content_link}"></iframe>`;
+            const item = store.creations.find(c => c.id === id);
+            content.innerHTML = `<iframe src="${item.content_link}"></iframe>`;
         }
-        
-        renderComments(id);
         document.getElementById('item-modal').style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-
-        document.getElementById('submit-btn').onclick = () => submitComment(id);
     }
 
-    function renderComments(itemId) {
-        const list = document.getElementById('comments-list');
-        const relevant = store.comments.filter(c => c.item_id === itemId && c.status === 'מאושר');
-        list.innerHTML = relevant.length 
-            ? relevant.map(c => `<div style="padding:10px; border-bottom:1px solid #ddd"><strong>${c.name} (${c.relation}):</strong><br>${c.content}</div>`).join('')
-            : '<p style="color:#999">עדיין אין תגובות ליצירה זו. מוזמנים לכתוב ראשונים.</p>';
-    }
-
-    async function submitComment(itemId) {
-        const btn = document.getElementById('submit-btn');
-        const payload = {
-            name: document.getElementById('c-name').value,
-            relation: document.getElementById('c-rel').value,
-            content: document.getElementById('c-content').value,
-            item_id: itemId
-        };
-        if(!payload.name || !payload.content) return alert("נא למלא שם ותוכן");
-        
-        btn.disabled = true; btn.innerText = "שולח...";
-        try {
-            await fetch(URLS.appsScript, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) });
-            alert("התגובה נשלחה ותופיע באתר לאחר אישור המשפחה.");
-            closeModal();
-        } catch(e) { alert("שגיאה בשליחה"); }
-        btn.disabled = false; btn.innerText = "שליחת תגובה";
-    }
-
-    function closeModal() {
-        document.getElementById('item-modal').style.display = 'none';
-        document.body.style.overflow = 'auto';
-    }
+    function closeModal() { document.getElementById('item-modal').style.display = 'none'; }
 
     init();
 </script>
