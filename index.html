@@ -6,94 +6,85 @@
     <title>לזכרו של ברק לב שלם</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
     <style>
-        :root { --primary: #2c3e50; --accent: #e67e22; --bg: #fdfcfb; --white: #ffffff; }
-        body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); margin: 0; color: #333; direction: rtl; }
-        nav { background: var(--primary); color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
-        .nav-links a { color: white; text-decoration: none; margin: 0 10px; cursor: pointer; font-weight: 500; }
+        :root { --primary: #2c3e50; --accent: #e67e22; --bg: #fdfcfb; --white: #ffffff; --text: #333; }
+        body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); margin: 0; color: var(--text); line-height: 1.6; overflow-x: hidden; }
+        
+        /* Nav */
+        nav { background: var(--primary); color: white; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; height: 65px; }
+        .nav-links { display: flex; gap: 20px; }
+        .nav-links a { color: white; text-decoration: none; font-weight: 500; cursor: pointer; }
+        
+        /* Layout */
         .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+        .hero { text-align: center; padding: 80px 20px; background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://drive.google.com/uc?export=view&id=1JLmcif2XirD6hNg_5my6K8XxSKAxcgf4'); background-size: cover; background-position: center; color: white; border-bottom: 5px solid var(--accent); }
+        .hero h1 { font-size: 3.5rem; margin: 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
         
-        .hero { text-align: center; padding: 60px 20px; background: #eee; border-radius: 0 0 50px 50px; margin-bottom: 30px; }
-        .random-gallery { display: flex; gap: 10px; overflow-x: auto; padding: 10px 0; margin: 20px 0; }
-        .random-gallery img { height: 180px; border-radius: 8px; flex-shrink: 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1); object-fit: cover; }
+        /* Grid & Cards */
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; margin-top: 30px; }
+        .card { background: var(--white); border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.08); transition: 0.3s; cursor: pointer; position: relative; border: 1px solid #eee; display: flex; flex-direction: column; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+        .card img { width: 100%; height: 200px; object-fit: cover; }
+        .card-content { padding: 15px; flex-grow: 1; }
+        .card-tag { position: absolute; top: 10px; right: 10px; background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; z-index: 5; font-weight: bold; }
 
-        .filter-tags { margin-bottom: 25px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
-        .tag-btn { background: #e0e0e0; border: none; padding: 8px 18px; border-radius: 20px; cursor: pointer; transition: 0.2s; }
-        .tag-btn.active { background: var(--accent); color: white; }
-
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
-        .card { background: var(--white); border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.08); cursor: pointer; transition: 0.3s; border: 1px solid #eee; }
-        .card:hover { transform: translateY(-5px); }
-        .card img { width: 100%; height: 200px; object-fit: cover; background: #eee; }
-        .card-content { padding: 15px; text-align: right; }
-
-        /* Modal & Comments */
-        #item-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 2000; justify-content: center; align-items: center; }
-        .modal-inner { background: white; width: 95%; max-width: 1000px; height: 90vh; border-radius: 15px; overflow: hidden; position: relative; display: flex; flex-direction: column; }
-        .modal-body { flex: 1; overflow-y: auto; position: relative; }
-        .close { position: absolute; top: 15px; left: 15px; font-size: 35px; color: #fff; cursor: pointer; z-index: 2100; background: rgba(0,0,0,0.3); width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
+        /* Modal */
+        #item-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 2000; justify-content: center; align-items: center; backdrop-filter: blur(5px); }
+        .modal-content { background: white; width: 95%; max-width: 1000px; height: 90vh; border-radius: 15px; display: flex; flex-direction: column; overflow: hidden; position: relative; }
+        .modal-body { flex: 1; overflow-y: auto; padding: 0; background: #fff; }
+        .close-modal { position: absolute; top: 15px; left: 15px; font-size: 2.5rem; cursor: pointer; color: #fff; z-index: 2100; background: rgba(0,0,0,0.5); width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: 0.3s; }
+        .close-modal:hover { background: var(--accent); }
         
-        .comments-section { background: #f8f9fa; border-top: 2px solid #eee; padding: 20px; max-height: 40%; overflow-y: auto; }
-        .comment-item { border-bottom: 1px solid #ddd; padding: 10px 0; }
-        .comment-form { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; padding: 15px; background: white; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .comment-form input, .comment-form textarea { padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-family: inherit; }
-        .submit-btn { background: var(--primary); color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        /* Filters */
+        .filters { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; justify-content: center; }
+        .filter-btn { padding: 8px 20px; border-radius: 20px; border: 1px solid #ddd; background: white; cursor: pointer; transition: 0.3s; font-family: inherit; }
+        .filter-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+
+        /* Comments */
+        .comments-section { background: #f1f1f1; padding: 25px; border-top: 1px solid #ddd; max-height: 400px; overflow-y: auto; }
+        .comment-form { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; background: white; padding: 15px; border-radius: 8px; }
+        .comment-form input, .comment-form textarea { padding: 12px; border: 1px solid #ccc; border-radius: 5px; font-family: inherit; }
+        .submit-btn { background: var(--primary); color: white; border: none; padding: 12px; border-radius: 5px; cursor: pointer; font-weight: bold; }
         
         iframe { width: 100%; height: 100%; border: none; }
-        .joke-box { background: #fff3e0; padding: 25px; border-radius: 15px; border-right: 6px solid var(--accent); margin: 20px 0; }
         .hidden { display: none; }
     </style>
 </head>
 <body>
 
 <nav>
-    <div style="font-weight: bold; font-size: 1.3rem;">ברק לב שלם ז"ל</div>
+    <div style="font-weight: bold; font-size: 1.4rem;">לזכרו של ברק לב שלם</div>
     <div class="nav-links">
         <a onclick="showSection('home')">בית</a>
-        <a onclick="showSection('creations')">יצירות</a>
-        <a onclick="showSection('memories')">סיפורים</a>
+        <a onclick="showSection('creations')">יצירות של ברק</a>
+        <a onclick="showSection('memories')">סיפורי זיכרון</a>
         <a onclick="showSection('gallery')">גלריה</a>
         <a onclick="showSection('jokes')">בדיחות</a>
     </div>
 </nav>
 
 <div id="main-content">
-    <section id="home-section" class="container">
+    <section id="home-section">
         <div class="hero">
             <h1>ברק לב שלם</h1>
-            <p>1987 - 2026</p>
+            <p style="font-size: 1.5rem;">1982 - 2024</p>
         </div>
-        <h3>רגעים של ברק</h3>
-        <div id="home-gallery" class="random-gallery"></div>
-        <div class="joke-box">
-            <h4 style="margin-top:0; color:var(--accent)">בדיחה של ברק</h4>
-            <p id="home-joke">טוען...</p>
+        <div class="container">
+            <div id="random-joke-container"></div>
+            <h2 style="border-right: 5px solid var(--accent); padding-right: 15px;">טעימה מהיצירות</h2>
+            <div id="featured-creations" class="grid"></div>
         </div>
-        <h3>מתוך היצירות</h3>
-        <div id="home-creations" class="grid"></div>
     </section>
 
-    <section id="inner-section" class="container hidden">
-        <h2 id="section-title" style="border-right: 5px solid var(--accent); padding-right: 15px;"></h2>
-        <div id="filter-container" class="filter-tags"></div>
-        <div id="inner-grid" class="grid"></div>
+    <section id="content-section" class="container hidden">
+        <h2 id="section-header" style="border-right: 5px solid var(--accent); padding-right: 15px; margin-bottom: 30px;"></h2>
+        <div id="filters-container" class="filters"></div>
+        <div id="section-grid" class="grid"></div>
     </section>
 </div>
 
 <div id="item-modal">
-    <span class="close" onclick="closeModal()">&times;</span>
-    <div class="modal-inner">
-        <div class="modal-body" id="modal-content"></div>
-        <div class="comments-section" id="comments-area">
-            <h4 style="margin-top:0">תגובות ומילים חמות</h4>
-            <div id="comments-list"></div>
-            <div class="comment-form">
-                <input type="text" id="c-name" placeholder="שם מלא">
-                <input type="text" id="c-rel" placeholder="קשר לברק (חבר, משפחה...)">
-                <textarea id="c-content" rows="2" placeholder="כתבו כאן..."></textarea>
-                <button class="submit-btn" id="submit-btn">שליחת תגובה</button>
-            </div>
-        </div>
-    </div>
+    <span class="close-modal" onclick="closeModal()">&times;</span>
+    <div class="modal-content" id="modal-inner-content"></div>
 </div>
 
 <script>
@@ -107,8 +98,9 @@
 
     let store = { creations: [], jokes: [], photos: [], comments: [] };
 
+    // פונקציית חילוץ ID תמונה חסינה
     function fixDriveUrl(url) {
-        if (!url || typeof url !== 'string') return '';
+        if (!url) return '';
         const match = url.match(/[-\w]{25,}/);
         return match ? `https://drive.google.com/uc?export=view&id=${match[0]}` : url;
     }
@@ -122,120 +114,159 @@
                 creations: c, 
                 jokes: j, 
                 photos: p.map(img => ({...img, url: fixDriveUrl(img.url || img.webContentLink)})),
-                comments: com
+                comments: com 
             };
             renderHome();
-        } catch (e) { console.error(e); }
+        } catch (e) { console.error("טעינה נכשלה", e); }
     }
 
     function fetchCSV(url) {
-        return new Promise(resolve => Papa.parse(url, { download: true, header: true, complete: r => resolve(r.data) }));
+        return new Promise(resolve => {
+            Papa.parse(url, { download: true, header: true, skipEmptyLines: true, complete: r => resolve(r.data) });
+        });
     }
 
     function renderHome() {
-        if(store.photos.length) {
-            const random = [...store.photos].sort(() => 0.5 - Math.random()).slice(0, 8);
-            document.getElementById('home-gallery').innerHTML = random.map(p => `<img src="${p.url}">`).join('');
-        }
         if(store.jokes.length) {
             const rj = store.jokes[Math.floor(Math.random() * store.jokes.length)];
-            document.getElementById('home-joke').innerText = rj['Joke Content'] || "";
+            document.getElementById('random-joke-container').innerHTML = `
+                <div style="background: #fff3e0; padding: 25px; border-radius: 12px; border-right: 5px solid var(--accent); margin: 20px 0;">
+                    <h3 style="margin-top:0; color: var(--accent);">בדיחה של ברק</h3>
+                    <p style="font-size: 1.2rem;">${rj['Joke Content'] || ""}</p>
+                </div>`;
         }
-        document.getElementById('home-creations').innerHTML = store.creations.slice(0, 3).map(i => createCard(i)).join('');
+        const featured = store.creations.filter(i => i.id).slice(0, 3);
+        document.getElementById('featured-creations').innerHTML = featured.map(i => createCard(i)).join('');
     }
 
     function createCard(item) {
         const img = (item.type === 'image' || item.url) ? fixDriveUrl(item.url) : 'https://drive.google.com/uc?export=view&id=1JLmcif2XirD6hNg_5my6K8XxSKAxcgf4';
-        return `<div class="card" onclick="openItem('${item.id}', '${item.type || 'text'}')">
-            <img src="${img}" loading="lazy">
-            <div class="card-content"><h3>${item.title || 'ללא כותרת'}</h3><p>${item.summary || ''}</p></div>
-        </div>`;
+        const cat = item.category || item.Categories || 'כללי';
+        return `
+            <div class="card" onclick="openItem('${item.id}', '${item.type || 'text'}')">
+                <span class="card-tag">${cat}</span>
+                <img src="${img}" loading="lazy">
+                <div class="card-content">
+                    <h3 style="margin:0">${item.title || 'ללא כותרת'}</h3>
+                    <p style="font-size:0.9rem; color:#666; margin-top:10px;">${item.summary || ''}</p>
+                </div>
+            </div>`;
     }
 
     function showSection(name) {
-        const home = document.getElementById('home-section'), inner = document.getElementById('inner-section');
+        window.scrollTo(0,0);
+        const home = document.getElementById('home-section');
+        const content = document.getElementById('content-section');
+        const grid = document.getElementById('section-grid');
+        const header = document.getElementById('section-header');
+        const filterContainer = document.getElementById('filters-container');
+
         home.classList.toggle('hidden', name !== 'home');
-        inner.classList.toggle('hidden', name === 'home');
+        content.classList.toggle('hidden', name === 'home');
         if(name === 'home') return;
+
         let items = [], title = '';
-        if(name === 'creations') { items = store.creations.filter(i => i.content_link?.includes('creations')); title = 'יצירות'; }
-        if(name === 'memories') { items = store.creations.filter(i => i.content_link?.includes('memories')); title = 'סיפורים'; }
+        if(name === 'creations') { items = store.creations.filter(i => i.content_link?.includes('creations')); title = 'יצירות של ברק'; }
+        if(name === 'memories') { items = store.creations.filter(i => i.content_link?.includes('memories')); title = 'סיפורי זיכרון'; }
         if(name === 'gallery') { items = store.photos.map(p => ({...p, type:'image'})); title = 'גלריה'; }
-        if(name === 'jokes') { items = store.jokes; title = 'בדיחות'; }
-        document.getElementById('section-title').innerText = title;
+        if(name === 'jokes') { items = store.jokes; title = 'בדיחות של ברק'; }
+
+        header.innerText = title;
         renderFilters(items, name);
         renderGrid(items, name);
     }
 
     function renderFilters(items, section) {
         let cats = [];
-        items.forEach(i => (i.Categories || i.category || '').split(',').forEach(c => cats.push(c.trim())));
+        items.forEach(i => {
+            const c = i.category || i.Categories || '';
+            c.split(',').forEach(s => cats.push(s.trim()));
+        });
         const unique = [...new Set(cats)].filter(Boolean);
-        document.getElementById('filter-container').innerHTML = `<button class="tag-btn active" onclick="filterItems('all','${section}',this)">הכל</button>` +
-            unique.map(c => `<button class="tag-btn" onclick="filterItems('${c}','${section}',this)">${c}</button>`).join('');
+        const container = document.getElementById('filters-container');
+        container.innerHTML = `<button class="filter-btn active" onclick="filterItems('all', '${section}', this)">הכל</button>` +
+            unique.map(c => `<button class="filter-btn" onclick="filterItems('${c}', '${section}', this)">${c}</button>`).join('');
     }
 
     function filterItems(tag, section, btn) {
-        btn.parentElement.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('active'));
+        btn.parentElement.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
+        
         let src = [];
         if(section === 'creations') src = store.creations.filter(i => i.content_link?.includes('creations'));
         if(section === 'memories') src = store.creations.filter(i => i.content_link?.includes('memories'));
         if(section === 'gallery') src = store.photos.map(p => ({...p, type:'image'}));
         if(section === 'jokes') src = store.jokes;
-        const filtered = tag === 'all' ? src : src.filter(i => (i.Categories || i.category || '').includes(tag));
+
+        const filtered = tag === 'all' ? src : src.filter(i => (i.category || i.Categories || '').includes(tag));
         renderGrid(filtered, section);
     }
 
     function renderGrid(items, section) {
-        const g = document.getElementById('inner-grid');
-        g.innerHTML = section === 'jokes' 
-            ? items.map(j => `<div class="joke-box"><strong>${j.Categories}</strong><p>${j['Joke Content']}</p></div>`).join('')
-            : items.map(i => createCard(i)).join('');
+        const grid = document.getElementById('section-grid');
+        if(section === 'jokes') {
+            grid.innerHTML = items.map(j => `<div style="background:#fff3e0; padding:20px; border-radius:10px; border-right:4px solid var(--accent);"><strong>${j.Categories || 'כללי'}</strong><p>${j['Joke Content']}</p></div>`).join('');
+        } else {
+            grid.innerHTML = items.map(i => createCard(i)).join('');
+        }
     }
 
-    function openItem(id, type) {
-        const content = document.getElementById('modal-content');
+    function openItem(itemId, type) {
+        const modalInner = document.getElementById('modal-inner-content');
+        let item, contentHtml = '';
+        
         if(type === 'image') {
-            const item = store.photos.find(p => p.id === id);
-            content.innerHTML = `<div style="height:100%;background:#000;display:flex;align-items:center;justify-content:center"><img src="${item.url}" style="max-height:100%;max-width:100%"></div>`;
+            item = store.photos.find(p => p.id === itemId);
+            contentHtml = `<div class="modal-body" style="background:#000; display:flex; align-items:center; justify-content:center;"><img src="${item.url}" style="max-height:100%; max-width:100%; object-fit:contain;"></div>`;
         } else {
-            const item = store.creations.find(c => c.id === id);
-            content.innerHTML = `<iframe src="${item.content_link}"></iframe>`;
+            item = store.creations.find(c => c.id === itemId);
+            contentHtml = `<div class="modal-body"><iframe src="${item.content_link}"></iframe></div>`;
         }
-        renderComments(id);
+
+        const commentsHtml = `
+            <div class="comments-section">
+                <h4 style="margin:0 0 15px 0">תגובות ומילים חמות</h4>
+                <div id="comments-list-${itemId}">
+                    ${renderCommentsHtml(itemId)}
+                </div>
+                <div class="comment-form">
+                    <input type="text" id="c-name" placeholder="שם מלא">
+                    <input type="text" id="c-rel" placeholder="קשר לברק">
+                    <textarea id="c-content" rows="2" placeholder="כתבו מילה חמה..."></textarea>
+                    <button class="submit-btn" onclick="submitComment('${itemId}')">שלח תגובה</button>
+                </div>
+            </div>`;
+
+        modalInner.innerHTML = contentHtml + commentsHtml;
         document.getElementById('item-modal').style.display = 'flex';
         document.body.style.overflow = 'hidden';
-        document.getElementById('submit-btn').onclick = () => submitComment(id);
     }
 
-    function renderComments(itemId) {
-        const list = document.getElementById('comments-list');
+    function renderCommentsHtml(itemId) {
         const relevant = store.comments.filter(c => c.item_id === itemId && c.status === 'מאושר');
-        list.innerHTML = relevant.length 
-            ? relevant.map(c => `<div class="comment-item"><strong>${c.name} (${c.relation}):</strong><br>${c.content}</div>`).join('')
-            : '<p style="color:#999">אין עדיין תגובות. תהיו הראשונים לכתוב.</p>';
+        return relevant.length ? relevant.map(c => `<div style="padding:10px 0; border-bottom:1px solid #ddd"><strong>${c.name}:</strong> ${c.content}</div>`).join('') : '<p style="color:#999">אין עדיין תגובות.</p>';
     }
 
     async function submitComment(itemId) {
-        const btn = document.getElementById('submit-btn');
-        const data = {
+        const payload = {
             name: document.getElementById('c-name').value,
             relation: document.getElementById('c-rel').value,
             content: document.getElementById('c-content').value,
             item_id: itemId
         };
-        if(!data.name || !data.content) return alert("נא למלא שם ותוכן");
-        btn.disabled = true; btn.innerText = "שולח...";
+        if(!payload.name || !payload.content) return alert("נא למלא שם ותוכן");
         try {
-            await fetch(URLS.appsScript, { method: 'POST', mode: 'no-cors', body: JSON.stringify(data) });
-            alert("תודה! התגובה נשלחה ותופיע לאחר אישור המשפחה.");
+            await fetch(URLS.appsScript, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) });
+            alert("תודה! התגובה נשלחה ותופיע לאחר אישור.");
             closeModal();
         } catch(e) { alert("שגיאה בשליחה"); }
-        btn.disabled = false; btn.innerText = "שליחת תגובה";
     }
 
-    function closeModal() { document.getElementById('item-modal').style.display = 'none'; document.body.style.overflow = 'auto'; }
+    function closeModal() {
+        document.getElementById('item-modal').style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+
     init();
 </script>
 </body>
