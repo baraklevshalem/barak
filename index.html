@@ -23,50 +23,39 @@
             .hamburger { display: block; }
         }
 
-        /* Layout */
+        /* Layout & Search */
         .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+        .search-area { margin-bottom: 30px; background: #eee; padding: 20px; border-radius: 12px; }
+        .search-input { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ccc; font-size: 1rem; box-sizing: border-box; }
+        .deep-search-btn { margin-top: 10px; background: var(--primary); color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-size: 0.85rem; }
+
         .section-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid var(--accent); margin: 40px 0 20px; padding-bottom: 10px; }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
         .show-all-btn { background: none; border: 1px solid var(--accent); color: var(--accent); padding: 5px 15px; border-radius: 5px; cursor: pointer; font-size: 0.9rem; font-weight: bold; }
 
-        /* Filters */
-        .filter-bar { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 25px; }
-        .filter-btn { background: #eee; border: none; padding: 8px 18px; border-radius: 20px; cursor: pointer; font-weight: bold; }
-        .filter-btn.active { background: var(--accent); color: white; }
-
         /* Cards */
-        .card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05); cursor: pointer; display: flex; flex-direction: column; transition: 0.3s; height: 100%; border: 1px solid #eee; }
+        .card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05); cursor: pointer; display: flex; flex-direction: column; transition: 0.3s; height: 100%; border: 1px solid #eee; position: relative; }
         .card:hover { transform: translateY(-5px); }
         .card img { width: 100%; height: 200px; object-fit: cover; background: #eee; }
         .card-content { padding: 15px; flex-grow: 1; text-align: right; }
-        .tag { display: inline-block; background: #fff3e0; color: var(--accent); padding: 3px 10px; border-radius: 15px; font-size: 0.75rem; font-weight: bold; margin-bottom: 8px; margin-left: 5px; }
-
-        /* Hero */
-        .hero { display: flex; align-items: center; gap: 40px; padding: 40px 0; }
-        .hero-img { flex: 0 0 300px; }
-        .hero-img img { width: 100%; border-radius: 15px; box-shadow: 10px 10px 0 var(--accent); object-fit: cover; aspect-ratio: 1; }
-        @media (max-width: 768px) { .hero { flex-direction: column; text-align: center; } .hero-img { flex: 0 0 auto; width: 220px; } }
+        .tag { display: inline-block; background: #fff3e0; color: var(--accent); padding: 3px 10px; border-radius: 15px; font-size: 0.75rem; font-weight: bold; margin-bottom: 8px; }
+        .author-tag { font-size: 0.85rem; color: #666; font-style: italic; margin-top: 5px; display: block; }
 
         /* Modal */
         .modal { display: none; position: fixed; z-index: 2000; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); justify-content: center; align-items: center; }
         .modal-content { background: white; width: 95%; max-width: 900px; max-height: 90vh; border-radius: 20px; overflow-y: auto; padding: 30px; position: relative; direction: rtl; text-align: right; }
-        .external-content-wrapper { all: revert; direction: rtl !important; text-align: right !important; font-family: sans-serif; line-height: 1.6; }
-        
-        .modal-actions { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
-        .share-btn { background: #f0f0f0; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-size: 0.9rem; }
+        .external-content-wrapper { all: revert; direction: rtl !important; text-align: right !important; }
 
-        /* Comment System */
-        .comment-section { margin-top: 30px; background: #f9f9f9; padding: 20px; border-radius: 10px; border: 1px solid #eee; }
-        .comment-bubble { background: white; padding: 12px; border-radius: 8px; margin-bottom: 10px; border: 1px solid #eee; }
-        .comment-form input, .comment-form textarea { width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ddd; box-sizing: border-box; font-family: inherit; }
-        .submit-btn { background: var(--accent); color: white; border: none; padding: 12px 20px; border-radius: 5px; cursor: pointer; font-weight: bold; width: 100%; }
-        .submit-btn:disabled { background: #ccc; cursor: not-allowed; }
+        /* Comments */
+        .comment-section { margin-top: 30px; background: #f9f9f9; padding: 20px; border-radius: 10px; }
+        .submit-btn { background: var(--accent); color: white; border: none; padding: 12px 20px; border-radius: 5px; cursor: pointer; width: 100%; font-weight: bold; }
+        .submit-btn:disabled { background: #ccc; }
     </style>
 </head>
 <body>
 
 <nav>
-    <div class="logo" onclick="showPage('home')" style="cursor:pointer; font-weight:bold; font-size:1.2rem;">ברק לב שלם</div>
+    <div class="logo" onclick="showPage('home')" style="cursor:pointer; font-weight:bold;">ברק לב שלם</div>
     <button class="hamburger" onclick="toggleMenu()">☰</button>
     <div class="nav-links" id="nav-links">
         <a onclick="showPage('home'); toggleMenu()">בית</a>
@@ -81,34 +70,24 @@
 
 <div id="item-modal" class="modal" onclick="closeModal()">
     <div class="modal-content" onclick="event.stopPropagation()">
-        <span onclick="closeModal()" style="position:absolute; top:15px; left:15px; font-size:35px; cursor:pointer; color:#999;">×</span>
-        <div class="modal-actions" id="modal-actions"></div>
+        <span onclick="closeModal()" style="position:absolute; top:15px; left:15px; font-size:35px; cursor:pointer;">×</span>
+        <div id="modal-actions" style="margin-bottom:20px;"></div>
         <div id="modal-body"></div>
         <div id="comment-area"></div>
     </div>
 </div>
 
 <script>
-    // הגדרות URL
     const JOKES_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSR74JGStqevOMg4uFKqudbSRFEQVRisiEgSwTuxnLjsTUx7TShIVuzPkdRgOZiJq8Pz3H-zoa_3mK3/pub?gid=0&single=true&output=csv';
     const PHOTOS_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSevdjPZljQNazIav8vcVOszHVu5iKOA-AtYUjwhZGuZUibJpjgnJHC_tsrZY11p9aAE_iQytePZsAZ/pub?output=csv';
     const TEXTS_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSXdGMnIRS-ydFn4BRfngLIAbdveYx7L7eS96kCvpruVDca1-uGk3qyQY9Nh9C_eTpbjKoojzB2zlFn/pub?gid=1983290067&single=true&output=csv';
     const COMMENTS_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRLoH5kw3YDw4HGqSflNsJfe-Gaq34n-5916WzKs-wFlAiCOUiit6ZqmkUiKprnAyJ6ezB0bwQhkGej/pub?output=csv';
     const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby5P7mLEeCeZJU3Yj3NZgoQ9r8Em8S1--uZyQwuXph7mLIr2DimiGvrtiW4yxcWzFs5Gw/exec';
 
-    const MAIN_PHOTO_ID = '1S-KFrVUHzS9dJsN1ag8EwfNyiXwFHqC-';
-    const CV_FILE = 'about_barak.html';
-
     let data = { jokes: [], photos: [], texts: [], comments: [] };
 
-    // פונקציית תמונות חכמה - פתרון ה-403 ושיפור מהירות
-    function getPhotoUrl(id) {
-        return `https://drive.google.com/thumbnail?id=${id}&sz=w1200`;
-    }
-
-    function toggleMenu() {
-        document.getElementById('nav-links').classList.toggle('active');
-    }
+    function getPhotoUrl(id) { return `https://drive.google.com/thumbnail?id=${id}&sz=w1200`; }
+    function toggleMenu() { document.getElementById('nav-links').classList.toggle('active'); }
 
     async function init() {
         const [j, p, t, c] = await Promise.all([
@@ -119,15 +98,7 @@
         
         const urlParams = new URLSearchParams(window.location.search);
         const itemId = urlParams.get('item');
-        
-        showPage('home');
-        
-        if (itemId) {
-            const photo = data.photos.find(p => p.id === itemId);
-            if (photo) openItem('photo', photo.id, photo.id, photo.title);
-            const text = data.texts.find(t => t.id === itemId);
-            if (text) openItem('text', text.content_link, text.id, text.title);
-        }
+        itemId ? openFromUrl(itemId) : showPage('home');
     }
 
     function fetchCSV(url, header) {
@@ -138,150 +109,151 @@
         const container = document.getElementById('main-content');
         window.scrollTo(0,0);
         if (pageId === 'home') renderHome(container);
-        else if (pageId === 'gallery') renderArchive(container, 'גלריה', data.photos, 'category', renderPhotoCard);
-        else if (pageId === 'texts') renderArchive(container, 'יצירות וסיפורים', data.texts, 'type', renderTextCard);
-        else if (pageId === 'jokes') renderArchive(container, 'מאגר הבדיחות', data.jokes, 'Categories', renderJokeCard);
+        else if (pageId === 'gallery') renderArchive(container, 'גלריה', data.photos, renderPhotoCard, true);
+        else if (pageId === 'texts') renderArchive(container, 'יצירות וסיפורים', data.texts, renderTextCard, true, true);
+        else if (pageId === 'jokes') renderArchive(container, 'מאגר הבדיחות', data.jokes, renderJokeCard, true);
         else if (pageId === 'about') renderAbout(container);
     }
 
     function renderHome(container) {
         const randomJoke = data.jokes[Math.floor(Math.random() * data.jokes.length)];
         const samplePhotos = [...data.photos].sort(() => 0.5 - Math.random()).slice(0, 4);
-        const sampleTexts = [...data.texts].slice(0, 3);
         container.innerHTML = `
-            <div class="hero">
-                <div class="hero-img"><img src="${getPhotoUrl(MAIN_PHOTO_ID)}" alt="ברק"></div>
-                <div class="hero-text"><h1>ברק לב שלם</h1><p>ברוכים הבאים לאתר הזיכרון של ברק. מקום שבו אספנו את המילים שלו, החיוך שלו והבדיחות שתמיד ידע לספר.</p></div>
-            </div>
-            <div class="section-header"><h3>בדיחה אקראית</h3><button class="show-all-btn" onclick="showPage('jokes')">לכל הבדיחות</button></div>
-            <div style="background:white; padding:30px; border-radius:15px; border-right:5px solid var(--accent); margin-bottom:40px;">"${randomJoke ? randomJoke['Joke Content'] : ''}"</div>
-            <div class="section-header"><h3>מהגלריה</h3><button class="show-all-btn" onclick="showPage('gallery')">הצג הכל</button></div>
+            <div class="section-header"><h3>בדיחה אקראית</h3><button class="show-all-btn" onclick="showPage('jokes')">עוד בדיחות</button></div>
+            <div style="background:white; padding:20px; border-radius:10px; border-right:5px solid var(--accent);">"${randomJoke ? randomJoke['Joke Content'] : ''}"</div>
+            <div class="section-header"><h3>מהגלריה</h3><button class="show-all-btn" onclick="showPage('gallery')">לכל הגלריה</button></div>
             <div class="grid">${samplePhotos.map(renderPhotoCard).join('')}</div>
-            <div class="section-header"><h3>יצירות נבחרות</h3><button class="show-all-btn" onclick="showPage('texts')">הצג הכל</button></div>
-            <div class="grid">${sampleTexts.map(renderTextCard).join('')}</div>
         `;
     }
 
-    function renderArchive(container, title, items, filterKey, cardFunc) {
-        let cats = [];
-        items.forEach(i => (i[filterKey] || 'כללי').split(',').forEach(c => cats.push(c.trim())));
-        const uniqueCats = [...new Set(cats)];
+    function renderArchive(container, title, items, cardFunc, hasSearch = false, isDeep = false) {
         container.innerHTML = `
             <div class="section-header"><h2>${title}</h2></div>
-            <div class="filter-bar">
-                <button class="filter-btn active" onclick="filterItems(this, 'all')">הכל</button>
-                ${uniqueCats.map(c => `<button class="filter-btn" onclick="filterItems(this, '${c}')">${c}</button>`).join('')}
-            </div>
-            <div class="grid">${items.map(cardFunc).join('')}</div>
+            ${hasSearch ? `
+                <div class="search-area">
+                    <input type="text" class="search-input" placeholder="חיפוש מהיר (לפי שם, כותב, תיאור או מילות מפתח)..." oninput="fastSearch(this.value)">
+                    ${isDeep ? `<button class="deep-search-btn" onclick="deepSearch()">🔍 חיפוש מורחב בתוך תוכן היצירות (ייקח כמה שניות)</button>` : ''}
+                </div>` : ''}
+            <div class="grid" id="archive-grid">${items.map(cardFunc).join('')}</div>
         `;
     }
 
-    function filterItems(btn, cat) {
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
+    function fastSearch(query) {
+        const q = query.toLowerCase();
         document.querySelectorAll('.card').forEach(card => {
-            const itemCats = card.getAttribute('data-cats') || '';
-            card.style.display = (cat === 'all' || itemCats.includes(cat)) ? 'flex' : 'none';
+            const text = card.innerText.toLowerCase() + (card.getAttribute('data-search') || '').toLowerCase();
+            card.style.display = text.includes(q) ? 'flex' : 'none';
         });
     }
 
+    async function deepSearch() {
+        const query = prompt("הכנס מילת חיפוש לחיפוש בתוך קבצי היצירות:");
+        if (!query) return;
+        const grid = document.getElementById('archive-grid');
+        grid.innerHTML = "מחפש בתוך הקבצים, נא להמתין...";
+        
+        let results = [];
+        for (let item of data.texts) {
+            try {
+                const res = await fetch(item.content_link);
+                const html = await res.text();
+                if (html.toLowerCase().includes(query.toLowerCase())) results.push(item);
+            } catch (e) { console.log("Error fetching", item.content_link); }
+        }
+        
+        grid.innerHTML = results.length ? results.map(renderTextCard).join('') : "לא נמצאו תוצאות בחיפוש המורחב.";
+    }
+
     function renderPhotoCard(p) {
-        return `<div class="card" data-cats="${p.category}" onclick="openItem('photo', '${p.id}', '${p.id}', '${p.title}')">
+        return `<div class="card" data-search="${p.category}" onclick="openItem('photo', '${p.id}', '${p.id}', '${p.title}')">
             <img src="${getPhotoUrl(p.id)}" loading="lazy">
             <div class="card-content"><span class="tag">${p.category}</span><p>${p.title}</p></div>
         </div>`;
     }
 
     function renderTextCard(t) {
-        return `<div class="card" data-cats="${t.type}" onclick="openItem('text', '${t.content_link}', '${t.id}', '${t.title}')">
-            <div class="card-content"><span class="tag">${t.type}</span><h4>${t.title}</h4><p>${t.summary || ''}</p></div>
+        const searchData = `${t.author} ${t.description} ${t.keywords} ${t.type}`;
+        return `<div class="card" data-search="${searchData}" onclick="openItem('text', '${t.content_link}', '${t.id}', '${t.title}', '${t.author}')">
+            <div class="card-content">
+                <span class="tag">${t.type}</span>
+                <h4>${t.title}</h4>
+                <p style="font-size:0.9rem;">${t.description || ''}</p>
+                <span class="author-tag">מאת: ${t.author || 'לא ידוע'}</span>
+            </div>
         </div>`;
     }
 
     function renderJokeCard(j) {
-        return `<div class="card" data-cats="${j.Categories}"><div class="card-content"><span class="tag">${j.Categories}</span><p>"${j['Joke Content']}"</p></div></div>`;
+        return `<div class="card" data-search="${j.Categories}"><div class="card-content"><span class="tag">${j.Categories}</span><p>"${j['Joke Content']}"</p></div></div>`;
     }
 
-    async function openItem(type, path, id, title) {
+    async function openItem(type, path, id, title, author = "") {
         const modal = document.getElementById('item-modal');
         const body = document.getElementById('modal-body');
         modal.style.display = 'flex';
         body.innerHTML = 'טוען...';
-        document.getElementById('modal-actions').innerHTML = `<button class="share-btn" onclick="shareItem('${id}', '${title}')">🔗 שתף פריט זה</button>`;
+        
+        document.getElementById('modal-actions').innerHTML = `<button onclick="shareItem('${id}', '${title}')">🔗 שתף</button>`;
 
-        if(type === 'photo') {
-            body.innerHTML = `<img src="${getPhotoUrl(path)}" style="max-width:100%; border-radius:10px; display:block; margin:0 auto;">`;
+        if (type === 'photo') {
+            body.innerHTML = `<h3>${title}</h3><img src="${getPhotoUrl(path)}" style="max-width:100%; border-radius:10px;">`;
         } else {
             try {
                 const res = await fetch(path);
                 const html = await res.text();
-                body.innerHTML = `<div class="external-content-wrapper">${html}</div>`;
-            } catch(e) { body.innerHTML = "הקובץ לא נמצא."; }
+                body.innerHTML = `<h2>${title}</h2><p><strong>מאת: ${author}</strong></p><hr><div class="external-content-wrapper">${html}</div>`;
+            } catch (e) { body.innerHTML = "הקובץ לא נמצא בנתיב: " + path; }
         }
         renderComments(id);
     }
 
-    function shareItem(id, title) {
-        const shareUrl = `${window.location.origin}${window.location.pathname}?item=${id}`;
-        if (navigator.share) {
-            navigator.share({ title: title, url: shareUrl });
-        } else {
-            const el = document.createElement('textarea');
-            el.value = shareUrl; document.body.appendChild(el); el.select(); document.execCommand('copy'); document.body.removeChild(el);
-            alert("הקישור הועתק ללוח!");
-        }
-    }
-
     function renderComments(itemId) {
         const filtered = data.comments.filter(c => c.item_id === itemId);
-        const listHtml = filtered.map(c => {
-            const rel = c.relation ? ` (${c.relation})` : '';
-            return `<div class="comment-bubble"><strong>${c.name}${rel}:</strong><p>${c.content}</p></div>`;
-        }).join('');
-
+        const listHtml = filtered.map(c => `<div style="border-bottom:1px solid #eee; padding:10px;"><strong>${c.name}${c.relation ? ` (${c.relation})` : ''}:</strong><p>${c.content}</p></div>`).join('');
+        
         document.getElementById('comment-area').innerHTML = `
             <div class="comment-section">
-                <h4>תגובות (${filtered.length})</h4>
+                <h4>תגובות</h4>
                 ${listHtml}
-                <div class="comment-form">
-                    <input type="text" id="c-name" placeholder="שם מלא (חובה)">
-                    <input type="text" id="c-rel" placeholder="הקשר שלי לברק">
-                    <textarea id="c-content" rows="3" placeholder="רציתי להגיד ש..."></textarea>
-                    <button class="submit-btn" id="send-btn" onclick="sendComment('${itemId}')">שליחת התגובה</button>
+                <div style="margin-top:20px;">
+                    <input type="text" id="c-name" placeholder="שם מלא (חובה)" style="width:100%; margin-bottom:5px;">
+                    <input type="text" id="c-rel" placeholder="הקשר שלי לברק" style="width:100%; margin-bottom:5px;">
+                    <textarea id="c-content" placeholder="רציתי להגיד ש..." style="width:100%; margin-bottom:5px;"></textarea>
+                    <button id="send-btn" class="submit-btn" onclick="sendComment('${itemId}')">שליחת התגובה</button>
                 </div>
             </div>`;
     }
 
     async function sendComment(id) {
-        const btn = document.getElementById('send-btn');
-        const name = document.getElementById('c-name').value.trim();
-        const relation = document.getElementById('c-rel').value.trim();
-        const content = document.getElementById('c-content').value.trim();
-
-        if(!name || !content) return alert("נא למלא שם ותוכן");
+        const name = document.getElementById('c-name').value;
+        const content = document.getElementById('c-content').value;
+        if (!name || !content) return alert("שם ותוכן הם חובה");
         
+        const btn = document.getElementById('send-btn');
         btn.disabled = true; btn.innerText = "שולח...";
-        const params = new URLSearchParams({ name, relation, content, item_id: id });
-
+        
+        const params = new URLSearchParams({ name, relation: document.getElementById('c-rel').value, content, item_id: id });
         try {
             await fetch(APPS_SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: params });
-            alert("תודה! התגובה נשלחה ותופיע באתר לאחר אישור.");
+            alert("התגובה נשלחה לאישור!");
             closeModal();
-        } catch(e) { alert("שגיאה בשליחה"); btn.disabled = false; btn.innerText = "שליחת התגובה"; }
+        } catch(e) { alert("שגיאה בשליחה"); btn.disabled = false; }
     }
 
-    function closeModal() { 
-        document.getElementById('item-modal').style.display = 'none';
-        window.history.replaceState({}, '', window.location.pathname);
+    function shareItem(id, title) {
+        const url = `${window.location.origin}${window.location.pathname}?item=${id}`;
+        if (navigator.share) navigator.share({ title, url });
+        else { prompt("העתק את הקישור:", url); }
     }
 
-    async function renderAbout(container) {
-        container.innerHTML = `<div class="section-header"><h2>קורות חיים</h2></div><div id="cv-target">טוען...</div>`;
-        try {
-            const res = await fetch(CV_FILE);
-            const html = await res.text();
-            document.getElementById('cv-target').innerHTML = `<div class="external-content-wrapper">${html}</div>`;
-        } catch(e) { document.getElementById('cv-target').innerHTML = "הקובץ לא נמצא."; }
+    function closeModal() { document.getElementById('item-modal').style.display = 'none'; }
+    
+    function openFromUrl(id) {
+        const photo = data.photos.find(p => p.id === id);
+        if (photo) return openItem('photo', photo.id, photo.id, photo.title);
+        const text = data.texts.find(t => t.id === id);
+        if (text) return openItem('text', text.content_link, text.id, text.title, text.author);
+        showPage('home');
     }
 
     window.onload = init;
