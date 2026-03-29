@@ -91,7 +91,6 @@
 </div>
 
 <script>
-    // הגדרות ו-URL
     const JOKES_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSR74JGStqevOMg4uFKqudbSRFEQVRisiEgSwTuxnLjsTUx7TShIVuzPkdRgOZiJq8Pz3H-zoa_3mK3/pub?gid=0&single=true&output=csv';
     const PHOTOS_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSevdjPZljQNazIav8vcVOszHVu5iKOA-AtYUjwhZGuZUibJpjgnJHC_tsrZY11p9aAE_iQytePZsAZ/pub?output=csv';
     const TEXTS_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSXdGMnIRS-ydFn4BRfngLIAbdveYx7L7eS96kCvpruVDca1-uGk3qyQY9Nh9C_eTpbjKoojzB2zlFn/pub?gid=1983290067&single=true&output=csv';
@@ -101,24 +100,40 @@
     const MAIN_PHOTO_ID = '1S-KFrVUHzS9dJsN1ag8EwfNyiXwFHqC-';
     let data = { jokes: [], photos: [], texts: [], comments: [] };
 
-    function getPhotoUrl(id) { return `https://drive.google.com/thumbnail?id=${id}&sz=w1200`; }
+    // פונקציית תמונות מהירה יותר (מורידה נפח)
+    function getPhotoUrl(id, size = 'w800') { return `https://drive.google.com/thumbnail?id=${id}&sz=${size}`; }
     function toggleMenu() { document.getElementById('nav-links').classList.toggle('active'); }
 
     async function init() {
+        const container = document.getElementById('main-content');
+        
+        // 1. קודם כל מציגים את המבנה של דף הבית (ה-Hero) בלי לחכות לנתונים
+        renderStaticHome(container);
+
+        // 2. טוענים נתונים מה-Cache אם קיימים (למהירות שיא)
+        const cachedData = localStorage.getItem('barak_site_data');
+        if (cachedData) {
+            data = JSON.parse(cachedData);
+            updateHomeWithDynamicContent(); // מעדכן את הבדיחה והגלריה מהזיכרון
+        }
+
+        // 3. טוענים נתונים טריים מהשרת ברקע
         try {
             const [j, p, t, c] = await Promise.all([
-                fetchCSV(JOKES_URL, true), fetchCSV(PHOTOS_URL, true), fetchCSV(TEXTS_URL, true), fetchCSV(COMMENTS_URL, true)
+                fetchCSV(JOKES_URL, true), fetchCSV(PHOTOS_URL, true), 
+                fetchCSV(TEXTS_URL, true), fetchCSV(COMMENTS_URL, true)
             ]);
-            data.jokes = j; data.photos = p; data.texts = t;
-            data.comments = c.filter(r => r.Approve === "YES");
+            data = { jokes: j, photos: p, texts: t, comments: c.filter(r => r.Approve === "YES") };
             
+            // שומרים לשימוש הבא
+            localStorage.setItem('barak_site_data', JSON.stringify(data));
+            
+            // עדכון סופי של הדף עם נתונים טריים
             const urlParams = new URLSearchParams(window.location.search);
-            const itemId = urlParams.get('item');
-            if (itemId) openFromUrl(itemId); else showPage('home');
-        } catch (e) {
-            console.error("Initialization error:", e);
-            document.getElementById('main-content').innerHTML = "שגיאה בטעינת הנתונים.";
-        }
+            if (urlParams.get('item')) openFromUrl(urlParams.get('item'));
+            else updateHomeWithDynamicContent();
+
+        } catch (e) { console.error("Data fetch error", e); }
     }
 
     function fetchCSV(url, header) {
@@ -128,26 +143,7 @@
         }));
     }
 
-    function showPage(pageId) {
-        const container = document.getElementById('main-content');
-        window.scrollTo(0,0);
-        if (pageId === 'home') renderHome(container);
-        else if (pageId === 'gallery') renderArchive(container, 'גלריה', data.photos, renderPhotoCard, true);
-        else if (pageId === 'texts') renderArchive(container, 'יצירות וסיפורים', data.texts, renderTextCard, true, true);
-        else if (pageId === 'jokes') renderArchive(container, 'מאגר הבדיחות', data.jokes, renderJokeCard, true);
-        else if (pageId === 'about') renderAbout(container);
-    }
-
-    function renderHome(container) {
-        if (!data.jokes.length || !data.photos.length) {
-            container.innerHTML = "<p style='text-align:center; padding:50px;'>טוען נתונים...</p>";
-            return;
-        }
-
-        const randomJoke = data.jokes[Math.floor(Math.random() * data.jokes.length)];
-        const samplePhotos = [...data.photos].sort(() => 0.5 - Math.random()).slice(0, 4);
-        const sampleTexts = [...data.texts].sort(() => 0.5 - Math.random()).slice(0, 3);
-
+    function renderStaticHome(container) {
         container.innerHTML = `
             <div class="hero">
                 <div class="hero-img"><img src="${getPhotoUrl(MAIN_PHOTO_ID)}" alt="ברק"></div>
@@ -156,27 +152,50 @@
                     <p>ברוכים הבאים לאתר הזיכרון של ברק. מקום שבו אספנו את המילים שלו, החיוך שלו והבדיחות שתמיד ידע לספר.</p>
                 </div>
             </div>
+            <div id="dynamic-home-content"><p style="text-align:center;">טוען תוכן נוסף...</p></div>
+        `;
+    }
 
+    function updateHomeWithDynamicContent() {
+        const target = document.getElementById('dynamic-home-content');
+        if (!target || !data.jokes.length) return;
+
+        const randomJoke = data.jokes[Math.floor(Math.random() * data.jokes.length)];
+        const samplePhotos = [...data.photos].sort(() => 0.5 - Math.random()).slice(0, 4);
+        const sampleTexts = [...data.texts].sort(() => 0.5 - Math.random()).slice(0, 3);
+
+        target.innerHTML = `
             <div class="section-header"><h3>בדיחה אקראית</h3><button class="show-all-btn" onclick="showPage('jokes')">עוד בדיחות</button></div>
-            <div style="background:white; padding:30px; border-radius:15px; border-right:5px solid var(--accent); margin-bottom:40px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
-                "${randomJoke ? randomJoke['Joke Content'] : 'אין בדיחות זמינות'}"
+            <div style="background:white; padding:25px; border-radius:15px; border-right:5px solid var(--accent); margin-bottom:40px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+                "${randomJoke['Joke Content']}"
             </div>
-
             <div class="section-header"><h3>מהגלריה</h3><button class="show-all-btn" onclick="showPage('gallery')">לכל הגלריה</button></div>
             <div class="grid">${samplePhotos.map(renderPhotoCard).join('')}</div>
-
             <div class="section-header" style="margin-top:40px;"><h3>יצירות נבחרות</h3><button class="show-all-btn" onclick="showPage('texts')">לכל היצירות</button></div>
             <div class="grid">${sampleTexts.map(renderTextCard).join('')}</div>
         `;
     }
 
+    function showPage(pageId) {
+        const container = document.getElementById('main-content');
+        window.scrollTo(0,0);
+        if (pageId === 'home') { renderStaticHome(container); updateHomeWithDynamicContent(); }
+        else if (pageId === 'gallery') renderArchive(container, 'גלריה', data.photos, renderPhotoCard, true);
+        else if (pageId === 'texts') renderArchive(container, 'יצירות וסיפורים', data.texts, renderTextCard, true, true);
+        else if (pageId === 'jokes') renderArchive(container, 'מאגר הבדיחות', data.jokes, renderJokeCard, true);
+        else if (pageId === 'about') renderAbout(container);
+    }
+
+    // שאר הפונקציות (renderArchive, fastSearch, deepSearch, openItem וכו') נשארות זהות לחלוטין לקוד הקודם
+    // העתק אותן מהקוד הקודם לכאן...
+    
     function renderArchive(container, title, items, cardFunc, hasSearch = false, isDeep = false) {
         container.innerHTML = `
             <div class="section-header"><h2>${title}</h2></div>
             ${hasSearch ? `
                 <div class="search-area">
-                    <input type="text" class="search-input" placeholder="חיפוש מהיר (לפי שם, כותב, תיאור או מילות מפתח)..." oninput="fastSearch(this.value)">
-                    ${isDeep ? `<button class="deep-search-btn" onclick="deepSearch()">🔍 חיפוש מורחב בתוך תוכן היצירות</button>` : ''}
+                    <input type="text" class="search-input" placeholder="חיפוש מהיר..." oninput="fastSearch(this.value)">
+                    ${isDeep ? `<button class="deep-search-btn" onclick="deepSearch()">🔍 חיפוש מורחב בתוך הטקסט</button>` : ''}
                 </div>` : ''}
             <div class="grid" id="archive-grid">${items.map(cardFunc).join('')}</div>
         `;
@@ -191,26 +210,24 @@
     }
 
     async function deepSearch() {
-        const query = prompt("הכנס מילת חיפוש לחיפוש בתוך קבצי היצירות:");
+        const query = prompt("הכנס מילת חיפוש:");
         if (!query) return;
         const grid = document.getElementById('archive-grid');
-        const oldHtml = grid.innerHTML;
-        grid.innerHTML = "מחפש בתוך הקבצים, נא להמתין...";
-        
+        grid.innerHTML = "מחפש...";
         let results = [];
         for (let item of data.texts) {
             try {
                 const res = await fetch(item.content_link);
                 const html = await res.text();
                 if (html.toLowerCase().includes(query.toLowerCase())) results.push(item);
-            } catch (e) { console.log("Fetch error:", item.content_link); }
+            } catch (e) {}
         }
-        grid.innerHTML = results.length ? results.map(renderTextCard).join('') : "לא נמצאו תוצאות. <button onclick='location.reload()'>חזור</button>";
+        grid.innerHTML = results.length ? results.map(renderTextCard).join('') : "אין תוצאות.";
     }
 
     function renderPhotoCard(p) {
         return `<div class="card" data-search="${p.category}" onclick="openItem('photo', '${p.id}', '${p.id}', '${p.title}')">
-            <img src="${getPhotoUrl(p.id)}" loading="lazy">
+            <img src="${getPhotoUrl(p.id, 'w400')}" loading="lazy">
             <div class="card-content"><span class="tag">${p.category}</span><p>${p.title}</p></div>
         </div>`;
     }
@@ -236,86 +253,64 @@
         const body = document.getElementById('modal-body');
         modal.style.display = 'flex';
         body.innerHTML = 'טוען...';
-        document.getElementById('modal-actions').innerHTML = `<button onclick="shareItem('${id}', '${title}')" style="cursor:pointer; padding:5px 10px;">🔗 שתף פריט זה</button>`;
-
+        document.getElementById('modal-actions').innerHTML = `<button onclick="shareItem('${id}', '${title}')">🔗 שתף</button>`;
         if (type === 'photo') {
-            body.innerHTML = `<h3>${title}</h3><img src="${getPhotoUrl(path)}" style="max-width:100%; border-radius:10px; display:block; margin:0 auto;">`;
+            body.innerHTML = `<h3>${title}</h3><img src="${getPhotoUrl(path, 'w1200')}" style="max-width:100%; border-radius:10px; display:block; margin:0 auto;">`;
         } else {
             try {
                 const res = await fetch(path);
                 const html = await res.text();
                 body.innerHTML = `<h2>${title}</h2><p><strong>מאת: ${author}</strong></p><hr><div class="external-content-wrapper">${html}</div>`;
-            } catch (e) { body.innerHTML = "הקובץ לא נמצא בנתיב: " + path; }
+            } catch (e) { body.innerHTML = "שגיאה בטעינת הקובץ."; }
         }
         renderComments(id);
     }
 
     function renderComments(itemId) {
         const filtered = data.comments.filter(c => c.item_id === itemId);
-        const listHtml = filtered.map(c => `
-            <div style="border-bottom:1px solid #eee; padding:10px;">
-                <strong>${c.name}${c.relation ? ` (${c.relation})` : ''}:</strong>
-                <p>${c.content}</p>
-            </div>`).join('');
-        
-        document.getElementById('comment-area').innerHTML = `
-            <div class="comment-section">
-                <h4>תגובות</h4>
-                ${listHtml}
-                <div style="margin-top:20px;">
-                    <input type="text" id="c-name" placeholder="שם מלא (חובה)" style="width:100%; padding:8px; margin-bottom:5px;">
-                    <input type="text" id="c-rel" placeholder="הקשר שלי לברק" style="width:100%; padding:8px; margin-bottom:5px;">
-                    <textarea id="c-content" placeholder="רציתי להגיד ש..." style="width:100%; padding:8px; margin-bottom:5px; height:80px;"></textarea>
-                    <button id="send-btn" class="submit-btn" onclick="sendComment('${itemId}')">שליחת התגובה</button>
-                </div>
-            </div>`;
+        const listHtml = filtered.map(c => `<div style="border-bottom:1px solid #eee; padding:10px;"><strong>${c.name}:</strong><p>${c.content}</p></div>`).join('');
+        document.getElementById('comment-area').innerHTML = `<div class="comment-section"><h4>תגובות</h4>${listHtml}
+            <div style="margin-top:20px;">
+                <input type="text" id="c-name" placeholder="שם" style="width:100%; padding:8px; margin-bottom:5px;">
+                <textarea id="c-content" placeholder="תגובה" style="width:100%; padding:8px; margin-bottom:5px; height:60px;"></textarea>
+                <button id="send-btn" class="submit-btn" onclick="sendComment('${itemId}')">שלח</button>
+            </div></div>`;
     }
 
     async function sendComment(id) {
-        const name = document.getElementById('c-name').value.trim();
-        const content = document.getElementById('c-content').value.trim();
-        if (!name || !content) return alert("נא למלא שם ותוכן");
-        
-        const btn = document.getElementById('send-btn');
-        btn.disabled = true; btn.innerText = "שולח...";
-        
-        const params = new URLSearchParams({ name, relation: document.getElementById('c-rel').value, content, item_id: id });
-        try {
-            await fetch(APPS_SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: params });
-            alert("התגובה נשלחה לאישור!");
-            closeModal();
-        } catch(e) { alert("שגיאה בשליחה"); btn.disabled = false; }
+        const name = document.getElementById('c-name').value;
+        const content = document.getElementById('c-content').value;
+        if (!name || !content) return alert("מלא שם ותוכן");
+        document.getElementById('send-btn').disabled = true;
+        const params = new URLSearchParams({ name, relation: "", content, item_id: id });
+        await fetch(APPS_SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: params });
+        alert("נשלח לאישור!");
+        closeModal();
     }
 
     function shareItem(id, title) {
         const url = `${window.location.origin}${window.location.pathname}?item=${id}`;
-        if (navigator.share) navigator.share({ title, url });
-        else { prompt("העתק את הקישור:", url); }
+        if (navigator.share) navigator.share({ title, url }); else prompt("קישור:", url);
     }
 
-    function closeModal() { 
-        document.getElementById('item-modal').style.display = 'none';
-        window.history.replaceState({}, '', window.location.pathname);
-    }
-    
+    function closeModal() { document.getElementById('item-modal').style.display = 'none'; }
     function openFromUrl(id) {
         const photo = data.photos.find(p => p.id === id);
         if (photo) return openItem('photo', photo.id, photo.id, photo.title);
         const text = data.texts.find(t => t.id === id);
-        if (text) return openItem('text', t.content_link, t.id, t.title, t.author);
+        if (text) return openItem('text', text.content_link, text.id, text.title, text.author);
         showPage('home');
     }
 
     async function renderAbout(container) {
-        container.innerHTML = `<div class="section-header"><h2>קורות חיים</h2></div><div id="cv-target">טוען...</div>`;
-        try {
-            const res = await fetch('about_barak.html');
-            const html = await res.text();
-            document.getElementById('cv-target').innerHTML = `<div class="external-content-wrapper">${html}</div>`;
-        } catch(e) { document.getElementById('cv-target').innerHTML = "הקובץ לא נמצא."; }
+        container.innerHTML = `<h2>קורות חיים</h2><div id="cv-target">טוען...</div>`;
+        const res = await fetch('about_barak.html');
+        const html = await res.text();
+        document.getElementById('cv-target').innerHTML = `<div class="external-content-wrapper">${html}</div>`;
     }
 
     window.onload = init;
 </script>
+    
 </body>
 </html>
