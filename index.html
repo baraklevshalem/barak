@@ -23,6 +23,19 @@
             .hamburger { display: block; }
         }
 
+        /* Hero Section Styling */
+        .hero { display: flex; align-items: center; gap: 40px; padding: 40px 0; margin-bottom: 20px; }
+        .hero-img { flex: 0 0 300px; }
+        .hero-img img { width: 100%; border-radius: 15px; box-shadow: 10px 10px 0 var(--accent); object-fit: cover; aspect-ratio: 1; }
+        .hero-text h1 { font-size: 2.8rem; margin: 0 0 10px 0; color: var(--primary); }
+        .hero-text p { font-size: 1.2rem; line-height: 1.6; margin: 0; }
+
+        @media (max-width: 768px) {
+            .hero { flex-direction: column; text-align: center; gap: 20px; }
+            .hero-img { flex: 0 0 auto; width: 220px; margin: 0 auto; }
+            .hero-text h1 { font-size: 2rem; }
+        }
+
         /* Layout & Search */
         .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
         .search-area { margin-bottom: 30px; background: #eee; padding: 20px; border-radius: 12px; }
@@ -41,19 +54,6 @@
         .tag { display: inline-block; background: #fff3e0; color: var(--accent); padding: 3px 10px; border-radius: 15px; font-size: 0.75rem; font-weight: bold; margin-bottom: 8px; }
         .author-tag { font-size: 0.85rem; color: #666; font-style: italic; margin-top: 5px; display: block; }
 
-         /* Hero Section */
-        .hero { display: flex; align-items: center; gap: 40px; padding: 40px 0; margin-bottom: 20px; }
-        .hero-img { flex: 0 0 300px; }
-        .hero-img img { width: 100%; border-radius: 15px; box-shadow: 10px 10px 0 var(--accent); object-fit: cover; aspect-ratio: 1; }
-        .hero-text h1 { font-size: 2.8rem; margin: 0 0 10px 0; color: var(--primary); }
-        .hero-text p { font-size: 1.2rem; line-height: 1.6; margin: 0; }
-
-        @media (max-width: 768px) {
-            .hero { flex-direction: column; text-align: center; gap: 20px; }
-            .hero-img { flex: 0 0 auto; width: 220px; margin: 0 auto; }
-            .hero-text h1 { font-size: 2rem; }
-        }
-        
         /* Modal */
         .modal { display: none; position: fixed; z-index: 2000; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); justify-content: center; align-items: center; }
         .modal-content { background: white; width: 95%; max-width: 900px; max-height: 90vh; border-radius: 20px; overflow-y: auto; padding: 30px; position: relative; direction: rtl; text-align: right; }
@@ -91,31 +91,41 @@
 </div>
 
 <script>
+    // הגדרות ו-URL
     const JOKES_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSR74JGStqevOMg4uFKqudbSRFEQVRisiEgSwTuxnLjsTUx7TShIVuzPkdRgOZiJq8Pz3H-zoa_3mK3/pub?gid=0&single=true&output=csv';
     const PHOTOS_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSevdjPZljQNazIav8vcVOszHVu5iKOA-AtYUjwhZGuZUibJpjgnJHC_tsrZY11p9aAE_iQytePZsAZ/pub?output=csv';
     const TEXTS_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSXdGMnIRS-ydFn4BRfngLIAbdveYx7L7eS96kCvpruVDca1-uGk3qyQY9Nh9C_eTpbjKoojzB2zlFn/pub?gid=1983290067&single=true&output=csv';
     const COMMENTS_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRLoH5kw3YDw4HGqSflNsJfe-Gaq34n-5916WzKs-wFlAiCOUiit6ZqmkUiKprnAyJ6ezB0bwQhkGej/pub?output=csv';
     const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby5P7mLEeCeZJU3Yj3NZgoQ9r8Em8S1--uZyQwuXph7mLIr2DimiGvrtiW4yxcWzFs5Gw/exec';
 
+    const MAIN_PHOTO_ID = '1S-KFrVUHzS9dJsN1ag8EwfNyiXwFHqC-';
     let data = { jokes: [], photos: [], texts: [], comments: [] };
 
     function getPhotoUrl(id) { return `https://drive.google.com/thumbnail?id=${id}&sz=w1200`; }
     function toggleMenu() { document.getElementById('nav-links').classList.toggle('active'); }
 
     async function init() {
-        const [j, p, t, c] = await Promise.all([
-            fetchCSV(JOKES_URL, true), fetchCSV(PHOTOS_URL, true), fetchCSV(TEXTS_URL, true), fetchCSV(COMMENTS_URL, true)
-        ]);
-        data.jokes = j; data.photos = p; data.texts = t;
-        data.comments = c.filter(r => r.Approve === "YES");
-        
-        const urlParams = new URLSearchParams(window.location.search);
-        const itemId = urlParams.get('item');
-        itemId ? openFromUrl(itemId) : showPage('home');
+        try {
+            const [j, p, t, c] = await Promise.all([
+                fetchCSV(JOKES_URL, true), fetchCSV(PHOTOS_URL, true), fetchCSV(TEXTS_URL, true), fetchCSV(COMMENTS_URL, true)
+            ]);
+            data.jokes = j; data.photos = p; data.texts = t;
+            data.comments = c.filter(r => r.Approve === "YES");
+            
+            const urlParams = new URLSearchParams(window.location.search);
+            const itemId = urlParams.get('item');
+            if (itemId) openFromUrl(itemId); else showPage('home');
+        } catch (e) {
+            console.error("Initialization error:", e);
+            document.getElementById('main-content').innerHTML = "שגיאה בטעינת הנתונים.";
+        }
     }
 
     function fetchCSV(url, header) {
-        return new Promise(res => Papa.parse(url, { download: true, header, skipEmptyLines: true, complete: r => res(r.data) }));
+        return new Promise((res, rej) => Papa.parse(url, { 
+            download: true, header, skipEmptyLines: true, 
+            complete: r => res(r.data), error: e => rej(e) 
+        }));
     }
 
     function showPage(pageId) {
@@ -128,45 +138,34 @@
         else if (pageId === 'about') renderAbout(container);
     }
 
-function renderHome(container) {
-        // בחירת בדיחה אקראית
+    function renderHome(container) {
+        if (!data.jokes.length || !data.photos.length) {
+            container.innerHTML = "<p style='text-align:center; padding:50px;'>טוען נתונים...</p>";
+            return;
+        }
+
         const randomJoke = data.jokes[Math.floor(Math.random() * data.jokes.length)];
-        
-        // בחירת 4 תמונות אקראיות
         const samplePhotos = [...data.photos].sort(() => 0.5 - Math.random()).slice(0, 4);
-        
-        // בחירת 3 יצירות אקראיות
         const sampleTexts = [...data.texts].sort(() => 0.5 - Math.random()).slice(0, 3);
 
         container.innerHTML = `
-            <div class="hero" style="display: flex; align-items: center; gap: 40px; padding: 40px 0;">
-                <div class="hero-img" style="flex: 0 0 300px;">
-                    <img src="${getPhotoUrl(MAIN_PHOTO_ID)}" alt="ברק" style="width: 100%; border-radius: 15px; box-shadow: 10px 10px 0 var(--accent); object-fit: cover; aspect-ratio: 1;">
-                </div>
+            <div class="hero">
+                <div class="hero-img"><img src="${getPhotoUrl(MAIN_PHOTO_ID)}" alt="ברק"></div>
                 <div class="hero-text">
-                    <h1 style="font-size: 2.5rem; margin-bottom: 10px;">ברק לב שלם</h1>
-                    <p style="font-size: 1.2rem; line-height: 1.6;">ברוכים הבאים לאתר הזיכרון של ברק. מקום שבו אספנו את המילים שלו, החיוך שלו והבדיחות שתמיד ידע לספר.</p>
+                    <h1>ברק לב שלם</h1>
+                    <p>ברוכים הבאים לאתר הזיכרון של ברק. מקום שבו אספנו את המילים שלו, החיוך שלו והבדיחות שתמיד ידע לספר.</p>
                 </div>
             </div>
 
-            <div class="section-header">
-                <h3>בדיחה אקראית</h3>
-                <button class="show-all-btn" onclick="showPage('jokes')">עוד בדיחות</button>
-            </div>
-            <div style="background:white; padding:30px; border-radius:15px; border-right:5px solid var(--accent); margin-bottom:40px; font-size: 1.1rem; line-height:1.6; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
-                "${randomJoke ? randomJoke['Joke Content'] : 'טוען בדיחה...'}"
+            <div class="section-header"><h3>בדיחה אקראית</h3><button class="show-all-btn" onclick="showPage('jokes')">עוד בדיחות</button></div>
+            <div style="background:white; padding:30px; border-radius:15px; border-right:5px solid var(--accent); margin-bottom:40px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+                "${randomJoke ? randomJoke['Joke Content'] : 'אין בדיחות זמינות'}"
             </div>
 
-            <div class="section-header">
-                <h3>מהגלריה</h3>
-                <button class="show-all-btn" onclick="showPage('gallery')">לכל הגלריה</button>
-            </div>
+            <div class="section-header"><h3>מהגלריה</h3><button class="show-all-btn" onclick="showPage('gallery')">לכל הגלריה</button></div>
             <div class="grid">${samplePhotos.map(renderPhotoCard).join('')}</div>
 
-            <div class="section-header" style="margin-top: 50px;">
-                <h3>יצירות נבחרות</h3>
-                <button class="show-all-btn" onclick="showPage('texts')">לכל היצירות</button>
-            </div>
+            <div class="section-header" style="margin-top:40px;"><h3>יצירות נבחרות</h3><button class="show-all-btn" onclick="showPage('texts')">לכל היצירות</button></div>
             <div class="grid">${sampleTexts.map(renderTextCard).join('')}</div>
         `;
     }
@@ -177,7 +176,7 @@ function renderHome(container) {
             ${hasSearch ? `
                 <div class="search-area">
                     <input type="text" class="search-input" placeholder="חיפוש מהיר (לפי שם, כותב, תיאור או מילות מפתח)..." oninput="fastSearch(this.value)">
-                    ${isDeep ? `<button class="deep-search-btn" onclick="deepSearch()">🔍 חיפוש מורחב בתוך תוכן היצירות (ייקח כמה שניות)</button>` : ''}
+                    ${isDeep ? `<button class="deep-search-btn" onclick="deepSearch()">🔍 חיפוש מורחב בתוך תוכן היצירות</button>` : ''}
                 </div>` : ''}
             <div class="grid" id="archive-grid">${items.map(cardFunc).join('')}</div>
         `;
@@ -195,6 +194,7 @@ function renderHome(container) {
         const query = prompt("הכנס מילת חיפוש לחיפוש בתוך קבצי היצירות:");
         if (!query) return;
         const grid = document.getElementById('archive-grid');
+        const oldHtml = grid.innerHTML;
         grid.innerHTML = "מחפש בתוך הקבצים, נא להמתין...";
         
         let results = [];
@@ -203,10 +203,9 @@ function renderHome(container) {
                 const res = await fetch(item.content_link);
                 const html = await res.text();
                 if (html.toLowerCase().includes(query.toLowerCase())) results.push(item);
-            } catch (e) { console.log("Error fetching", item.content_link); }
+            } catch (e) { console.log("Fetch error:", item.content_link); }
         }
-        
-        grid.innerHTML = results.length ? results.map(renderTextCard).join('') : "לא נמצאו תוצאות בחיפוש המורחב.";
+        grid.innerHTML = results.length ? results.map(renderTextCard).join('') : "לא נמצאו תוצאות. <button onclick='location.reload()'>חזור</button>";
     }
 
     function renderPhotoCard(p) {
@@ -237,11 +236,10 @@ function renderHome(container) {
         const body = document.getElementById('modal-body');
         modal.style.display = 'flex';
         body.innerHTML = 'טוען...';
-        
-        document.getElementById('modal-actions').innerHTML = `<button onclick="shareItem('${id}', '${title}')">🔗 שתף</button>`;
+        document.getElementById('modal-actions').innerHTML = `<button onclick="shareItem('${id}', '${title}')" style="cursor:pointer; padding:5px 10px;">🔗 שתף פריט זה</button>`;
 
         if (type === 'photo') {
-            body.innerHTML = `<h3>${title}</h3><img src="${getPhotoUrl(path)}" style="max-width:100%; border-radius:10px;">`;
+            body.innerHTML = `<h3>${title}</h3><img src="${getPhotoUrl(path)}" style="max-width:100%; border-radius:10px; display:block; margin:0 auto;">`;
         } else {
             try {
                 const res = await fetch(path);
@@ -254,25 +252,29 @@ function renderHome(container) {
 
     function renderComments(itemId) {
         const filtered = data.comments.filter(c => c.item_id === itemId);
-        const listHtml = filtered.map(c => `<div style="border-bottom:1px solid #eee; padding:10px;"><strong>${c.name}${c.relation ? ` (${c.relation})` : ''}:</strong><p>${c.content}</p></div>`).join('');
+        const listHtml = filtered.map(c => `
+            <div style="border-bottom:1px solid #eee; padding:10px;">
+                <strong>${c.name}${c.relation ? ` (${c.relation})` : ''}:</strong>
+                <p>${c.content}</p>
+            </div>`).join('');
         
         document.getElementById('comment-area').innerHTML = `
             <div class="comment-section">
                 <h4>תגובות</h4>
                 ${listHtml}
                 <div style="margin-top:20px;">
-                    <input type="text" id="c-name" placeholder="שם מלא (חובה)" style="width:100%; margin-bottom:5px;">
-                    <input type="text" id="c-rel" placeholder="הקשר שלי לברק" style="width:100%; margin-bottom:5px;">
-                    <textarea id="c-content" placeholder="רציתי להגיד ש..." style="width:100%; margin-bottom:5px;"></textarea>
+                    <input type="text" id="c-name" placeholder="שם מלא (חובה)" style="width:100%; padding:8px; margin-bottom:5px;">
+                    <input type="text" id="c-rel" placeholder="הקשר שלי לברק" style="width:100%; padding:8px; margin-bottom:5px;">
+                    <textarea id="c-content" placeholder="רציתי להגיד ש..." style="width:100%; padding:8px; margin-bottom:5px; height:80px;"></textarea>
                     <button id="send-btn" class="submit-btn" onclick="sendComment('${itemId}')">שליחת התגובה</button>
                 </div>
             </div>`;
     }
 
     async function sendComment(id) {
-        const name = document.getElementById('c-name').value;
-        const content = document.getElementById('c-content').value;
-        if (!name || !content) return alert("שם ותוכן הם חובה");
+        const name = document.getElementById('c-name').value.trim();
+        const content = document.getElementById('c-content').value.trim();
+        if (!name || !content) return alert("נא למלא שם ותוכן");
         
         const btn = document.getElementById('send-btn');
         btn.disabled = true; btn.innerText = "שולח...";
@@ -291,14 +293,26 @@ function renderHome(container) {
         else { prompt("העתק את הקישור:", url); }
     }
 
-    function closeModal() { document.getElementById('item-modal').style.display = 'none'; }
+    function closeModal() { 
+        document.getElementById('item-modal').style.display = 'none';
+        window.history.replaceState({}, '', window.location.pathname);
+    }
     
     function openFromUrl(id) {
         const photo = data.photos.find(p => p.id === id);
         if (photo) return openItem('photo', photo.id, photo.id, photo.title);
         const text = data.texts.find(t => t.id === id);
-        if (text) return openItem('text', text.content_link, text.id, text.title, text.author);
+        if (text) return openItem('text', t.content_link, t.id, t.title, t.author);
         showPage('home');
+    }
+
+    async function renderAbout(container) {
+        container.innerHTML = `<div class="section-header"><h2>קורות חיים</h2></div><div id="cv-target">טוען...</div>`;
+        try {
+            const res = await fetch('about_barak.html');
+            const html = await res.text();
+            document.getElementById('cv-target').innerHTML = `<div class="external-content-wrapper">${html}</div>`;
+        } catch(e) { document.getElementById('cv-target').innerHTML = "הקובץ לא נמצא."; }
     }
 
     window.onload = init;
