@@ -189,14 +189,27 @@
     // שאר הפונקציות (renderArchive, fastSearch, deepSearch, openItem וכו') נשארות זהות לחלוטין לקוד הקודם
     // העתק אותן מהקוד הקודם לכאן...
     
-    function renderArchive(container, title, items, cardFunc, hasSearch = false, isDeep = false) {
+  function renderArchive(container, title, items, cardFunc, hasSearch = false, isDeep = false) {
+        // חילוץ קטגוריות ייחודיות מהפריטים
+        const categories = [...new Set(items.map(item => item.category || item.Categories || item.type))].filter(Boolean);
+
         container.innerHTML = `
             <div class="section-header"><h2>${title}</h2></div>
+            
             ${hasSearch ? `
                 <div class="search-area">
                     <input type="text" class="search-input" placeholder="חיפוש מהיר..." oninput="fastSearch(this.value)">
-                    ${isDeep ? `<button class="deep-search-btn" onclick="deepSearch()">🔍 חיפוש מורחב בתוך הטקסט</button>` : ''}
+                    
+                    <div class="filter-buttons" style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap;">
+                        <button onclick="fastSearch('')" style="padding: 5px 12px; border-radius: 20px; border: 1px solid var(--primary); background: var(--primary); color: white; cursor: pointer; font-size: 0.85rem;">הכל</button>
+                        ${categories.map(cat => `
+                            <button onclick="fastSearch('${cat}')" style="padding: 5px 12px; border-radius: 20px; border: 1px solid #ccc; background: white; cursor: pointer; font-size: 0.85rem;">${cat}</button>
+                        `).join('')}
+                    </div>
+
+                    ${isDeep ? `<button class="deep-search-btn" onclick="deepSearch()" style="margin-top:15px; display:block;">🔍 חיפוש מורחב בתוך תוכן היצירות</button>` : ''}
                 </div>` : ''}
+            
             <div class="grid" id="archive-grid">${items.map(cardFunc).join('')}</div>
         `;
     }
