@@ -18,9 +18,29 @@
         .hamburger { display: none; font-size: 28px; cursor: pointer; background: none; border: none; color: white; }
 
         @media (max-width: 768px) {
-            .nav-links { display: none; flex-direction: column; position: absolute; top: 65px; left: 0; width: 100%; background: var(--primary); padding: 20px; gap: 15px; box-shadow: 0 5px 10px rgba(0,0,0,0.2); }
+            .nav-links { 
+                display: none; 
+                flex-direction: column; 
+                position: absolute; 
+                top: 65px; 
+                right: 0; /* נצמד לימין */
+                left: 0;  /* נצמד לשמאל - ככה הוא תמיד ברוחב 100% */
+                width: 100%; 
+                background: var(--primary); 
+                padding: 20px 0; /* פדינג רק למעלה למטה */
+                gap: 0; 
+                box-shadow: 0 5px 10px rgba(0,0,0,0.2); 
+                box-sizing: border-box; /* מבטיח שהפדינג לא יגדיל את הרוחב מעבר ל-100% */
+            }
+            .nav-links a {
+                padding: 15px 20px; /* שטח לחיצה גדול ונוח לאצבע */
+                border-bottom: 1px solid rgba(255,255,255,0.1); /* קו מפריד עדין */
+                width: 100%;
+                box-sizing: border-box;
+            }
             .nav-links.active { display: flex; }
             .hamburger { display: block; }
+        }
         }
 
         /* Hero Section Styling */
