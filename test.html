@@ -63,43 +63,8 @@
                     "tertiary-fixed-dim": "#e3c19b",
                     "primary-container": "#2c3e50"
             },
-            "borderRadius": {
-                    "DEFAULT": "0.25rem",
-                    "lg": "0.5rem",
-                    "xl": "0.75rem",
-                    "full": "9999px"
-            },
-            "spacing": {
-                    "xl": "64px",
-                    "md": "24px",
-                    "sm": "16px",
-                    "xs": "8px",
-                    "unit": "4px",
-                    "lg": "40px",
-                    "container-max": "1200px",
-                    "gutter": "24px"
-            },
             "fontFamily": {
-                    "title-lg": ["Heebo"],
-                    "headline-md": ["Heebo"],
-                    "body-lg": ["Heebo"],
-                    "headline-lg": ["Heebo"],
-                    "display-lg": ["Heebo"],
-                    "body-md": ["Heebo"],
-                    "label-lg": ["Heebo"],
-                    "display-md": ["Heebo"],
-                    "label-sm": ["Heebo"]
-            },
-            "fontSize": {
-                    "title-lg": ["20px", {"lineHeight": "1.4", "fontWeight": "500"}],
-                    "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "500"}],
-                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
-                    "headline-lg": ["28px", {"lineHeight": "1.3", "fontWeight": "500"}],
-                    "display-lg": ["48px", {"lineHeight": "1.2", "fontWeight": "700"}],
-                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
-                    "label-lg": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "500"}],
-                    "display-md": ["36px", {"lineHeight": "1.2", "fontWeight": "700"}],
-                    "label-sm": ["12px", {"lineHeight": "1.4", "fontWeight": "400"}]
+                    "sans": ["Heebo", "sans-serif"]
             }
           },
         },
@@ -114,43 +79,32 @@
             background-color: #ecfdfd;
             scroll-behavior: smooth;
         }
-        .line-clamp-3 {
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;  
-            overflow: hidden;
-        }
-        .line-clamp-2 {
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;  
-            overflow: hidden;
-        }
-        /* עיצוב גוף היצירות והטקסטים לפונט היבו קריא ומכובד */
-        .custom-prose-content {
+        /* עיצוב הפונט לקטעי היצירות והטקסטים שיופיעו בתוך האתר */
+        .custom-prose-content, .custom-prose-content p, .custom-prose-content div {
             font-family: 'Heebo', sans-serif !important;
-            font-size: 18px;
-            line-height: 1.8;
-            color: #162839;
+            font-size: 19px !important;
+            line-height: 1.8 !important;
+            color: #162839 !important;
+            font-weight: 400;
         }
     </style>
 </head>
 <body class="bg-surface text-on-surface flex flex-col min-h-screen">
 
-    <header class="bg-white/90 backdrop-blur-md fixed top-0 w-full z-50 border-b border-slate-100 shadow-sm transition-all duration-300 ease-in-out">
+    <header class="bg-white/90 backdrop-blur-md fixed top-0 w-full z-50 border-b border-slate-100 shadow-sm">
         <div class="flex justify-between items-center h-16 px-6 md:px-12 max-w-7xl mx-auto">
-            <div class="text-xl font-bold text-slate-800 tracking-tight cursor-pointer" onclick="showPage('home')">לזכרו של ברק לב שלם</div>
+            <div class="text-xl font-bold text-slate-800 cursor-pointer" onclick="showPage('home')">לזכרו של ברק לב שלם</div>
             
             <nav class="hidden md:flex items-center gap-8">
-                <a class="text-slate-600 hover:text-primary transition-colors font-medium text-sm tracking-wide cursor-pointer" onclick="showPage('home')">בית</a>
-                <a class="text-slate-600 hover:text-primary transition-colors font-medium text-sm tracking-wide cursor-pointer" onclick="showPage('gallery')">גלריה</a>
-                <a class="text-slate-600 hover:text-primary transition-colors font-medium text-sm tracking-wide cursor-pointer" onclick="showPage('texts')">יצירות וסיפורים</a>
-                <a class="text-slate-600 hover:text-primary transition-colors font-medium text-sm tracking-wide cursor-pointer" onclick="showPage('jokes')">פינת ההומור והבדיחות</a>
-                <a class="text-slate-600 hover:text-primary transition-colors font-medium text-sm tracking-wide cursor-pointer" onclick="showPage('about')">קורות חיים</a>
+                <a class="text-slate-600 hover:text-primary transition-colors font-medium text-sm cursor-pointer" onclick="showPage('home')">בית</a>
+                <a class="text-slate-600 hover:text-primary transition-colors font-medium text-sm cursor-pointer" onclick="showPage('gallery')">גלריה</a>
+                <a class="text-slate-600 hover:text-primary transition-colors font-medium text-sm cursor-pointer" onclick="showPage('texts')">יצירות וסיפורים</a>
+                <a class="text-slate-600 hover:text-primary transition-colors font-medium text-sm cursor-pointer" onclick="showPage('jokes')">פינת ההומור והבדיחות</a>
+                <a class="text-slate-600 hover:text-primary transition-colors font-medium text-sm cursor-pointer" onclick="showPage('about')">קורות חיים</a>
             </nav>
 
             <div class="flex items-center gap-4">
-                <button class="bg-[#162839] text-white px-5 py-2 rounded-lg font-label-lg hover:bg-slate-800 transition-all text-sm" onclick="openAddMemoryModal()">
+                <button class="bg-[#162839] text-white px-5 py-2 rounded-lg hover:bg-slate-800 transition-all text-sm" onclick="openAddMemoryModal()">
                     הוספת זיכרון / סיפור
                 </button>
                 <button class="md:hidden block material-symbols-outlined text-2xl" onclick="toggleMenu()">menu</button>
@@ -158,154 +112,143 @@
         </div>
         
         <div id="mobile-menu" class="hidden bg-white border-b border-slate-100 px-6 py-4 flex flex-col gap-3 md:hidden">
-            <a class="text-slate-600 font-medium text-sm" onclick="showPage('home'); toggleMenu()">בית</a>
-            <a class="text-slate-600 font-medium text-sm" onclick="showPage('gallery'); toggleMenu()">גלריה</a>
-            <a class="text-slate-600 font-medium text-sm" onclick="showPage('texts'); toggleMenu()">יצירות וסיפורים</a>
-            <a class="text-slate-600 font-medium text-sm" onclick="showPage('jokes'); toggleMenu()">פינת ההומור והבדיחות</a>
-            <a class="text-slate-600 font-medium text-sm" onclick="showPage('about'); toggleMenu()">קורות חיים</a>
+            <a class="text-slate-600 font-medium text-sm cursor-pointer" onclick="showPage('home'); toggleMenu()">בית</a>
+            <a class="text-slate-600 font-medium text-sm cursor-pointer" onclick="showPage('gallery'); toggleMenu()">גלריה</a>
+            <a class="text-slate-600 font-medium text-sm cursor-pointer" onclick="showPage('texts'); toggleMenu()">יצירות וסיפורים</a>
+            <a class="text-slate-600 font-medium text-sm cursor-pointer" onclick="showPage('jokes'); toggleMenu()">פינת ההומור והבדיחות</a>
+            <a class="text-slate-600 font-medium text-sm cursor-pointer" onclick="showPage('about'); toggleMenu()">קורות חיים</a>
         </div>
     </header>
 
-    <main class="flex-grow pt-28 pb-xl px-6 max-w-7xl w-full mx-auto">
+    <main class="flex-grow pt-28 pb-12 px-6 max-w-7xl w-full mx-auto">
 
         <div id="page-home" class="page-view space-y-12">
             <section class="flex flex-col md:flex-row items-center gap-12 py-6">
                 <div class="w-full md:w-1/3 flex justify-center">
-                    <img id="hero-profile-image" src="barak.jpg" alt="ברק לב שלם" class="w-64 h-64 md:w-80 md:h-80 object-cover rounded-2xl shadow-xl border-4 border-white transition-transform duration-300 hover:scale-102" onerror="this.src='https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=500'">
+                    <img id="hero-profile-image" src="" alt="ברק לב שלם" class="w-64 h-64 md:w-80 md:h-80 object-cover rounded-2xl shadow-xl border-4 border-white" onerror="this.src='https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=500'">
                 </div>
                 <div class="w-full md:w-2/3 space-y-4 text-center md:text-right">
-                    <h1 class="font-display-lg text-primary">ברק לב שלם ז"ל</h1>
-                    <p class="font-body-lg text-on-surface-variant leading-relaxed">
+                    <h1 class="text-4xl font-bold text-primary">ברק לב שלם ז"ל</h1>
+                    <p class="text-lg text-slate-600 leading-relaxed">
                         אתר זה מוקדש להנצחת חייו, יצירותיו, סיפוריו והחיוך הגדול של ברק. כאן תוכלו למצוא את השירים שכתב, הגלריות, הבדיחות שאהב, ולשתף זיכרונות משלכם.
                     </p>
                 </div>
             </section>
 
-            <section class="grid grid-cols-1 md:grid-cols-2 gap-md pt-6">
-                <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-md flex flex-col justify-between hover:shadow-md transition-all">
+            <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-6 flex flex-col justify-between hover:shadow-md transition-all">
                     <div>
-                        <div class="flex justify-between items-center mb-sm">
-                            <span class="bg-secondary-fixed text-on-secondary-fixed px-3 py-1 rounded-md font-label-sm">הצצה לכתבים</span>
-                            <span class="material-symbols-outlined text-outline">auto_stories</span>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-amber-100 text-amber-800 px-3 py-1 rounded-md text-xs font-medium">הצצה לכתבים</span>
+                            <span class="material-symbols-outlined text-slate-400">auto_stories</span>
                         </div>
                         <div id="random-text-container" class="space-y-2">
-                            <p class="font-body-md text-slate-400 italic">טוען יצירה אקראית...</p>
+                            <p class="text-slate-400 italic">טוען יצירה אקראית...</p>
                         </div>
                     </div>
-                    <button class="mt-md text-sm font-medium text-secondary hover:underline text-right" onclick="showPage('texts')">לכל הכתבים והיצירות ←</button>
+                    <button class="mt-4 text-sm font-medium text-amber-700 hover:underline text-right" onclick="showPage('texts')">לכל הכתבים והיצירות ←</button>
                 </div>
 
-                <div class="bg-primary text-white rounded-xl shadow-lg p-md flex flex-col justify-between hover:translate-y-[-2px] transition-all">
+                <div class="bg-slate-900 text-white rounded-xl shadow-lg p-6 flex flex-col justify-between hover:shadow-xl transition-all">
                     <div>
-                        <div class="flex justify-between items-center mb-sm">
-                            <span class="bg-secondary text-white px-3 py-1 rounded-md font-label-sm">בדיחה אקראית מבית ברק</span>
-                            <span class="material-symbols-outlined text-secondary-fixed">mood</span>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-amber-600 text-white px-3 py-1 rounded-md text-xs font-medium">בדיחה מבית ברק</span>
+                            <span class="material-symbols-outlined text-amber-400">mood</span>
                         </div>
-                        <div id="random-joke-container" class="space-y-2 pt-2">
-                            <p class="font-headline-md italic" id="home-joke-text">טוען בדיחה...</p>
-                            <p class="font-body-md opacity-80 text-left" id="home-joke-punch"></p>
+                        <div id="random-joke-container" class="space-y-2 pt-2 text-right">
+                            <p class="text-xl italic font-medium" id="home-joke-text">טוען בדיחה...</p>
+                            <p class="text-md opacity-80 text-amber-300 pt-1" id="home-joke-punch"></p>
                         </div>
                     </div>
-                    <button class="mt-md text-sm font-medium text-secondary-fixed-dim hover:underline text-right" onclick="showPage('jokes')">לעוד בדיחות וצחוק ←</button>
+                    <button class="mt-4 text-sm font-medium text-amber-400 hover:underline text-right" onclick="showPage('jokes')">לעוד בדיחות וצחוק ←</button>
                 </div>
             </section>
         </div>
 
         <div id="page-gallery" class="page-view hidden space-y-6">
             <div class="text-right">
-                <h1 class="font-display-md text-primary mb-xs">גלריית תמונות וסרטונים</h1>
-                <p class="font-body-lg text-on-surface-variant">רגעים ותחנות בחייו של ברק.</p>
+                <h1 class="text-3xl font-bold text-primary mb-2">גלריית תמונות וסרטונים</h1>
+                <p class="text-slate-600">רגעים ותחנות בחייו של ברק.</p>
             </div>
             
-            <div class="flex flex-wrap gap-2 id-filters bg-white p-4 rounded-xl border border-slate-100 shadow-sm" id="photo-categories">
+            <div class="flex flex-wrap gap-2 bg-white p-4 rounded-xl border border-slate-100 shadow-sm" id="photo-categories">
                 </div>
 
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-md" id="gallery-grid">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="gallery-grid">
                 </div>
         </div>
 
         <div id="page-texts" class="page-view hidden space-y-6">
             <div class="text-right">
-                <h1 class="font-display-md text-primary mb-xs">יצירות וסיפורים</h1>
-                <p class="font-body-lg text-on-surface-variant">מקבץ יצירות, שירים וסיפורים שנכתבו על ידי ברק או לזכרו.</p>
+                <h1 class="text-3xl font-bold text-primary mb-2">יצירות וסיפורים</h1>
+                <p class="text-slate-600">מקבץ יצירות, שירים וסיפורים שנכתבו על ידי ברק או לזכרו.</p>
             </div>
 
-            <section class="bg-white rounded-xl shadow-sm p-md border border-slate-100 space-y-4">
-                <div class="flex flex-col lg:flex-row gap-md items-end">
-                    <div class="w-full lg:flex-1 space-y-xs">
-                        <label class="font-label-lg text-primary block">חיפוש חופשי</label>
+            <section class="bg-white rounded-xl shadow-sm p-6 border border-slate-100 space-y-4">
+                <div class="flex flex-col lg:flex-row gap-4 items-end">
+                    <div class="w-full lg:flex-1 space-y-1 text-right">
+                        <label class="text-sm font-medium text-primary">חיפוש חופשי</label>
                         <div class="relative">
-                            <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline">search</span>
-                            <input type="text" id="search-input" class="w-full pr-10 py-3 rounded-lg border border-outline-variant focus:ring-2 focus:ring-primary focus:outline-none bg-surface-container-lowest font-body-md" placeholder="חפשו לפי כותרת או מילת מפתח..." oninput="filterTexts()">
+                            <input type="text" id="search-input" class="w-full pr-4 pl-10 py-2.5 rounded-lg border border-slate-200 text-right" placeholder="חפשו לפי כותרת או מילים מהקטע..." oninput="filterTexts()">
                         </div>
                     </div>
-                    <div class="w-full lg:w-64 space-y-xs">
-                        <label class="font-label-lg text-primary block">קטגוריה</label>
-                        <select id="text-category-select" class="w-full py-3 rounded-lg border border-outline-variant focus:ring-2 focus:ring-primary focus:outline-none bg-surface-container-lowest font-body-md px-3 appearance-none" onchange="filterTexts()">
+                    <div class="w-full lg:w-64 space-y-1 text-right">
+                        <label class="text-sm font-medium text-primary">קטגוריה</label>
+                        <select id="text-category-select" class="w-full py-2.5 rounded-lg border border-slate-200 px-3 text-right" onchange="filterTexts()">
                             <option value="">כל הקטגוריות</option>
                         </select>
                     </div>
-                    <button class="w-full lg:w-auto bg-[#e67e22] text-white px-8 py-3 rounded-lg font-label-lg hover:brightness-110 transition-all flex items-center justify-center gap-2" onclick="triggerDeepSearch()">
-                        <span class="material-symbols-outlined">search_check</span>
-                        Deep Search
-                    </button>
                 </div>
             </section>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md" id="texts-grid">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="texts-grid">
                 </div>
         </div>
 
         <div id="page-jokes" class="page-view hidden space-y-6">
             <div class="text-right">
-                <h1 class="font-display-md text-primary mb-xs">מאגר הבדיחות של ברק</h1>
-                <p class="font-body-lg text-on-surface-variant">ההומור והחיוך שליוו את ברק תמיד. חפשו או סננו לפי קטגוריה.</p>
+                <h1 class="text-3xl font-bold text-primary mb-2">מאגר הבדיחות של ברק</h1>
+                <p class="text-slate-600">ההומור והחיוך שליוו את ברק תמיד.</p>
             </div>
 
             <div class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm flex flex-col md:flex-row gap-4">
-                <input type="text" id="joke-search" class="flex-1 py-2 px-4 rounded-lg border border-outline-variant focus:ring-2 focus:ring-primary focus:outline-none" placeholder="חפשו בדיחה..." oninput="filterJokes()">
-                <select id="joke-category" class="w-full md:w-64 py-2 px-4 rounded-lg border border-outline-variant focus:ring-2 focus:ring-primary focus:outline-none" onchange="filterJokes()">
-                    <option value="">כל הסגנונות</option>
+                <input type="text" id="joke-search" class="flex-1 py-2.5 px-4 rounded-lg border border-slate-200 text-right" placeholder="חפשו מילים מתוך הבדיחה..." oninput="filterJokes()">
+                <select id="joke-category" class="w-full md:w-64 py-2.5 px-4 rounded-lg border border-slate-200 text-right" onchange="filterJokes()">
+                    <option value="">כל הקטגוריות</option>
                 </select>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-md" id="jokes-container">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="jokes-container">
                 </div>
         </div>
 
-        <div id="page-about" class="page-view hidden bg-white rounded-xl shadow-sm p-md md:p-lg border border-slate-100">
-            <div id="cv-container" class="prose prose-slate max-w-none text-right custom-prose-content">
+        <div id="page-about" class="page-view hidden bg-white rounded-xl shadow-sm p-6 md:p-10 border border-slate-100">
+            <div id="cv-container" class="text-right custom-prose-content">
                 </div>
         </div>
 
     </main>
 
     <footer class="w-full border-t border-slate-200 mt-16 bg-slate-50">
-        <div class="flex flex-col md:flex-row justify-between items-center py-12 px-6 md:px-12 max-w-7xl mx-auto gap-6">
-            <div class="flex flex-col items-center md:items-start gap-2">
-                <span class="text-sm font-semibold text-slate-600">Barak Lev Shalem</span>
-                <p class="font-['Heebo'] text-xs uppercase tracking-widest text-slate-500 text-center md:text-right">
-                    © 2026 In Memory of Barak Lev Shalem. May his memory be a blessing.
-                </p>
-            </div>
-            <div class="flex gap-6">
-                <a class="font-['Heebo'] text-xs uppercase tracking-widest text-slate-400 hover:text-slate-800 underline decoration-orange-500/30 underline-offset-4 transition-all" href="#">Privacy Policy</a>
-                <a class="font-['Heebo'] text-xs uppercase tracking-widest text-slate-400 hover:text-slate-800 underline decoration-orange-500/30 underline-offset-4 transition-all" href="#">Contact Family</a>
-            </div>
+        <div class="flex flex-col md:flex-row justify-between items-center py-8 px-6 md:px-12 max-w-7xl mx-auto gap-4">
+            <span class="text-sm font-semibold text-slate-600">לזכרו של ברק לב שלם</span>
+            <p class="text-xs text-slate-500">
+                © 2026 In Memory of Barak Lev Shalem. May his memory be a blessing.
+            </p>
         </div>
     </footer>
 
     <div id="item-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-white rounded-xl shadow-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto flex flex-col border border-slate-100">
             <div class="p-4 border-b border-slate-100 flex justify-between items-center bg-slate-50/50 rounded-t-xl">
-                <h2 id="modal-title" class="font-headline-md text-primary"></h2>
-                <button class="material-symbols-outlined text-slate-400 hover:text-slate-600 transition-colors" onclick="closeModal()">close</button>
+                <h2 id="modal-title" class="text-xl font-bold text-primary"></h2>
+                <button class="material-symbols-outlined text-slate-400 hover:text-slate-600" onclick="closeModal()">close</button>
             </div>
             <div id="modal-body" class="p-6 overflow-y-auto text-right space-y-4 custom-prose-content">
                 </div>
-            <div id="modal-footer" class="p-4 border-t border-slate-100 bg-slate-50/50 flex flex-wrap justify-between items-center gap-2 rounded-b-xl">
+            <div id="modal-footer" class="p-4 border-t border-slate-100 bg-slate-50/50 flex justify-between items-center rounded-b-xl">
                 <div id="modal-actions"></div>
-                <button class="bg-slate-200 text-slate-700 px-4 py-2 rounded-lg font-medium text-sm hover:bg-slate-300 transition-all" onclick="closeModal()">סגירה</button>
+                <button class="bg-slate-200 text-slate-700 px-4 py-2 rounded-lg font-medium text-sm hover:bg-slate-300" onclick="closeModal()">סגירה</button>
             </div>
         </div>
     </div>
@@ -313,23 +256,23 @@
     <div id="add-memory-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-white rounded-xl shadow-xl max-w-lg w-full overflow-hidden border border-slate-100">
             <div class="p-4 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
-                <h2 class="font-headline-md text-primary">הוספת זיכרון או סיפור אישי</h2>
+                <h2 class="text-lg font-bold text-primary">הוספת זיכרון או סיפור אישי</h2>
                 <button class="material-symbols-outlined text-slate-400 hover:text-slate-600" onclick="closeAddMemoryModal()">close</button>
             </div>
             <div class="p-6 space-y-4 text-right">
                 <div>
                     <label class="block text-sm font-medium text-slate-700 mb-1">שם מלא</label>
-                    <input type="text" id="form-name" class="w-full p-2 border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:outline-none">
+                    <input type="text" id="form-name" class="w-full p-2 border border-slate-200 rounded-lg">
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-slate-700 mb-1">הקשר / מערכת יחסים עם ברק</label>
-                    <input type="text" id="form-relation" class="w-full p-2 border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:outline-none" placeholder="למשל: חבר מהצבא, בן משפחה...">
+                    <input type="text" id="form-relation" class="w-full p-2 border border-slate-200 rounded-lg" placeholder="למשל: חבר מהצבא, בן משפחה...">
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-slate-700 mb-1">הסיפור או הזיכרון שלכם</label>
-                    <textarea id="form-content" rows="5" class="w-full p-2 border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:outline-none"></textarea>
+                    <textarea id="form-content" rows="5" class="w-full p-2 border border-slate-200 rounded-lg"></textarea>
                 </div>
-                <button id="send-btn" class="w-full bg-[#e67e22] text-white py-2.5 rounded-lg font-medium hover:brightness-110 transition-all" onclick="submitMemory()">שליחה לאישור המשפחה</button>
+                <button id="send-btn" class="w-full bg-amber-600 text-white py-2.5 rounded-lg font-medium hover:bg-amber-700" onclick="submitMemory()">שליחה לאישור המשפחה</button>
             </div>
         </div>
     </div>
@@ -380,47 +323,54 @@
         }
 
         async function loadJokes() {
-            const res = await fetch(JOKES_URL);
-            const csv = await res.text();
-            data.jokes = Papa.parse(csv, { header: true }).data;
-            populateJokeFilters();
-            renderJokes();
+            try {
+                const res = await fetch(JOKES_URL);
+                const csv = await res.text();
+                data.jokes = Papa.parse(csv, { header: true }).data.filter(j => j.content || j.text || j.setup || j.joke);
+                populateJokeFilters();
+                renderJokes();
+            } catch(e) { console.error("Error loading jokes", e); }
         }
 
         async function loadPhotosAndVideos() {
-            const resP = await fetch(PHOTOS_URL);
-            const csvP = await resP.text();
-            let items = Papa.parse(csvP, { header: true }).data.map(i => ({...i, type: 'photo'}));
-
             try {
-                const resV = await fetch(VIDEOS_URL);
-                const csvV = await resV.text();
-                const videos = Papa.parse(csvV, { header: true }).data.map(i => ({...i, type: 'video'}));
-                items = items.concat(videos);
-            } catch(e) { console.log("No videos spreadsheet found", e); }
+                const resP = await fetch(PHOTOS_URL);
+                const csvP = await resP.text();
+                let items = Papa.parse(csvP, { header: true }).data.map(i => ({...i, type: 'photo'}));
 
-            data.photos = items.filter(i => i.id || i.url || i.src || i.image);
-            
-            // עדכון דינמי של תמונת דף הבית במידה וקיימת תמונה ראשונה
-            if (data.photos.length > 0) {
-                const firstPhoto = data.photos.find(p => p.type === 'photo');
-                if (firstPhoto) {
-                    const imgUrl = firstPhoto.url || firstPhoto.src || firstPhoto.image;
-                    const heroImg = document.getElementById('hero-profile-image');
-                    if (heroImg && imgUrl) heroImg.src = imgUrl;
+                try {
+                    const resV = await fetch(VIDEOS_URL);
+                    const csvV = await resV.text();
+                    const videos = Papa.parse(csvV, { header: true }).data.map(i => ({...i, type: 'video'}));
+                    items = items.concat(videos);
+                } catch(e) { console.log("No explicit videos tab found, using main photos spreadsheet", e); }
+
+                // מיפוי נכון של שדות התמונות מהספרדשיט אל המשתנה
+                data.photos = items.filter(i => i.id || i.url || i.src || i.image || i.link);
+                
+                // החלפת התמונה השבורה בדף הבית בתמונה האמיתית הראשונה מהגלריה הדינמית
+                if (data.photos.length > 0) {
+                    const firstPhoto = data.photos.find(p => p.type === 'photo');
+                    if (firstPhoto) {
+                        const imgUrl = firstPhoto.url || firstPhoto.src || firstPhoto.image || firstPhoto.link;
+                        const heroImg = document.getElementById('hero-profile-image');
+                        if (heroImg && imgUrl) heroImg.src = imgUrl;
+                    }
                 }
-            }
-            
-            populatePhotoCategories();
-            renderGallery();
+                
+                populatePhotoCategories();
+                renderGallery();
+            } catch(e) { console.error("Error loading photos", e); }
         }
 
         async function loadTexts() {
-            const res = await fetch(TEXTS_URL);
-            const csv = await res.text();
-            data.texts = Papa.parse(csv, { header: true }).data.filter(t => t.id || t.title);
-            populateTextCategories();
-            renderTexts();
+            try {
+                const res = await fetch(TEXTS_URL);
+                const csv = await res.text();
+                data.texts = Papa.parse(csv, { header: true }).data.filter(t => t.id || t.title);
+                populateTextCategories();
+                renderTexts();
+            } catch(e) { console.error("Error loading texts", e); }
         }
 
         async function loadComments() {
@@ -434,16 +384,16 @@
         function renderHomeWidgets() {
             if (data.jokes.length > 0) {
                 const randomJoke = data.jokes[Math.floor(Math.random() * data.jokes.length)];
-                const jokeText = randomJoke.content || randomJoke.text || randomJoke.setup || '';
-                const punchText = randomJoke.punchline || '';
+                const jokeText = randomJoke.content || randomJoke.text || randomJoke.setup || randomJoke.joke || '';
+                const punchText = randomJoke.punchline || randomJoke.punch || '';
                 document.getElementById('home-joke-text').innerText = jokeText ? `"${jokeText}"` : 'לחצו למעבר לפינת ההומור';
                 document.getElementById('home-joke-punch').innerText = punchText;
             }
             if (data.texts.length > 0) {
                 const randomText = data.texts[Math.floor(Math.random() * data.texts.length)];
                 document.getElementById('random-text-container').innerHTML = `
-                    <h4 class="font-headline-md text-primary">${randomText.title || 'ללא כותרת'}</h4>
-                    <p class="font-body-md text-on-surface-variant line-clamp-2">${randomText.preview || randomText.content || ''}</p>
+                    <h4 class="text-xl font-bold text-primary">${randomText.title || 'ללא כותרת'}</h4>
+                    <p class="text-slate-600 text-sm line-clamp-3 mt-1">${randomText.preview || randomText.content || ''}</p>
                 `;
             }
         }
@@ -459,16 +409,19 @@
 
         function renderJokes(filtered = data.jokes) {
             const container = document.getElementById('jokes-container');
+            if (filtered.length === 0) {
+                container.innerHTML = `<p class="text-slate-400 italic text-right">לא נמצאו בדיחות תואמות.</p>`;
+                return;
+            }
             container.innerHTML = filtered.map(j => {
-                const content = j.content || j.text || j.setup || '';
-                const punchline = j.punchline || '';
-                if (!content && !punchline) return '';
+                const content = j.content || j.text || j.setup || j.joke || '';
+                const punchline = j.punchline || j.punch || '';
                 return `
-                <div class="bg-white p-md rounded-xl border border-slate-100 shadow-sm flex flex-col justify-between hover:shadow-md transition-all">
+                <div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm flex flex-col justify-between hover:shadow-md transition-all text-right">
                     <div>
-                        <span class="bg-surface-container-high text-on-surface-variant px-2.5 py-0.5 rounded text-xs font-medium inline-block mb-2">${j.category || 'כללי'}</span>
-                        <p class="font-headline-md text-primary mb-2">${content}</p>
-                        ${punchline ? `<p class="font-body-md text-secondary font-medium border-r-2 border-slate-200 pr-2">${punchline}</p>` : ''}
+                        <span class="bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded text-xs font-medium inline-block mb-3">${j.category || 'כללי'}</span>
+                        <p class="text-lg font-medium text-primary mb-2">${content}</p>
+                        ${punchline ? `<p class="text-md text-amber-700 font-medium border-r-2 border-amber-500 pr-2 mt-2">${punchline}</p>` : ''}
                     </div>
                 </div>`;
             }).join('');
@@ -478,8 +431,8 @@
             const q = document.getElementById('joke-search').value.toLowerCase();
             const cat = document.getElementById('joke-category').value;
             const filtered = data.jokes.filter(j => {
-                const content = (j.content || j.text || j.setup || '').toLowerCase();
-                const punch = (j.punchline || '').toLowerCase();
+                const content = (j.content || j.text || j.setup || j.joke || '').toLowerCase();
+                const punch = (j.punchline || j.punch || '').toLowerCase();
                 const matchesQ = content.includes(q) || punch.includes(q);
                 const matchesCat = !cat || j.category === cat;
                 return matchesQ && matchesCat;
@@ -490,14 +443,18 @@
         function populatePhotoCategories() {
             const cats = [...new Set(data.photos.map(p => p.category).filter(Boolean))];
             const container = document.getElementById('photo-categories');
-            container.innerHTML = `<span class="px-3 py-1 bg-primary text-white rounded-full font-label-sm cursor-pointer" onclick="filterGallery('')">הכל</span>` + 
-                cats.map(c => `<span class="px-3 py-1 bg-surface-container-high rounded-full font-label-sm text-on-surface-variant cursor-pointer hover:bg-surface-variant" onclick="filterGallery('${c}')">#${c}</span>`).join('');
+            container.innerHTML = `<span class="px-3 py-1 bg-primary text-white rounded-full text-xs font-medium cursor-pointer" onclick="filterGallery('')">הכל</span>` + 
+                cats.map(c => `<span class="px-3 py-1 bg-slate-100 rounded-full text-xs font-medium text-slate-600 cursor-pointer hover:bg-slate-200" onclick="filterGallery('${c}')">#${c}</span>`).join('');
         }
 
         function renderGallery(items = data.photos) {
             const container = document.getElementById('gallery-grid');
+            if (items.length === 0) {
+                container.innerHTML = `<p class="text-slate-400 italic text-right col-span-full">אין פריטים להצגה.</p>`;
+                return;
+            }
             container.innerHTML = items.map(p => {
-                const src = p.url || p.src || p.image || '';
+                const src = p.url || p.src || p.image || p.link || '';
                 const title = p.title || p.description || 'תמונה מהגלריה';
                 if (!src) return '';
                 if (p.type === 'video') {
@@ -506,7 +463,7 @@
                             <div class="aspect-square bg-slate-900 flex items-center justify-center text-white">
                                 <span class="material-symbols-outlined text-4xl opacity-80 group-hover:scale-110 transition-transform">play_circle</span>
                             </div>
-                            <div class="p-2 text-sm font-medium truncate bg-white text-right">${title}</div>
+                            <div class="p-3 text-sm font-medium truncate bg-white text-right">${title}</div>
                         </div>`;
                 }
                 return `
@@ -514,7 +471,7 @@
                         <div class="aspect-square overflow-hidden bg-slate-100">
                             <img src="${src}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=300'">
                         </div>
-                        <div class="p-2 text-sm font-medium truncate text-right">${title}</div>
+                        <div class="p-3 text-sm font-medium truncate text-right">${title}</div>
                     </div>`;
             }).join('');
         }
@@ -536,18 +493,18 @@
         function renderTexts(items = data.texts) {
             const container = document.getElementById('texts-grid');
             container.innerHTML = items.map(t => `
-                <article class="bg-white rounded-xl shadow-sm border border-slate-100 p-md flex flex-col justify-between hover:translate-y-[-4px] transition-all duration-300 group cursor-pointer" onclick="openItem('text', '${t.content_link || t.link || ''}', '${t.id}', '${t.title}', '${t.author || ''}')">
+                <article class="bg-white rounded-xl shadow-sm border border-slate-100 p-6 flex flex-col justify-between hover:translate-y-[-4px] transition-all duration-300 cursor-pointer" onclick="openItem('text', '${t.content_link || t.link || ''}', '${t.id}', '${t.title}', '${t.author || ''}', '${encodeURIComponent(t.content || t.preview || '')}')">
                     <div>
-                        <div class="flex justify-between items-start mb-sm">
-                            <span class="bg-primary-fixed text-on-primary-fixed px-3 py-1 rounded-md font-label-sm">${t.category || 'כללי'}</span>
-                            <span class="material-symbols-outlined text-outline group-hover:text-secondary transition-colors">auto_stories</span>
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-md text-xs font-medium">${t.category || 'כללי'}</span>
+                            <span class="material-symbols-outlined text-slate-400">auto_stories</span>
                         </div>
-                        <h3 class="font-headline-md text-primary mb-xs">${t.title || 'ללא כותרת'}</h3>
-                        <p class="font-body-md text-on-surface-variant line-clamp-3 mb-md leading-relaxed">${t.preview || t.content || ''}</p>
+                        <h3 class="text-xl font-bold text-primary mb-2 text-right">${t.title || 'ללא כותרת'}</h3>
+                        <p class="text-slate-600 text-sm line-clamp-3 text-right leading-relaxed">${t.preview || t.content || ''}</p>
                     </div>
-                    <div class="flex items-center justify-between pt-md border-t border-slate-100">
-                        <span class="font-label-lg text-primary">${t.author || 'ברק לב שלם'}</span>
-                        <span class="font-label-sm text-outline">${t.date || ''}</span>
+                    <div class="flex items-center justify-between pt-4 mt-4 border-t border-slate-100">
+                        <span class="text-xs font-medium text-slate-500">${t.author || 'ברק לב שלם'}</span>
+                        <span class="text-xs text-slate-400">${t.date || ''}</span>
                     </div>
                 </article>
             `).join('');
@@ -566,26 +523,22 @@
             renderTexts(filtered);
         }
 
-        function triggerDeepSearch() {
-            alert("מבצע חיפוש עומק במסמכים המקושרים...");
-        }
-
         async function loadCVContent() {
             const container = document.getElementById('cv-container');
-            container.innerHTML = `<p class="text-slate-500">טוען קורות חיים...</p>`;
+            container.innerHTML = `<p class="text-slate-400">טוען קורות חיים...</p>`;
             try {
                 const res = await fetch('about_barak.html');
                 if (res.ok) {
                     container.innerHTML = await res.text();
                 } else {
-                    container.innerHTML = `<p class="text-slate-500">הקובץ about_barak.html לא נמצא, אנא וודא שהוא קיים בתיקייה הראשית ב-GitHub.</p>`;
+                    container.innerHTML = `<p class="text-slate-500">הקובץ about_barak.html לא נמצא בשרת.</p>`;
                 }
             } catch (e) {
                 container.innerHTML = `<p class="text-red-500">שגיאה בטעינת קורות החיים.</p>`;
             }
         }
 
-        function openItem(type, link, id, title, author = '') {
+        function openItem(type, link, id, title, author = '', rawContent = '') {
             document.getElementById('modal-title').innerText = title;
             const body = document.getElementById('modal-body');
             const footerActions = document.getElementById('modal-actions');
@@ -605,48 +558,51 @@
                         <iframe class="w-full h-full" src="${embedUrl}" frameborder="0" allowfullscreen></iframe>
                     </div>`;
             } else if (type === 'text') {
+                const txt = rawContent ? decodeURIComponent(rawContent) : 'קטע זה זמין לקריאה.';
                 body.innerHTML = `
                     <div class="border-b pb-2 mb-4">
                         <span class="text-sm font-medium text-slate-500">מאת: ${author || 'ברק לב שלם'}</span>
                     </div>
-                    <div class="w-full h-[50vh] rounded-lg overflow-hidden border border-slate-100 bg-white">
-                        <iframe src="${link}" class="w-full h-full border-0"></iframe>
-                    </div>`;
+                    <div class="bg-white p-4 rounded-lg border border-slate-100 whitespace-pre-wrap leading-relaxed text-right text-lg font-normal">
+                        ${txt}
+                    </div>
+                    ${link ? `<div class="text-left mt-2"><a href="${link}" target="_blank" class="text-sm text-amber-700 hover:underline inline-flex items-center gap-1">צפייה במסמך המקור בגוגל דוקס ↗</a></div>` : ''}`;
             }
 
-            // עדכון כותרת קטע תגובות לפי דרישת העיצוב ל"תגובות" בלבד
+            // הצגת קטע תגובות תחת הכותרת "תגובות" בפונט הייבו
             const itemComments = data.comments.filter(c => c.item_id === id && c.approved === 'TRUE');
-            let commentsHtml = `<div class="mt-8 pt-6 border-t border-slate-100"><h4 class="font-headline-md text-primary mb-4">תגובות</h4>`;
+            let commentsHtml = `<div class="mt-8 pt-6 border-t border-slate-100 text-right"><h4 class="text-lg font-bold text-primary mb-4">תגובות</h4>`;
             if (itemComments.length > 0) {
                 commentsHtml += `<div class="space-y-3">` + itemComments.map(c => `
-                    <div class="bg-slate-50 p-3 rounded-lg border border-slate-100 text-right">
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-100 text-right">
                         <div class="flex justify-between items-center mb-1 text-xs text-slate-500">
-                            <span class="font-semibold text-primary">${c.name} ${c.relation ? `(${c.relation})` : ''}</span>
+                            <span class="font-bold text-primary">${c.name} ${c.relation ? `(${c.relation})` : ''}</span>
                             <span>${c.timestamp || ''}</span>
                         </div>
-                        <p class="text-sm text-slate-700 leading-relaxed">${c.content}</p>
+                        <p class="text-sm text-slate-700 mt-1 leading-relaxed">${c.content}</p>
                     </div>
                 `).join('') + `</div>`;
             } else {
-                commentsHtml += `<p class="text-sm text-slate-400 italic">טרם נכתבו תגובות. מוזמנים להוסיף בתחתית.</p>`;
+                commentsHtml += `<p class="text-sm text-slate-400 italic">טרם נכתבו תגובות. מוזמנים להוסיף תגובה ראשונה מטה.</p>`;
             }
             commentsHtml += `</div>`;
             body.innerHTML += commentsHtml;
 
+            // טופס תגובה חדשה
             body.innerHTML += `
-                <div class="bg-surface-container-low p-4 rounded-xl border border-slate-100 mt-6 space-y-3 text-right">
-                    <h5 class="font-title-lg text-primary">הוספת תגובה</h5>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 mt-6 space-y-3 text-right">
+                    <h5 class="text-md font-bold text-primary">הוספת תגובה</h5>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                        <input type="text" id="comment-name" placeholder="שמכם המלא" class="p-2 border rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary">
-                        <input type="text" id="comment-relation" placeholder="הקשר שלכם לברק" class="p-2 border rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary">
+                        <input type="text" id="comment-name" placeholder="שמכם המלא" class="p-2 border border-slate-200 rounded-lg text-sm bg-white text-right">
+                        <input type="text" id="comment-relation" placeholder="הקשר שלכם לברק" class="p-2 border border-slate-200 rounded-lg text-sm bg-white text-right">
                     </div>
-                    <textarea id="comment-content" placeholder="כתבו תגובה או זיכרון..." rows="3" class="w-full p-2 border rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary"></textarea>
-                    <button class="bg-[#162839] text-white px-4 py-1.5 rounded-lg text-sm hover:bg-slate-800 transition-all" onclick="submitComment('${id}')">שליחה לאישור</button>
+                    <textarea id="comment-content" placeholder="כתבו מילים חמות או זיכרון..." rows="3" class="w-full p-2 border border-slate-200 rounded-lg text-sm bg-white text-right"></textarea>
+                    <button class="bg-[#162839] text-white px-5 py-1.5 rounded-lg text-sm hover:bg-slate-800 transition-all" onclick="submitComment('${id}')">שליחה לאישור</button>
                 </div>
             `;
 
             footerActions.innerHTML = `
-                <button class="bg-orange-500 text-white px-4 py-2 rounded-lg font-medium text-sm hover:bg-orange-600 transition-all inline-flex items-center gap-1" onclick="shareItem('${id}', '${title}')">
+                <button class="bg-amber-600 text-white px-4 py-2 rounded-lg font-medium text-sm hover:bg-amber-700 transition-all inline-flex items-center gap-1" onclick="shareItem('${id}', '${title}')">
                     <span class="material-symbols-outlined text-sm">share</span> שיתוף קישור
                 </button>
             `;
@@ -669,9 +625,9 @@
 
         function openFromUrl(id) {
             const photo = data.photos.find(p => p.id === id);
-            if (photo) return openItem(photo.type || 'photo', photo.url || photo.src || photo.image, photo.id, photo.title);
+            if (photo) return openItem(photo.type || 'photo', photo.url || photo.src || photo.image || photo.link, photo.id, photo.title);
             const text = data.texts.find(t => t.id === id);
-            if (text) return openItem('text', t.content_link || t.link, text.id, text.title, text.author);
+            if (text) return openItem('text', text.content_link || text.link, text.id, text.title, text.author, encodeURIComponent(text.content || text.preview || ''));
             showPage('home');
         }
 
@@ -680,7 +636,7 @@
             if (navigator.share) {
                 navigator.share({ title, url });
             } else {
-                prompt("הקישור הישיר הועתק, באפשרותכם להעתיק ולשתף:", url);
+                prompt("הקישור הועתק, באפשרותכם להעתיק ולשתף אותו:", url);
             }
         }
 
@@ -695,7 +651,7 @@
             const name = document.getElementById('form-name').value;
             const relation = document.getElementById('form-relation').value;
             const content = document.getElementById('form-content').value;
-            if (!name || !content) return alert("אנא מלאו שם ותוכן הזיכרון.");
+            if (!name || !content) return alert("אנא מלאו שם ותוכן.");
 
             document.getElementById('send-btn').disabled = true;
             const params = new URLSearchParams({ name, relation, content, item_id: "general" });
@@ -713,7 +669,7 @@
 
             const params = new URLSearchParams({ name, relation, content, item_id: id });
             await fetch(APPS_SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: params });
-            alert("נשלח לאישור המשפחה!");
+            alert("התגובה נשלחה לאישור המשפחה ותופיע באתר בקרוב.");
             closeModal();
         }
     </script>
