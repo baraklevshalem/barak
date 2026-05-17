@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>סביבת בדיקה - עיצוב Stitch</title>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@100;300;400;500;700;800;900&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    
+    <script id="tailwind-config">
+          tailwind.config = {
+            darkMode: "class",
+            theme: {
+              extend: {
+                "colors": {
+                        "outline-variant": "#c4c6cd",
+                        "primary-container": "#2c3e50",
+                        "surface-container": "#e1f1f2",
+                        "primary": "#162839",
+                        "secondary-container": "#fc8f34",
+                        "surface-container-highest": "#d5e6e7",
+                        "inverse-primary": "#b5c8df",
+                        "tertiary-container": "#4e381c",
+                        "on-error": "#ffffff",
+                        "primary-fixed-dim": "#b5c8df",
+                        "surface-variant": "#d5e6e7",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed-variant": "#5a4225",
+                        "secondary-fixed": "#ffdcc5",
+                        "surface-dim": "#cdddde",
+                        "on-secondary": "#ffffff",
+                        "on-background": "#0f1e1f",
+                        "on-secondary-fixed-variant": "#713700",
+                        "on-secondary-fixed": "#301400",
+                        "tertiary-fixed-dim": "#e3c19b",
+                        "on-tertiary-container": "#c1a17d",
+                        "surface-bright": "#ecfdfd",
+                        "surface": "#ecfdfd",
+                        "on-primary-container": "#96a9be",
+                        "outline": "#74777d",
+                        "on-tertiary-fixed": "#291802",
+                        "surface-tint": "#4e6073",
+                        "surface-container-low": "#e6f7f8",
+                        "error": "#ba1a1a",
+                        "on-surface-variant": "#43474c",
+                        "tertiary-fixed": "#ffddb7",
+                        "inverse-surface": "#243334",
+                        "secondary": "#944a00",
+                        "on-surface": "#0f1e1f",
+                        "error-container": "#ffdad6",
+                        "on-primary": "#ffffff",
+                        "on-secondary-container": "#663100",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed-dim": "#ffb783",
+                        "inverse-on-surface": "#e3f4f5",
+                        "on-primary-fixed-variant": "#36485b",
+                        "tertiary": "#362308",
+                        "background": "#ecfdfd",
+                        "surface-container-high": "#dbebec",
+                        "primary-fixed": "#d1e4fb",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed": "#091d2e"
+                },
+                "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                },
+                "spacing": {
+                        "md": "24px",
+                        "gutter": "24px",
+                        "xs": "8px",
+                        "sm": "16px",
+                        "unit": "4px",
+                        "xl": "64px",
+                        "container-max": "1200px",
+                        "lg": "40px"
+                },
+                "fontFamily": {
+                        "body-lg": ["Heebo"],
+                        "title-lg": ["Heebo"],
+                        "body-md": ["Heebo"],
+                        "label-lg": ["Heebo"],
+                        "label-sm": ["Heebo"],
+                        "display-lg": ["Heebo"],
+                        "display-md": ["Heebo"],
+                        "headline-lg": ["Heebo"],
+                        "headline-md": ["Heebo"]
+                },
+                "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "title-lg": ["20px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label-lg": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "label-sm": ["12px", {"lineHeight": "1.4", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "display-md": ["36px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "headline-lg": ["28px", {"lineHeight": "1.3", "fontWeight": "500"}],
+                        "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "500"}]
+                }
+              },
+            },
+          }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Heebo', sans-serif;
+            background-color: #ecfdfd;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+
+<header class="fixed top-0 w-full z-50 border-b bg-white/90 backdrop-blur-md border-slate-100 shadow-sm">
+    <nav class="flex justify-between items-center h-16 px-6 md:px-12 max-w-7xl mx-auto">
+        <div class="flex items-center gap-8">
+            <span class="text-xl font-bold text-slate-800 tracking-tight">Barak Lev Shalem (בדיקת עיצוב)</span>
+            <div class="hidden md:flex items-center gap-6 font-['Heebo'] font-medium text-sm tracking-wide">
+                <a class="text-slate-900 border-b-2 border-orange-500 pb-1" href="#">בית</a>
+                <a class="text-slate-500 hover:text-slate-800 transition-colors" href="#">גלריה</a>
+                <a class="text-slate-500 hover:text-slate-800 transition-colors" href="#">יצירות</a>
+                <a class="text-slate-500 hover:text-slate-800 transition-colors" href="#">בדיחות</a>
+                <a class="text-slate-500 hover:text-slate-800 transition-colors" href="#">אודות</a>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main class="pt-24 pb-xl max-w-7xl mx-auto px-6 md:px-12">
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-lg items-center mb-xl">
+        <div class="order-2 md:order-1">
+            <h1 class="font-display-lg text-display-lg text-primary mb-md">ברק לב שלם</h1>
+            <p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl leading-relaxed">
+                ברוכים הבאים לאתר הזיכרון של ברק. מקום שבו אספנו את המילים שלו, החיוך שלו והבדיחות שתמיד ידע לספר. 
+                כאן תוכלו למצוא פיסות מהחיים שהיו מלאים בצחוק, יצירה ואור.
+            </p>
+        </div>
+        <div class="order-1 md:order-2">
+            <div class="aspect-square rounded-2xl overflow-hidden shadow-xl bg-surface-container-highest">
+                <img class="w-full h-full object-cover" src="https://drive.google.com/thumbnail?id=1S-KFrVUHzS9dJsN1ag8EwfNyiXwFHqC-&sz=w800" alt="ברק"/>
+            </div>
+        </div>
+    </section>
+
+    <section class="mb-xl" id="dynamic-joke-container">
+        <p class="text-center text-slate-500">טוען בדיחה מהגיליון...</p>
+    </section>
+
+    <section class="mb-xl">
+        <div class="flex justify-between items-end mb-lg">
+            <div>
+                <h2 class="font-headline-lg text-headline-lg text-primary">רגעים שנשארו איתנו</h2>
+                <p class="font-body-md text-body-md text-on-surface-variant">הגלריה של ברק (נטען דינמית)</p>
+            </div>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-md" id="dynamic-gallery-container">
+            <p class="text-slate-500">טוען תמונות...</p>
+        </div>
+    </section>
+</main>
+
+<script>
+    // הקישורים האמיתיים מהאתר שלך
+    const JOKES_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSR74JGStqevOMg4uFKqudbSRFEQVRisiEgSwTuxnLjsTUx7TShIVuzPkdRgOZiJq8Pz3H-zoa_3mK3/pub?gid=0&single=true&output=csv';
+    const PHOTOS_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSevdjPZljQNazIav8vcVOszHVu5iKOA-AtYUjwhZGuZUibJpjgnJHC_tsrZY11p9aAE_iQytePZsAZ/pub?output=csv';
+
+    let data = { jokes: [], photos: [] };
+
+    function getPhotoUrl(id, size = 'w400') { 
+        return `https://drive.google.com/thumbnail?id=${id}&sz=${size}`; 
+    }
+
+    async function initTest() {
+        try {
+            // משיכת הנתונים האמיתיים מהגיליונות שלך
+            const [jokesData, photosData] = await Promise.all([
+                fetchCSV(JOKES_URL, true),
+                fetchCSV(PHOTOS_URL, true)
+            ]);
+
+            data.jokes = jokesData;
+            data.photos = photosData;
+
+            // הפעלת הזרקת התוכן לעיצוב של Stitch
+            renderDynamicContent();
+        } catch (e) {
+            console.error("שגיאה בטעינת הנתונים לטסט", e);
+        }
+    }
+
+    function fetchCSV(url, header) {
+        return new Promise((res, rej) => Papa.parse(url, { 
+            download: true, header, skipEmptyLines: true, 
+            complete: r => res(r.data), error: e => rej(e) 
+        }));
+    }
+
+    function renderDynamicContent() {
+        // 1. הזרקת בדיחה אקראית לתוך מבנה ה-HTML שעיצבת ב-Stitch
+        if(data.jokes.length > 0) {
+            const randomJoke = data.jokes[Math.floor(Math.random() * data.jokes.length)];
+            const jokeContainer = document.getElementById('dynamic-joke-container');
+            
+            jokeContainer.innerHTML = `
+                <div class="bg-white rounded-xl p-lg shadow-sm border border-slate-100 flex flex-col md:flex-row items-center gap-md">
+                    <div class="bg-secondary-container/10 p-md rounded-full">
+                        <span class="material-symbols-outlined text-secondary text-4xl" data-weight="fill">mood</span>
+                    </div>
+                    <div class="flex-1 text-center md:text-right">
+                        <h3 class="font-headline-md text-headline-md text-primary mb-xs">ההומור של ברק (חי מהגיליון)</h3>
+                        <p class="font-body-lg text-body-lg italic text-on-surface leading-relaxed">
+                            "${randomJoke['Joke Content']}"
+                        </p>
+                    </div>
+                </div>
+            `;
+        }
+
+        // 2. הזרקת 4 תמונות מהגלריה האמיתית לתוך מבנה הריבועים של Stitch
+        if(data.photos.length > 0) {
+            const galleryContainer = document.getElementById('dynamic-gallery-container');
+            const samplePhotos = data.photos.slice(0, 4); // לוקח את 4 התמונות הראשונות בגיליון
+            
+            galleryContainer.innerHTML = samplePhotos.map(p => `
+                <div class="aspect-square rounded-xl overflow-hidden bg-surface-container shadow-sm hover:shadow-md transition-shadow">
+                    <img class="w-full h-full object-cover" src="${getPhotoUrl(p.id)}" alt="${p.title || 'תמונה'}"/>
+                </div>
+            `).join('');
+        }
+    }
+
+    window.onload = initTest;
+</script>
+</body>
+</html>
