@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>לזכרו של ברק לב שלם</title>
+    <title>לזכרו של ברק לב שלם היקר</title>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
-    
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@100..900&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     
@@ -44,13 +43,13 @@
         body { font-family: 'Heebo', sans-serif; background: var(--bg); margin: 0; color: var(--text); direction: rtl; }
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
         
-        /* מבנה ה-Page המקורי שלך שהיה ב-index.html - לא שונה כלל */
+        /* לוגיקת הצגת והסתרת העמודים המקורית שלך - ללא שינוי */
         .page { display: none; padding: 24px max(12px, (100vw - 1280px)/2); min-height: calc(100vh - 250px); }
         .page.active { display: block; }
         
-        /* עיצוב כרטיסים משופר בעזרת פאלת הצבעים החדשה */
+        /* עיצוב הגריד והכרטיסים המקורי שלך עם הטאץ' של העיצוב החדש */
         .grid-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; padding: 12px 0; }
-        .card { background: white; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.05); cursor: pointer; transition: 0.3s; display: flex; flex-direction: column; position: relative; }
+        .card { background: white; border: 1px solid #e1f1f2; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.05); cursor: pointer; transition: 0.3s; display: flex; flex-direction: column; position: relative; }
         .card:hover { transform: translateY(-4px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
         .card-img { width: 100%; aspect-ratio: 1; object-fit: cover; background: #f1f5f9; }
         .card-content { padding: 16px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
@@ -58,7 +57,7 @@
         .card-snippet { font-size: 14px; color: #43474c; flex-grow: 1; white-space: pre-wrap; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
         .card-meta { font-size: 12px; color: #74777d; margin-top: 12px; display: flex; justify-content: space-between; }
         
-        /* רכיבי חיפוש ומסננים */
+        /* שורת החיפוש והסינון המקורית */
         .controls-row { display: flex; gap: 16px; margin-bottom: 24px; flex-wrap: wrap; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); border: 1px solid #e1f1f2; }
         .search-input, .filter-select { padding: 10px 16px; border: 1px solid #c4c6cd; border-radius: 8px; font-family: inherit; font-size: 14px; background: #f8fafc; outline: none; }
         .search-input { flex-grow: 1; }
@@ -71,10 +70,10 @@
         .modal-close { background: none; border: none; font-size: 28px; cursor: pointer; color: #74777d; }
         .modal-body { padding: 24px; overflow-y: auto; }
 
-        /* התאמות למובייל עבור הניווט */
+        /* התאמות תפריט למובייל */
         @media (max-width: 768px) {
-            nav .nav-links { display: none; position: absolute; top: 65px; left: 0; width: 100%; background: #162839; flex-direction: column; padding: 20px; gap: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-            nav .nav-links.mobile-open { display: flex; }
+            .nav-links { display: none; position: absolute; top: 65px; left: 0; width: 100%; background: #162839; flex-direction: column; padding: 20px; gap: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+            .nav-links.mobile-open { display: flex; }
             .hamburger { display: block !important; }
         }
     </style>
@@ -85,11 +84,11 @@
     <div class="text-xl font-bold tracking-tight cursor-pointer" onclick="showPage('home')">Barak Lev Shalem</div>
     
     <div class="nav-links flex gap-6 font-medium text-sm">
-        <a href="#home" onclick="showPage('home')" class="text-white hover:text-[#fc8f34] transition-colors no-underline">בית</a>
-        <a href="#photos" onclick="showPage('photos')" class="text-white hover:text-[#fc8f34] transition-colors no-underline">גלריה</a>
-        <a href="#texts" onclick="showPage('texts')" class="text-white hover:text-[#fc8f34] transition-colors no-underline">יצירות וסיפורים</a>
-        <a href="#jokes" onclick="showPage('jokes')" class="text-white hover:text-[#fc8f34] transition-colors no-underline">ההומור שלו</a>
-        <a href="#about" onclick="showPage('about')" class="text-white hover:text-[#fc8f34] transition-colors no-underline">קורות חיים</a>
+        <a onclick="showPage('home')" class="text-white hover:text-[#fc8f34] transition-colors cursor-pointer">בית</a>
+        <a onclick="showPage('photos')" class="text-white hover:text-[#fc8f34] transition-colors cursor-pointer">גלריה</a>
+        <a onclick="showPage('texts')" class="text-white hover:text-[#fc8f34] transition-colors cursor-pointer">יצירות וסיפורים</a>
+        <a onclick="showPage('jokes')" class="text-white hover:text-[#fc8f34] transition-colors cursor-pointer">ההומור שלו</a>
+        <a onclick="showPage('about')" class="text-white hover:text-[#fc8f34] transition-colors cursor-pointer">קורות חיים</a>
     </div>
     
     <button class="hamburger hidden text-white bg-none border-none cursor-pointer" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open')">
@@ -208,7 +207,6 @@
         if (target) target.classList.add('active');
         
         document.querySelectorAll('nav a').forEach(a => a.style.borderBottom = 'none');
-        // סגירת תפריט מובייל
         document.querySelector('.nav-links').classList.remove('mobile-open');
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -221,168 +219,4 @@
             buildHome();
             renderPhotos();
             renderTexts(data.texts);
-            renderJokes();
-            renderAbout(document.getElementById('about-container'));
-
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.has('item')) openFromUrl(urlParams.get('item'));
-        } catch (e) {
-            console.error("Error loading data:", e);
-        }
-    }
-
-    function loadCSV(url) {
-        return new Promise((resolve, reject) => {
-            Papa.parse(url, { download: true, header: true, skipEmptyLines: true, complete: r => resolve(r.data), error: e => reject(e) });
-        });
-    }
-
-    function buildHome() {
-        if (data.jokes.length) {
-            const j = data.jokes[Math.floor(Math.random() * data.jokes.length)];
-            document.getElementById('home-joke').innerHTML = `<p style="font-style:italic; font-size:18px; margin:0;">"${j.content || Object.values(j)[0]}"</p>`;
-        }
-        if (data.photos.length) {
-            document.getElementById('home-photos').innerHTML = data.photos.slice(0, 4).map(p => `
-                <div class="card" onclick="openItem('photo', '${p.id}', '${p.id}', '${p.title}')">
-                    <img class="card-img" src="${driveImg(p.id, 'w300')}" alt="${p.title}">
-                </div>
-            `).join('');
-        }
-        if (data.texts.length) {
-            document.getElementById('home-texts').innerHTML = data.texts.slice(0, 3).map(t => `
-                <div class="card" onclick="openItem('text', '${t.content_link}', '${t.id}', '${t.title}', '${t.author}')">
-                    <div class="card-content">
-                        <h3 class="card-title">${t.title}</h3>
-                        <p class="card-snippet">${t.snippet || ''}</p>
-                        <div class="card-meta"><span>${t.author || 'ברק לב שלם'}</span><span>${t.date || ''}</span></div>
-                    </div>
-                </div>
-            `).join('');
-        }
-    }
-
-    function renderPhotos() {
-        const container = document.getElementById('photo-grid');
-        if (!data.photos.length) return container.innerHTML = "<p>אין תמונות כרגע</p>";
-        container.innerHTML = data.photos.map(p => `
-            <div class="card" onclick="openItem('photo', '${p.id}', '${p.id}', '${p.title}')">
-                <img class="card-img" src="${driveImg(p.id)}" alt="${p.title}">
-                <div class="card-content">
-                    <h3 class="card-title">${p.title || 'תמונה'}</h3>
-                    <div class="card-meta"><span>${p.date || ''}</span></div>
-                </div>
-            </div>
-        `).join('');
-    }
-
-    function renderTexts(list) {
-        const container = document.getElementById('text-grid');
-        if (!list.length) return container.innerHTML = "<p>לא נמצאו יצירות</p>";
-        container.innerHTML = list.map(t => `
-            <div class="card" onclick="openItem('text', '${t.content_link}', '${t.id}', '${t.title}', '${t.author}')">
-                <div class="card-content">
-                    <div>
-                        <span style="background:#ffdcc5; color:#301400; font-size:12px; padding:2px 8px; border-radius:4px;">${t.category || 'כתבים'}</span>
-                        <h3 class="card-title" style="margin-top:8px;">${t.title}</h3>
-                        <p class="card-snippet">${t.snippet || ''}</p>
-                    </div>
-                    <div class="card-meta"><span>${t.author || 'ברק לב שלם'}</span><span>${t.date || ''}</span></div>
-                </div>
-            </div>
-        `).join('');
-    }
-
-    function filterTexts() {
-        const query = document.getElementById('text-search').value.toLowerCase();
-        const cat = document.getElementById('text-category').value;
-        const filtered = data.texts.filter(t => {
-            const matchQ = t.title.toLowerCase().includes(query) || (t.snippet && t.snippet.toLowerCase().includes(query));
-            const matchC = !cat || t.category === cat;
-            return matchQ && matchC;
-        });
-        renderTexts(filtered);
-    }
-
-    function renderJokes() {
-        const container = document.getElementById('joke-grid');
-        if (!data.jokes.length) return container.innerHTML = "<p>אין בדיחות כרגע</p>";
-        const shuffled = [...data.jokes].sort(() => 0.5 - Math.random());
-        container.innerHTML = shuffled.map(j => `
-            <div class="bg-white rounded-xl p-6 shadow-sm border border-slate-100 flex gap-4 items-start text-right">
-                <span class="material-symbols-outlined text-orange-400 text-2xl mt-0.5">sentiment_satisfied</span>
-                <p class="text-slate-700 leading-relaxed font-medium text-base m-0">${j.content || Object.values(j)[0]}</p>
-            </div>
-        `).join('');
-    }
-
-    async function openItem(type, link, id, title, author = "") {
-        document.getElementById('modal-title').innerText = title;
-        const body = document.getElementById('modal-body');
-        body.innerHTML = "טוען תוכן...";
-        document.getElementById('item-modal').style.display = 'flex';
-        
-        document.getElementById('modal-actions').innerHTML = `
-            <button class="bg-slate-200 text-slate-700 px-3 py-1.5 rounded-md text-xs font-medium cursor-pointer border-none" onclick="shareItem('${id}', '${title}')">שתף פריט זה</button>
-        `;
-        
-        document.getElementById('send-btn').onclick = () => sendComment(id);
-
-        if (type === 'photo') {
-            body.innerHTML = `<img src="${driveImg(link, 'w1200')}" style="width:100%; max-height:60vh; object-fit:contain; border-radius:8px;">`;
-        } else if (type === 'text' && link) {
-            try {
-                const res = await fetch(link);
-                const html = await res.text();
-                body.innerHTML = `<div class="prose max-w-none text-right">${html}</div>`;
-            } catch (e) {
-                body.innerHTML = "<p>שגיאה בטעינת התוכן. ייתכן וקובץ הטקסט חסר.</p>";
-            }
-        }
-    }
-
-    async function sendComment(id) {
-        const name = document.getElementById('comment-name').value.trim();
-        const content = document.getElementById('comment-content').value.trim();
-        if (!name || !content) return alert("נא למלא שם ותוכן");
-        
-        document.getElementById('send-btn').disabled = true;
-        const params = new URLSearchParams({ name, relation: "", content, item_id: id });
-        await fetch(APPS_SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: params });
-        alert("נשלח לאישור!");
-        closeModal();
-    }
-
-    function shareItem(id, title) {
-        const url = `${window.location.origin}${window.location.pathname}?item=${id}`;
-        if (navigator.share) navigator.share({ title, url }); else prompt("קישור:", url);
-    }
-
-    function closeModal() { 
-        document.getElementById('item-modal').style.display = 'none'; 
-        document.getElementById('modal-body').innerHTML = '';
-    }
-    
-    function openFromUrl(id) {
-        const photo = data.photos.find(p => p.id === id);
-        if (photo) return openItem(photo.type || 'photo', photo.id, photo.id, photo.title);
-        const text = data.texts.find(t => t.id === id);
-        if (text) return openItem('text', text.content_link, text.id, text.title, text.author);
-        showPage('home');
-    }
-
-    async function renderAbout(container) {
-        container.innerHTML = `<h2>קורות חיים</h2><div id="cv-target">טוען...</div>`;
-        try {
-            const res = await fetch('about_barak.html');
-            const html = await res.text();
-            document.getElementById('cv-target').innerHTML = html;
-        } catch(e) {
-            document.getElementById('cv-target').innerHTML = "<p>קובץ קורות החיים (about_barak.html) לא נמצא בשרת.</p>";
-        }
-    }
-
-    window.onload = init;
-</script>
-</body>
-</html>
+            renderJokes
