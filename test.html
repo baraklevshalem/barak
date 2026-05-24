@@ -1,366 +1,1275 @@
+<!-- גלריה - לזכרו של ברק לב שלם -->
 <!DOCTYPE html>
-<html lang="he" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>לזכרו של ברק לב שלם</title>
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
-    
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@100..900&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-    
-    <script id="tailwind-config">
+
+<html dir="rtl" lang="he"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>גלריה - לזכרו של ברק לב שלם</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
       tailwind.config = {
         darkMode: "class",
         theme: {
           extend: {
             "colors": {
-                "outline-variant": "#c4c6cd", "primary-container": "#2c3e50", "surface-container": "#e1f1f2",
-                "primary": "#162839", "secondary-container": "#fc8f34", "surface-container-highest": "#d5e6e7",
-                "inverse-primary": "#b5c8df", "tertiary-container": "#4e381c", "on-error": "#ffffff",
-                "primary-fixed-dim": "#b5c8df", "surface-variant": "#d5e6e7", "surface-container-lowest": "#ffffff",
-                "on-tertiary-fixed-variant": "#5a4225", "secondary-fixed": "#ffdcc5", "surface-dim": "#cdddde",
-                "on-secondary": "#ffffff", "on-background": "#0f1e1f", "on-secondary-fixed-variant": "#713700",
-                "on-secondary-fixed": "#301400", "tertiary-fixed-dim": "#e3c19b", "on-tertiary-container": "#c1a17d",
-                "surface-bright": "#ecfdfd", "surface": "#ecfdfd", "on-primary-container": "#96a9be",
-                "outline": "#74777d", "on-tertiary-fixed": "#291802", "surface-tint": "#4e6073",
-                "surface-container-low": "#e6f7f8", "error": "#ba1a1a", "on-surface-variant": "#43474c",
-                "tertiary-fixed": "#ffddb7", "inverse-surface": "#243334", "secondary": "#944a00",
-                "on-surface": "#0f1e1f", "error-container": "#ffdad6", "on-primary": "#ffffff",
-                "on-secondary-container": "#663100", "on-tertiary": "#ffffff", "secondary-fixed-dim": "#ffb783",
-                "inverse-on-surface": "#e3f4f5", "on-primary-fixed-variant": "#36485b", "tertiary": "#362308",
-                "background": "#ecfdfd", "surface-container-high": "#dbebec", "primary-fixed": "#d1e4fb",
-                "on-error-container": "#93000a", "on-primary-fixed": "#091d2e"
+                    "surface-variant": "#d5e6e7",
+                    "secondary": "#944a00",
+                    "on-secondary-fixed-variant": "#713700",
+                    "on-primary-container": "#96a9be",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-fixed": "#291802",
+                    "on-secondary-container": "#663100",
+                    "inverse-on-surface": "#e3f4f5",
+                    "tertiary": "#362308",
+                    "on-tertiary": "#ffffff",
+                    "secondary-container": "#fc8f34",
+                    "on-error": "#ffffff",
+                    "inverse-primary": "#b5c8df",
+                    "on-tertiary-fixed-variant": "#5a4225",
+                    "on-error-container": "#93000a",
+                    "on-surface": "#0f1e1f",
+                    "error": "#ba1a1a",
+                    "on-primary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-fixed": "#301400",
+                    "tertiary-container": "#4e381c",
+                    "on-background": "#0f1e1f",
+                    "outline": "#74777d",
+                    "inverse-surface": "#243334",
+                    "background": "#ecfdfd",
+                    "primary-fixed": "#d1e4fb",
+                    "on-primary-fixed": "#091d2e",
+                    "surface-tint": "#4e6073",
+                    "surface-container-low": "#e6f7f8",
+                    "surface-container-high": "#dbebec",
+                    "surface-container": "#e1f1f2",
+                    "on-tertiary-container": "#c1a17d",
+                    "surface-container-highest": "#d5e6e7",
+                    "surface": "#ecfdfd",
+                    "secondary-fixed-dim": "#ffb783",
+                    "on-secondary": "#ffffff",
+                    "outline-variant": "#c4c6cd",
+                    "primary-fixed-dim": "#b5c8df",
+                    "primary": "#162839",
+                    "on-surface-variant": "#43474c",
+                    "surface-dim": "#cdddde",
+                    "secondary-fixed": "#ffdcc5",
+                    "tertiary-fixed": "#ffddb7",
+                    "surface-bright": "#ecfdfd",
+                    "on-primary-fixed-variant": "#36485b",
+                    "tertiary-fixed-dim": "#e3c19b",
+                    "primary-container": "#2c3e50"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xl": "64px",
+                    "md": "24px",
+                    "sm": "16px",
+                    "xs": "8px",
+                    "unit": "4px",
+                    "lg": "40px",
+                    "container-max": "1200px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "title-lg": ["Heebo"],
+                    "headline-md": ["Heebo"],
+                    "body-lg": ["Heebo"],
+                    "headline-lg": ["Heebo"],
+                    "display-lg": ["Heebo"],
+                    "body-md": ["Heebo"],
+                    "label-lg": ["Heebo"],
+                    "display-md": ["Heebo"],
+                    "label-sm": ["Heebo"]
+            },
+            "fontSize": {
+                    "title-lg": ["20px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-lg": ["28px", {"lineHeight": "1.3", "fontWeight": "500"}],
+                    "display-lg": ["48px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-lg": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "display-md": ["36px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "1.4", "fontWeight": "400"}]
             }
           },
         },
       }
     </script>
-
-    <style>
-        :root { --primary: #162839; --accent: #944a00; --bg: #ecfdfd; --white: #ffffff; --text: #0f1e1f; }
-        html { overflow-y: scroll; scroll-behavior: smooth; }
-        body { font-family: 'Heebo', sans-serif; background: var(--bg); margin: 0; color: var(--text); direction: rtl; }
-        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
-        
-        /* מבנה ה-Page המקורי שלך שהיה ב-index.html - לא שונה כלל */
-        .page { display: none; padding: 24px max(12px, (100vw - 1280px)/2); min-height: calc(100vh - 250px); }
-        .page.active { display: block; }
-        
-        /* עיצוב כרטיסים משופר בעזרת פאלת הצבעים החדשה */
-        .grid-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; padding: 12px 0; }
-        .card { background: white; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.05); cursor: pointer; transition: 0.3s; display: flex; flex-direction: column; position: relative; }
-        .card:hover { transform: translateY(-4px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
-        .card-img { width: 100%; aspect-ratio: 1; object-fit: cover; background: #f1f5f9; }
-        .card-content { padding: 16px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
-        .card-title { font-size: 18px; font-weight: 700; margin: 0 0 8px 0; color: var(--primary); }
-        .card-snippet { font-size: 14px; color: #43474c; flex-grow: 1; white-space: pre-wrap; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
-        .card-meta { font-size: 12px; color: #74777d; margin-top: 12px; display: flex; justify-content: space-between; }
-        
-        /* רכיבי חיפוש ומסננים */
-        .controls-row { display: flex; gap: 16px; margin-bottom: 24px; flex-wrap: wrap; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); border: 1px solid #e1f1f2; }
-        .search-input, .filter-select { padding: 10px 16px; border: 1px solid #c4c6cd; border-radius: 8px; font-family: inherit; font-size: 14px; background: #f8fafc; outline: none; }
-        .search-input { flex-grow: 1; }
-        .filter-select { width: 180px; }
-        
-        /* מודל פריט (Pop-up) המקורי שלך - ללא שינויי מבנה */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15,30,31,0.6); z-index: 2000; justify-content: center; align-items: center; padding: 12px; }
-        .modal-content { background: white; width: 100%; max-width: 800px; max-height: 90vh; border-radius: 16px; overflow-y: auto; position: relative; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); display: flex; flex-direction: column; text-align: right; }
-        .modal-header { padding: 20px; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: white; z-index: 10; }
-        .modal-close { background: none; border: none; font-size: 28px; cursor: pointer; color: #74777d; }
-        .modal-body { padding: 24px; overflow-y: auto; }
-
-        /* התאמות למובייל עבור הניווט */
-        @media (max-width: 768px) {
-            nav .nav-links { display: none; position: absolute; top: 65px; left: 0; width: 100%; background: #162839; flex-direction: column; padding: 20px; gap: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-            nav .nav-links.mobile-open { display: flex; }
-            .hamburger { display: block !important; }
+<style>
+        body {
+            font-family: 'Heebo', sans-serif;
+            background-color: #ecfdfd;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
     </style>
 </head>
-<body class="pt-20">
-
-<nav class="fixed top-0 left-0 w-full z-50 bg-[#162839] text-white px-6 md:px-12 flex justify-between items-center h-[65px] shadow-md">
-    <div class="text-xl font-bold tracking-tight cursor-pointer" onclick="showPage('home')">Barak Lev Shalem</div>
-    
-    <div class="nav-links flex gap-6 font-medium text-sm">
-        <a href="#home" onclick="showPage('home')" class="text-white hover:text-[#fc8f34] transition-colors no-underline">בית</a>
-        <a href="#photos" onclick="showPage('photos')" class="text-white hover:text-[#fc8f34] transition-colors no-underline">גלריה</a>
-        <a href="#texts" onclick="showPage('texts')" class="text-white hover:text-[#fc8f34] transition-colors no-underline">יצירות וסיפורים</a>
-        <a href="#jokes" onclick="showPage('jokes')" class="text-white hover:text-[#fc8f34] transition-colors no-underline">ההומור שלו</a>
-        <a href="#about" onclick="showPage('about')" class="text-white hover:text-[#fc8f34] transition-colors no-underline">קורות חיים</a>
-    </div>
-    
-    <button class="hamburger hidden text-white bg-none border-none cursor-pointer" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open')">
-        <span class="material-symbols-outlined text-2xl">menu</span>
-    </button>
-</nav>
-
-<main class="max-w-7xl mx-auto px-4 md:px-8 mt-4">
-
-    <div id="home" class="page active">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center mb-16 mt-6">
-            <div>
-                <h1 class="text-4xl md:text-5xl font-bold text-[#162839] mb-4">ברק לב שלם</h1>
-                <p class="text-lg text-[#43474c] leading-relaxed">
-                    ברוכים הבאים לאתר הזיכרון של ברק. מקום שבו אספנו את המילים שלו, החיוך שלו והבדיחות שתמיד ידע לספר. כאן תוכלו למצוא פיסות מהחיים שהיו מלאים בצחוק, יצירה ואור.
-                </p>
-                <div class="mt-8 flex gap-4">
-                    <button onclick="showPage('texts')" class="bg-[#162839] text-white px-6 py-3 rounded-xl hover:opacity-90 transition-all font-medium border-none cursor-pointer">קראו מיצירותיו</button>
-                    <button onclick="showPage('photos')" class="border border-[#162839] text-[#162839] bg-transparent px-6 py-3 rounded-xl hover:bg-[#162839]/5 transition-all font-medium cursor-pointer">צפו בגלריה</button>
-                </div>
-            </div>
-            <div>
-                <div class="aspect-square max-w-[400px] mx-auto rounded-2xl overflow-hidden shadow-xl bg-slate-100">
-                    <img class="w-full h-full object-cover" src="https://drive.google.com/thumbnail?id=1S-KFrVUHzS9dJsN1ag8EwfNyiXwFHqC-&sz=w800" alt="ברק לב שלם"/>
-                </div>
-            </div>
-        </div>
-
-        <h2 class="text-xl font-bold text-[#162839] mb-4 border-b pb-2 border-slate-200">הומור אקראי</h2>
-        <div id="home-joke" class="bg-white rounded-xl p-6 shadow-sm border border-slate-100 mb-8">טוען בדיחה...</div>
-
-        <h2 class="text-xl font-bold text-[#162839] mb-4 border-b pb-2 border-slate-200">טעימה מהגלריה</h2>
-        <div id="home-photos" class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">טוען תמונות...</div>
-
-        <h2 class="text-xl font-bold text-[#162839] mb-4 border-b pb-2 border-slate-200">שירים וסיפורים אחרונים</h2>
-        <div id="home-texts" class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">טוען יצירות...</div>
-    </div>
-
-    <div id="photos" class="page">
-        <h2 class="text-2xl font-bold text-[#162839] mb-4">גלריית רגעים</h2>
-        <div class="controls-row">
-            <input type="text" id="photo-search" class="search-input" placeholder="חפש תמונות...">
-        </div>
-        <div id="photo-grid" class="grid-container">טוען...</div>
-    </div>
-
-    <div id="texts" class="page">
-        <h2 class="text-2xl font-bold text-[#162839] mb-4">יצירות וסיפורים</h2>
-        <div class="controls-row">
-            <input type="text" id="text-search" class="search-input" oninput="filterTexts()" placeholder="חפש ביצירות...">
-            <select id="text-category" class="filter-select" onchange="filterTexts()">
-                <option value="">כל הקטגוריות</option>
-                <option value="שירה">שירה</option>
-                <option value="סיפורים">סיפורים</option>
-                <option value="מכתבים">מכתבים</option>
-            </select>
-        </div>
-        <div id="text-grid" class="grid-container">טוען...</div>
-    </div>
-
-    <div id="jokes" class="page">
-        <div class="mb-6 flex justify-between items-center">
-            <h2 class="text-2xl font-bold text-[#162839] m-0">ההומור של ברק</h2>
-            <button onclick="renderJokes()" class="bg-[#fc8f34] text-[#301400] px-4 py-2 rounded-lg font-medium hover:opacity-90 flex items-center gap-1 text-sm border-none cursor-pointer shadow-sm">בדיחה אקראית חדשה</button>
-        </div>
-        <div id="joke-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">טוען...</div>
-    </div>
-
-    <div id="about" class="page">
-        <div id="about-container" class="bg-white rounded-xl p-8 shadow-sm border border-slate-100 text-right">טוען...</div>
-    </div>
-
-</main>
-
-<div id="item-modal" class="modal" onclick="if(event.target===this) closeModal()">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h3 id="modal-title" class="text-xl font-bold text-[#162839] m-0"></h3>
-            <button class="modal-close" onclick="closeModal()">&times;</button>
-        </div>
-        <div id="modal-body" class="modal-body"></div>
-        <div class="p-6 border-t border-slate-100 bg-slate-50 flex flex-col gap-4">
-            <div class="flex gap-2" id="modal-actions"></div>
-            <div id="comments-section" class="mt-4">
-                <h4 class="font-bold text-[#162839] mb-2 text-sm">הוספת זיכרון או תגובה לפריט זה:</h4>
-                <div class="flex flex-col gap-2">
-                    <input type="text" id="comment-name" placeholder="שמך" class="p-2 border rounded-md text-sm outline-none">
-                    <textarea id="comment-content" placeholder="כתבו כאן את הזיכרון או התגובה..." class="p-2 border rounded-md text-sm h-20 outline-none"></textarea>
-                    <button id="send-btn" class="bg-[#162839] text-white px-4 py-2 rounded-md text-sm self-start hover:opacity-90 border-none cursor-pointer">שלח לאישור משפחה</button>
-                </div>
-            </div>
-        </div>
-    </div>
+<body class="text-on-surface">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full z-50 border-b border-slate-100 bg-white/90 backdrop-blur-md shadow-sm">
+<div class="flex justify-between items-center h-16 px-6 md:px-12 max-w-7xl mx-auto">
+<div class="text-xl font-bold text-slate-800 tracking-tight">Barak Lev Shalem</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="font-label-lg text-slate-500 hover:text-slate-800 transition-colors" href="#">Home</a>
+<a class="font-label-lg text-slate-900 border-b-2 border-orange-500 pb-1" href="#">Gallery</a>
+<a class="font-label-lg text-slate-500 hover:text-slate-800 transition-colors" href="#">Works</a>
+<a class="font-label-lg text-slate-500 hover:text-slate-800 transition-colors" href="#">Jokes</a>
+<a class="font-label-lg text-slate-500 hover:text-slate-800 transition-colors" href="#">About</a>
 </div>
+<div class="flex items-center gap-4">
+<button class="bg-primary text-white px-5 py-2 rounded-lg font-label-lg hover:opacity-90 transition-all">Add a Memory</button>
+</div>
+</div>
+</nav>
+<main class="pt-24 pb-20 px-6 md:px-12 max-w-7xl mx-auto">
+<!-- Header Section -->
+<header class="mb-12 text-center md:text-right">
+<h1 class="font-display-md text-primary mb-4">גלריה - לזכרו של ברק לב שלם</h1>
+<p class="font-body-lg text-on-surface-variant max-w-3xl md:mr-0 mr-auto">
+                אוסף רגעים, זכרונות ויצירות ממהלך חייו של ברק. מוזמנים לעיין בתמונות ובסרטונים המשקפים את אישיותו הייחודית.
+            </p>
+</header>
+<!-- Search and Filter Section -->
+<div class="flex flex-col md:flex-row justify-between items-center gap-6 mb-12">
+<!-- Filter Chips -->
+<div class="flex flex-wrap gap-3 order-2 md:order-1">
+<button class="px-6 py-2 rounded-full bg-primary text-white font-label-lg shadow-sm">הכל</button>
+<button class="px-6 py-2 rounded-full bg-white text-on-surface-variant border border-outline-variant font-label-lg hover:bg-surface-container-low transition-colors">משפחה</button>
+<button class="px-6 py-2 rounded-full bg-white text-on-surface-variant border border-outline-variant font-label-lg hover:bg-surface-container-low transition-colors">טבע</button>
+<button class="px-6 py-2 rounded-full bg-white text-on-surface-variant border border-outline-variant font-label-lg hover:bg-surface-container-low transition-colors">טיולים</button>
+<button class="px-6 py-2 rounded-full bg-white text-on-surface-variant border border-outline-variant font-label-lg hover:bg-surface-container-low transition-colors">וידאו</button>
+</div>
+<!-- Search Bar -->
+<div class="relative w-full md:w-80 order-1 md:order-2">
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pr-10 pl-4 py-3 bg-white border border-outline-variant rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all font-body-md" placeholder="חיפוש בגלריה..." type="text"/>
+</div>
+</div>
+<!-- Gallery Grid (3-column asymmetric layout) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Card 1 -->
+<div class="group relative overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+<div class="aspect-[4/5] relative overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A serene landscape photograph of a lush green valley during sunrise, captured with soft morning mist rolling over the hills. The lighting is golden and warm, creating a peaceful and eternal atmosphere that aligns with a memorial theme. The style is sharp and professional, using a natural color palette of deep greens and soft oranges to evoke a sense of quiet remembrance." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCO9xxe-4obyjmzsLma9w6-zB2h4K2Dw9RVTCUQEvZ_I3ZYVQwyeupaJIkCifGMCvl5bZVzrQ2OxI6uK0pu6Hy2ioX9I5zgy8KSGhJXso3eLzcOf2Mt7Hx3HtQ8sWgh3ZALpR6PXtGbhDVURvclR7MtoFCkMoOWB8-76pvkJ3FMkQY3y-V6nMJx01ZH49ndGZUyG5C6UM3rIbU-pNACAE9lPv5ew3df314xxV1DftNkYvLZ6XehbQc2s1PgAnZSOojg1RX6j64tnIXi"/>
+<div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-label-lg text-primary shadow-sm">טבע</div>
+</div>
+<div class="p-6">
+<h3 class="font-title-lg text-primary mb-1">זריחה מעל העמק</h3>
+<p class="font-label-sm text-on-surface-variant">אוקטובר 2022</p>
+</div>
+</div>
+<!-- Card 2 (Video Highlight) -->
+<div class="group relative overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+<div class="aspect-[4/5] relative overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A cinematic outdoor setting of a person sitting by a crackling campfire at twilight under a vast starry sky. The visual style is evocative and warm, with deep midnight blues and rich fire oranges defining the palette. The lighting from the fire creates a soft glow on the surroundings, suggesting a moment of deep reflection and storytelling in a high-end, corporate modern aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcWcZM0l4AK_jLY6L2e79H3SUilSOjILyRRf3867flxYHTCSF1Qu5k14MW7NgZXG-wHZ4xJ_615TS3twzdVXg2bmAEbtT-XPDYb8AKe5-je_fqS5RKB8QKruWe27P_J8x2UUaOUcMbVe3AbKyfqCioQOjR8iVmrPHGKjUJjnRl4g0hIlHktIb1o4CHwzYxQo2Y5spmueTFfllfVq3ICVl9azGzzsALsUdZV7k2w52xFhWACpsLMhAHT8yvf3DdUm6-Jw8qF8jIsf9x"/>
+<div class="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-6xl text-white drop-shadow-lg" data-weight="fill">play_circle</span>
+</div>
+<div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-label-lg text-primary shadow-sm">וידאו</div>
+</div>
+<div class="p-6">
+<h3 class="font-title-lg text-primary mb-1">מסביב למדורה</h3>
+<p class="font-label-sm text-on-surface-variant">טיול שנתי עם החברים</p>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group relative overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+<div class="aspect-[4/5] relative overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A heartwarming close-up shot of a diverse group of people laughing together during a golden hour garden party. The scene is filled with authentic emotion and joy, captured with a shallow depth of field that focuses on the smiling faces. The aesthetic is clean and bright, maintaining the respectful yet celebratory tone of a memorial gallery, using soft neutral tones and vibrant natural light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDN8Iza2hrLPRp5tztszY2u4O9N98WFBeIeXqdyHsO3UrQdXU1eSRmvrQPiuScFPIl-W5lBCUJYEAnM_JbXShWZgPBs-f0njCEJ6xN78wPZj7hOCdGVq4hvB1l4nJV6hAXYkJ7j7llefs9DrSerNVb9JcojnqoR8SGRE-3EZUOJUSgdjQsMSJBthlY-TKs8jg942TMVaE96X1uf95Y7sB64y_F6OClqnwVRi_DqAQHcYERqxopPMkByn1jUr8uof8wr-4Z_RC8I40WT"/>
+<div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-label-lg text-primary shadow-sm">משפחה</div>
+</div>
+<div class="p-6">
+<h3 class="font-title-lg text-primary mb-1">חגיגת יום הולדת</h3>
+<p class="font-label-sm text-on-surface-variant">רגעים של אושר משותף</p>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="group relative overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+<div class="aspect-[4/5] relative overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="An expansive panoramic view of mountain peaks reaching above the clouds, bathed in the soft, cool light of dusk. The colors are muted blues and slate greys, creating a somber yet majestic mood. The image serves as a metaphor for spiritual transcendence and memory, styled with professional corporate minimalism that emphasizes the scale and dignity of the natural world." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDyMRJnjdpiyHX78gCp2ugq7KRKkkzQcoOfZT2ox8L1sz2jS05mymn4e9P6GpUKMG8dpUTu5eBDqgm31U3PKaUxDev-gXoh8ittSwGTQbV5UDv5h-qilD9c_bTfnX0pQWD0FNSzGOb0oXF9eO8kDgKX8ESZXqyLaDjMKZ8lPhNMuUMQzbBHpXCim2vEG48bSqKqrM5eEHIRdIMlU1QhP6-nXDBegoAeEsGOyv-9I78dQTwnOFivEUq0uQH_lFJvCwaVR0ehN6wYXXL"/>
+<div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-label-lg text-primary shadow-sm">טיולים</div>
+</div>
+<div class="p-6">
+<h3 class="font-title-lg text-primary mb-1">פסגת החרמון</h3>
+<p class="font-label-sm text-on-surface-variant">טיול חורפי 2021</p>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="group relative overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+<div class="aspect-[4/5] relative overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A creative high-angle shot of an artist's desk filled with sketches, architectural tools, and blueprints, illuminated by soft natural light from a side window. The aesthetic is organized but deeply personal, reflecting the 'Works' category. The color palette is dominated by off-whites, neutral greys, and warm wood tones, conveying a sense of legacy and intellectual curiosity through a minimalist lens." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0jBvNclM7lSjjFVA01cyieP63mNbJ8hCM-8UT7zx0y9jOoAg38LXOIE5oVm2gBOq_Z2RzarH8pKdvV69S2B8fjOokSzxEJnyxdvFKGHpRfnX-E-cNerSJXSmgKGLeE68Z1qMIEPtQUQ93Z_Z4H-gzYG-6pTQujQL4jJaN3G1mi4yd8b999eXA15xOptqeRDTtVlwJjOpHHSZPCVu3XVxbwDpfKjLVJR2Y-sQgoIbxCys_84lbfdj_Ix8yTyzAmjTlAn6vQ9MDYdF3"/>
+<div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-label-lg text-primary shadow-sm">עבודה</div>
+</div>
+<div class="p-6">
+<h3 class="font-title-lg text-primary mb-1">שולחן העבודה</h3>
+<p class="font-label-sm text-on-surface-variant">מבט אל תהליך היצירה</p>
+</div>
+</div>
+<!-- Card 6 -->
+<div class="group relative overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+<div class="aspect-[4/5] relative overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A nostalgic candid photograph of three friends laughing around a table at an outdoor cafe, with city lights beginning to twinkle in the blurred background. The style is warm and documentary-like, emphasizing connection and shared humanity. The lighting is low-key with bright spots of urban luminescence, maintaining a refined and clean composition suitable for a high-quality memorial portal." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVxxobOBaiUx2KYGq4m02sGqRiXGRWvk5mM21lEA45urFGKPdxE0A3GrUUo_jydpGvq1ALhcOqdnMGiSnYSSl0s8bWNksVIA3StmKuJmE8LjMjDZZ-FHrN2XMWciwVsinfHw8HSPFVqy-BHx6ZioR8YICEPZUGg9GMfTOft0NTPLtS82Q2OQmgR_AR07qombuLL_7zFskJxHnpQFC6tclkKYyivcAu1XLEvfRxLnVokWXKNopEi_mcl0hTteQ2niHDxvH-rLqdlWd_"/>
+<div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-label-lg text-primary shadow-sm">חברים</div>
+</div>
+<div class="p-6">
+<h3 class="font-title-lg text-primary mb-1">ערב בעיר</h3>
+<p class="font-label-sm text-on-surface-variant">צחוק שמהדהד עד היום</p>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="mt-16 flex justify-center items-center gap-4">
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant text-primary hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+<div class="flex gap-2">
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-white font-label-lg">1</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant text-on-surface-variant font-label-lg hover:bg-surface-container transition-colors">2</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant text-on-surface-variant font-label-lg hover:bg-surface-container transition-colors">3</button>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant text-primary hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full border-t border-slate-200 mt-16 bg-slate-50">
+<div class="flex flex-col md:flex-row justify-between items-center py-12 px-6 md:px-12 max-w-7xl mx-auto gap-6">
+<div class="flex flex-col items-center md:items-start gap-2">
+<span class="text-sm font-semibold text-slate-600">Barak Lev Shalem</span>
+<p class="font-['Heebo'] text-xs uppercase tracking-widest text-slate-500">© 2024 In Memory of Barak Lev Shalem. May his memory be a blessing.</p>
+</div>
+<div class="flex gap-8">
+<a class="font-['Heebo'] text-xs uppercase tracking-widest text-slate-400 hover:text-slate-600 underline decoration-orange-500/30 underline-offset-4 transition-all" href="#">Privacy Policy</a>
+<a class="font-['Heebo'] text-xs uppercase tracking-widest text-slate-400 hover:text-slate-600 underline decoration-orange-500/30 underline-offset-4 transition-all" href="#">Contact Family</a>
+<a class="font-['Heebo'] text-xs uppercase tracking-widest text-slate-400 hover:text-slate-600 underline decoration-orange-500/30 underline-offset-4 transition-all" href="#">Terms of Remembrance</a>
+</div>
+</div>
+</footer>
+<!-- Floating Action Button -->
+<button class="fixed bottom-8 right-8 w-16 h-16 bg-secondary text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform z-40">
+<span class="material-symbols-outlined text-3xl" data-weight="fill">flare</span>
+</button>
+</body></html>
 
-<footer class="w-full border-t border-slate-200 mt-16 bg-white py-8">
-    <div class="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-500">
-        <div class="font-bold text-slate-700">לזכרו של ברק לב שלם</div>
-        <div class="text-xs">© 2026 In Memory of Barak Lev Shalem. May his memory be a blessing.</div>
-    </div>
+<!-- יצירות וסיפורים - לזכרו של ברק לב שלם -->
+<!DOCTYPE html><html dir="rtl" lang="he" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@100..900&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-variant": "#d5e6e7",
+                    "secondary": "#944a00",
+                    "on-secondary-fixed-variant": "#713700",
+                    "on-primary-container": "#96a9be",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-fixed": "#291802",
+                    "on-secondary-container": "#663100",
+                    "inverse-on-surface": "#e3f4f5",
+                    "tertiary": "#362308",
+                    "on-tertiary": "#ffffff",
+                    "secondary-container": "#fc8f34",
+                    "on-error": "#ffffff",
+                    "inverse-primary": "#b5c8df",
+                    "on-tertiary-fixed-variant": "#5a4225",
+                    "on-error-container": "#93000a",
+                    "on-surface": "#0f1e1f",
+                    "error": "#ba1a1a",
+                    "on-primary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-fixed": "#301400",
+                    "tertiary-container": "#4e381c",
+                    "on-background": "#0f1e1f",
+                    "outline": "#74777d",
+                    "inverse-surface": "#243334",
+                    "background": "#ecfdfd",
+                    "primary-fixed": "#d1e4fb",
+                    "on-primary-fixed": "#091d2e",
+                    "surface-tint": "#4e6073",
+                    "surface-container-low": "#e6f7f8",
+                    "surface-container-high": "#dbebec",
+                    "surface-container": "#e1f1f2",
+                    "on-tertiary-container": "#c1a17d",
+                    "surface-container-highest": "#d5e6e7",
+                    "surface": "#ecfdfd",
+                    "secondary-fixed-dim": "#ffb783",
+                    "on-secondary": "#ffffff",
+                    "outline-variant": "#c4c6cd",
+                    "primary-fixed-dim": "#b5c8df",
+                    "primary": "#162839",
+                    "on-surface-variant": "#43474c",
+                    "surface-dim": "#cdddde",
+                    "secondary-fixed": "#ffdcc5",
+                    "tertiary-fixed": "#ffddb7",
+                    "surface-bright": "#ecfdfd",
+                    "on-primary-fixed-variant": "#36485b",
+                    "tertiary-fixed-dim": "#e3c19b",
+                    "primary-container": "#2c3e50"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xl": "64px",
+                    "md": "24px",
+                    "sm": "16px",
+                    "xs": "8px",
+                    "unit": "4px",
+                    "lg": "40px",
+                    "container-max": "1200px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "title-lg": ["Heebo"],
+                    "headline-md": ["Heebo"],
+                    "body-lg": ["Heebo"],
+                    "headline-lg": ["Heebo"],
+                    "display-lg": ["Heebo"],
+                    "body-md": ["Heebo"],
+                    "label-lg": ["Heebo"],
+                    "display-md": ["Heebo"],
+                    "label-sm": ["Heebo"]
+            },
+            "fontSize": {
+                    "title-lg": ["20px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-lg": ["28px", {"lineHeight": "1.3", "fontWeight": "500"}],
+                    "display-lg": ["48px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-lg": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "display-md": ["36px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "1.4", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Heebo', sans-serif;
+            background-color: #ecfdfd;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- Top Navigation Bar -->
+<header class="bg-white/90 backdrop-blur-md fixed top-0 w-full z-50 border-b border-slate-100 shadow-sm transition-all duration-300 ease-in-out">
+<div class="flex justify-between items-center h-16 px-6 md:px-12 max-w-7xl mx-auto">
+<div class="text-xl font-bold text-slate-800 tracking-tight">Barak Lev Shalem</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-slate-500 hover:text-slate-800 transition-colors font-medium text-sm tracking-wide" href="#">בית</a>
+<a class="text-slate-500 hover:text-slate-800 transition-colors font-medium text-sm tracking-wide" href="#">גלריה</a>
+<a class="text-slate-900 border-b-2 border-orange-500 pb-1 font-medium text-sm tracking-wide" href="#">יצירות</a>
+<a class="text-slate-500 hover:text-slate-800 transition-colors font-medium text-sm tracking-wide" href="#">בדיחות</a>
+<a class="text-slate-500 hover:text-slate-800 transition-colors font-medium text-sm tracking-wide" href="#">על האתר</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="bg-[#162839] text-white px-5 py-2 rounded-lg font-label-lg hover:bg-slate-800 transition-all">
+                    Add a Memory
+                </button>
+</div>
+</div>
+</header>
+<main class="pt-32 pb-xl px-6 max-w-7xl mx-auto">
+<!-- Page Header -->
+<div class="mb-lg text-center md:text-right">
+<h1 class="font-display-md text-primary mb-xs">יצירות וסיפורים</h1>
+<p class="font-body-lg text-on-surface-variant max-w-2xl">מקבץ יצירות, שירים וסיפורים שנכתבו על ידי ברק או לזכרו.</p>
+</div>
+<!-- Search & Filter Section -->
+<section class="bg-white rounded-xl shadow-sm p-md mb-xl border border-slate-100">
+<div class="flex flex-col lg:flex-row gap-md items-end">
+<div class="w-full lg:flex-1 space-y-xs">
+<label class="font-label-lg text-primary block">חיפוש חופשי</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pr-10 py-3 rounded-lg border border-outline-variant focus:ring-2 focus:ring-primary focus:outline-none bg-surface-container-lowest font-body-md" placeholder="חפשו לפי כותרת או מילת מפתח..." type="text">
+</div>
+</div>
+<div class="w-full lg:w-64 space-y-xs">
+<label class="font-label-lg text-primary block">קטגוריה</label>
+<select class="w-full py-3 rounded-lg border border-outline-variant focus:ring-2 focus:ring-primary focus:outline-none bg-surface-container-lowest font-body-md px-3 appearance-none">
+<option>כל היצירות</option>
+<option>שירה</option>
+<option>סיפורים קצרים</option>
+<option>מכתבים</option>
+<option>הגות</option>
+</select>
+</div>
+<button class="w-full lg:w-auto bg-[#e67e22] text-white px-8 py-3 rounded-lg font-label-lg hover:brightness-110 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" data-icon="search_check">search_check</span>
+                    Deep Search
+                </button>
+</div>
+<div class="flex flex-wrap gap-xs mt-sm">
+<span class="px-3 py-1 bg-surface-container-high rounded-full font-label-sm text-on-surface-variant cursor-pointer hover:bg-surface-variant">#זכרונות</span>
+<span class="px-3 py-1 bg-surface-container-high rounded-full font-label-sm text-on-surface-variant cursor-pointer hover:bg-surface-variant">#צבא</span>
+<span class="px-3 py-1 bg-surface-container-high rounded-full font-label-sm text-on-surface-variant cursor-pointer hover:bg-surface-variant">#ילדות</span>
+<span class="px-3 py-1 bg-surface-container-high rounded-full font-label-sm text-on-surface-variant cursor-pointer hover:bg-surface-variant">#טיולים</span>
+</div>
+</section>
+<!-- Bento Grid of Works -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md">
+<!-- Card 1 -->
+<article class="bg-white rounded-xl shadow-sm border border-slate-50 p-md flex flex-col justify-between hover:translate-y-[-4px] transition-all duration-300 group">
+<div>
+<div class="flex justify-between items-start mb-sm">
+<span class="bg-secondary-fixed text-on-secondary-fixed px-3 py-1 rounded-md font-label-sm">שירה</span>
+<span class="material-symbols-outlined text-outline group-hover:text-secondary transition-colors" data-icon="auto_stories">auto_stories</span>
+</div>
+<h3 class="font-headline-md text-primary mb-xs">הרוח בין האורנים</h3>
+<p class="font-body-md text-on-surface-variant line-clamp-3 mb-md leading-relaxed">
+                        שיר שנכתב בערב סתווי אחד, מתאר את השקט של הרי ירושלים ואת התחושה של זמן שעומד מלכת. המילים נוגעות בנימים הדקים של הגעגוע.
+                    </p>
+</div>
+<div class="flex items-center justify-between pt-md border-t border-slate-50">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-surface-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional, warm portrait of a middle-aged man with a gentle smile and kind eyes, set against a soft-focus library background. The lighting is natural and sophisticated, conveying a sense of wisdom and heritage in a minimalist corporate modern style. The color palette is composed of muted earth tones and soft blues." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzN2AcdEL3pgMcgTDyKe9exk9rhtyHbCR7jjUEMAazn9KcUvOop6eMDnVXgutpSeZBGL5Mg4D8TPVPynxzFKANbsr1p-qXhHW5Q_Eb9EnFveaeWv6Nq0PEVViaVbX5Y5lewb4Rbg6g75GmyqZKB8x3WuIZVj92GzkW6y8bT0fg8B9fk8bbv_8fcIvjzKsAlnnaypSeA9EHLwfgac7jRevesFEFZYUqKBKvMDAPOtC5G436HN2pfueydA15TacViFyPr2SJF1JnSKfL">
+</div>
+<span class="font-label-lg text-primary">מיכאל לוי</span>
+</div>
+<span class="font-label-sm text-outline">12.04.2024</span>
+</div>
+</article>
+<!-- Card 2 (Image Focused) -->
+<article class="bg-white rounded-xl shadow-sm border border-slate-50 overflow-hidden flex flex-col hover:translate-y-[-4px] transition-all duration-300 group">
+<div class="h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A cinematic, high-angle shot of an antique typewriter sitting on a heavy oak desk by a window with soft morning light filtering through. Dust motes dance in the light, creating a serene, nostalgic atmosphere. The overall aesthetic is minimalist and dignified, with a palette of deep mahogany, ivory paper, and soft sunlight." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2xYID96HxF3oKL-tSbcf2JJQ4mCp0-XJyVNprFmhVuqvF2GHhlAOkRQjyOUO4Tab-FiRKupishUZICNErEUerdiySiAxD3Y4mv95WUwbVC32Wko4qQoZKe7uyaTccKzhtlwQ5Skx4P7BSPQXhw4m1ldoOWZ3bYMh3RqH11oQ4fgR8Jnmtjb4L6anx1Pi6azYbEXERz1NGm5QaEbudyKLNDheapVcfzsJCWPD2qUP4AeU3zaJPiXj7fE5bkzH1iP5rCuGhAOJqbg0P">
+</div>
+<div class="p-md flex-1 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-sm">
+<span class="bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-md font-label-sm">סיפור קצר</span>
+<span class="material-symbols-outlined text-outline" data-icon="book">book</span>
+</div>
+<h3 class="font-headline-md text-primary mb-xs">המסע להר הגבוה</h3>
+<p class="font-body-md text-on-surface-variant line-clamp-2 mb-md">
+                            תיאור מרגש של הטיול האחרון של ברק לדרום אמריקה, הסיפורים הקטנים שמאחורי התמונות.
+                        </p>
+</div>
+<div class="flex items-center justify-between pt-md border-t border-slate-50">
+<span class="font-label-lg text-primary">ברק לב שלם</span>
+<span class="font-label-sm text-outline">28.01.2023</span>
+</div>
+</div>
+</article>
+<!-- Card 3 -->
+<article class="bg-white rounded-xl shadow-sm border border-slate-50 p-md flex flex-col justify-between hover:translate-y-[-4px] transition-all duration-300 group">
+<div>
+<div class="flex justify-between items-start mb-sm">
+<span class="bg-primary-fixed text-on-primary-fixed px-3 py-1 rounded-md font-label-sm">הגות</span>
+<span class="material-symbols-outlined text-outline" data-icon="lightbulb">lightbulb</span>
+</div>
+<h3 class="font-headline-md text-primary mb-xs">על משמעות החברות</h3>
+<p class="font-body-md text-on-surface-variant line-clamp-3 mb-md">
+                        טקסט פילוסופי קצר שנמצא במחברתו של ברק, הדן בערך העליון של נאמנות ועזרה הדדית בחברה המודרנית.
+                    </p>
+</div>
+<div class="flex items-center justify-between pt-md border-t border-slate-50">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-400 text-sm">person</span>
+</div>
+<span class="font-label-lg text-primary">מערכת האתר</span>
+</div>
+<span class="font-label-sm text-outline">05.05.2024</span>
+</div>
+</article>
+<!-- Card 4 -->
+<article class="bg-white rounded-xl shadow-sm border border-slate-50 p-md flex flex-col justify-between hover:translate-y-[-4px] transition-all duration-300 group">
+<div>
+<div class="flex justify-between items-start mb-sm">
+<span class="bg-secondary-fixed text-on-secondary-fixed px-3 py-1 rounded-md font-label-sm">שירה</span>
+<span class="material-symbols-outlined text-outline" data-icon="edit_note">edit_note</span>
+</div>
+<h3 class="font-headline-md text-primary mb-xs">מילים של חול</h3>
+<p class="font-body-md text-on-surface-variant line-clamp-3 mb-md">
+                        "החול נשטף, המילים נשארות חקוקות על לוח הלב". פואמה קצרה שנכתבה בחוף הים.
+                    </p>
+</div>
+<div class="flex items-center justify-between pt-md border-t border-slate-50">
+<div class="flex items-center gap-2">
+<span class="font-label-lg text-primary">דניאל כהן</span>
+</div>
+<span class="font-label-sm text-outline">15.02.2024</span>
+</div>
+</article>
+<!-- Card 5 (Quote Style) -->
+<article class="bg-primary text-white rounded-xl shadow-lg p-md flex flex-col justify-center text-center hover:translate-y-[-4px] transition-all duration-300 border-none">
+<span class="material-symbols-outlined text-secondary-fixed text-4xl mb-sm" data-icon="format_quote" data-weight="fill">format_quote</span>
+<p class="font-headline-md italic mb-md">"החיים הם לא רק מה שקורה לנו, אלא מה שאנחנו בוחרים לזכור ממה שקרה."</p>
+<div class="w-12 h-1 bg-secondary-fixed mx-auto mb-sm"></div>
+<span class="font-label-lg opacity-80 uppercase tracking-widest">ברק לב שלם</span>
+</article>
+<!-- Card 6 -->
+<article class="bg-white rounded-xl shadow-sm border border-slate-50 p-md flex flex-col justify-between hover:translate-y-[-4px] transition-all duration-300 group">
+<div>
+<div class="flex justify-between items-start mb-sm">
+<span class="bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-md font-label-sm">מכתבים</span>
+<span class="material-symbols-outlined text-outline" data-icon="mail">mail</span>
+</div>
+<h3 class="font-headline-md text-primary mb-xs">מכתב מהמילואים</h3>
+<p class="font-body-md text-on-surface-variant line-clamp-3 mb-md">
+                        מכתב שנשלח למשפחה במהלך תקופת שירות המילואים האחרונה, מלא באופטימיות, הומור וגעגועים הביתה.
+                    </p>
+</div>
+<div class="flex items-center justify-between pt-md border-t border-slate-50">
+<div class="flex items-center gap-2">
+<span class="font-label-lg text-primary">משפחת לב שלם</span>
+</div>
+<span class="font-label-sm text-outline">10.11.2023</span>
+</div>
+</article>
+</div>
+<!-- Pagination -->
+<div class="mt-xl flex justify-center items-center gap-2">
+<button class="w-10 h-10 rounded-lg border border-outline-variant flex items-center justify-center text-outline hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+<button class="w-10 h-10 rounded-lg bg-primary text-white flex items-center justify-center font-label-lg">1</button>
+<button class="w-10 h-10 rounded-lg border border-outline-variant flex items-center justify-center text-primary hover:bg-surface-container-low transition-colors font-label-lg">2</button>
+<button class="w-10 h-10 rounded-lg border border-outline-variant flex items-center justify-center text-primary hover:bg-surface-container-low transition-colors font-label-lg">3</button>
+<button class="w-10 h-10 rounded-lg border border-outline-variant flex items-center justify-center text-outline hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full border-t border-slate-200 mt-16 bg-slate-50">
+<div class="flex flex-col md:flex-row justify-between items-center py-12 px-6 md:px-12 max-w-7xl mx-auto gap-6">
+<div class="text-sm font-semibold text-slate-600">Barak Lev Shalem</div>
+<div class="font-['Heebo'] text-xs uppercase tracking-widest text-slate-500 text-center md:text-right">
+                © 2024 In Memory of Barak Lev Shalem. May his memory be a blessing.
+            </div>
+<div class="flex gap-6">
+<a class="font-['Heebo'] text-xs uppercase tracking-widest text-slate-400 hover:text-slate-600 underline decoration-orange-500/30 underline-offset-4 transition-opacity opacity-80 hover:opacity-100" href="#">Privacy Policy</a>
+<a class="font-['Heebo'] text-xs uppercase tracking-widest text-slate-400 hover:text-slate-600 underline decoration-orange-500/30 underline-offset-4 transition-opacity opacity-80 hover:opacity-100" href="#">Contact Family</a>
+<a class="font-['Heebo'] text-xs uppercase tracking-widest text-slate-400 hover:text-slate-600 underline decoration-orange-500/30 underline-offset-4 transition-opacity opacity-80 hover:opacity-100" href="#">Terms</a>
+</div>
+</div>
 </footer>
 
-<script>
-    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyfE9S9p4NaxCymXwE2XUjZ5Hbe4wE6BcoXpX76fD75/exec';
-    const JOKES_SHEET = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSR74JGStqevOMg4uFKqudbSRFEQVRisiEgSwTuxnLjsTUx7TShIVuzPkdRgOZiJq8Pz3H-zoa_3mK3/pub?gid=0&single=true&output=csv';
-    const PHOTOS_SHEET = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSevdjPZljQNazIav8vcVOszHVu5iKOA-AtYUjwhZGuZUibJpjgnJHC_tsrZY11p9aAE_iQytePZsAZ/pub?output=csv';
-    const TEXTS_SHEET = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQXNnO7m4U66h3A4w3r3Iun3tE_h_dF9wO3O155B7pE0g_1z-x76oHk1nOn4m-r7uI9w_3z-7k9aAE_i/pub?output=csv';
 
-    let data = { jokes: [], photos: [], texts: [] };
+</body></html>
 
-    function driveImg(id, sz = 'w600') { return id ? `https://drive.google.com/thumbnail?id=${id}&sz=${sz}` : ''; }
-
-    function showPage(pageId) {
-        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-        const target = document.getElementById(pageId);
-        if (target) target.classList.add('active');
-        
-        document.querySelectorAll('nav a').forEach(a => a.style.borderBottom = 'none');
-        // סגירת תפריט מובייל
-        document.querySelector('.nav-links').classList.remove('mobile-open');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    async function init() {
-        try {
-            const [jRes, pRes, tRes] = await Promise.all([loadCSV(JOKES_SHEET), loadCSV(PHOTOS_SHEET), loadCSV(TEXTS_SHEET)]);
-            data.jokes = jRes; data.photos = pRes; data.texts = tRes;
-            
-            buildHome();
-            renderPhotos();
-            renderTexts(data.texts);
-            renderJokes();
-            renderAbout(document.getElementById('about-container'));
-
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.has('item')) openFromUrl(urlParams.get('item'));
-        } catch (e) {
-            console.error("Error loading data:", e);
+<!-- ההומור של ברק - מאגר הבדיחות -->
+<!DOCTYPE html><html dir="rtl" lang="he" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@100..900&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<title>ההומור של ברק - מאגר הבדיחות</title>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#d5e6e7",
+                        "secondary": "#944a00",
+                        "on-secondary-fixed-variant": "#713700",
+                        "on-primary-container": "#96a9be",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed": "#291802",
+                        "on-secondary-container": "#663100",
+                        "inverse-on-surface": "#e3f4f5",
+                        "tertiary": "#362308",
+                        "on-tertiary": "#ffffff",
+                        "secondary-container": "#fc8f34",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#b5c8df",
+                        "on-tertiary-fixed-variant": "#5a4225",
+                        "on-error-container": "#93000a",
+                        "on-surface": "#0f1e1f",
+                        "error": "#ba1a1a",
+                        "on-primary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed": "#301400",
+                        "tertiary-container": "#4e381c",
+                        "on-background": "#0f1e1f",
+                        "outline": "#74777d",
+                        "inverse-surface": "#243334",
+                        "background": "#ecfdfd",
+                        "primary-fixed": "#d1e4fb",
+                        "on-primary-fixed": "#091d2e",
+                        "surface-tint": "#4e6073",
+                        "surface-container-low": "#e6f7f8",
+                        "surface-container-high": "#dbebec",
+                        "surface-container": "#e1f1f2",
+                        "on-tertiary-container": "#c1a17d",
+                        "surface-container-highest": "#d5e6e7",
+                        "surface": "#ecfdfd",
+                        "secondary-fixed-dim": "#ffb783",
+                        "on-secondary": "#ffffff",
+                        "outline-variant": "#c4c6cd",
+                        "primary-fixed-dim": "#b5c8df",
+                        "primary": "#162839",
+                        "on-surface-variant": "#43474c",
+                        "surface-dim": "#cdddde",
+                        "secondary-fixed": "#ffdcc5",
+                        "tertiary-fixed": "#ffddb7",
+                        "surface-bright": "#ecfdfd",
+                        "on-primary-fixed-variant": "#36485b",
+                        "tertiary-fixed-dim": "#e3c19b",
+                        "primary-container": "#2c3e50"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "64px",
+                        "md": "24px",
+                        "sm": "16px",
+                        "xs": "8px",
+                        "unit": "4px",
+                        "lg": "40px",
+                        "container-max": "1200px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "title-lg": ["Heebo"],
+                        "headline-md": ["Heebo"],
+                        "body-lg": ["Heebo"],
+                        "headline-lg": ["Heebo"],
+                        "display-lg": ["Heebo"],
+                        "body-md": ["Heebo"],
+                        "label-lg": ["Heebo"],
+                        "display-md": ["Heebo"],
+                        "label-sm": ["Heebo"]
+                    },
+                    "fontSize": {
+                        "title-lg": ["20px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                        "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "500"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-lg": ["28px", {"lineHeight": "1.3", "fontWeight": "500"}],
+                        "display-lg": ["48px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label-lg": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "display-md": ["36px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "1.4", "fontWeight": "400"}]
+                    }
+                },
+            },
         }
-    }
-
-    function loadCSV(url) {
-        return new Promise((resolve, reject) => {
-            Papa.parse(url, { download: true, header: true, skipEmptyLines: true, complete: r => resolve(r.data), error: e => reject(e) });
-        });
-    }
-
-    function buildHome() {
-        if (data.jokes.length) {
-            const j = data.jokes[Math.floor(Math.random() * data.jokes.length)];
-            document.getElementById('home-joke').innerHTML = `<p style="font-style:italic; font-size:18px; margin:0;">"${j.content || Object.values(j)[0]}"</p>`;
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
-        if (data.photos.length) {
-            document.getElementById('home-photos').innerHTML = data.photos.slice(0, 4).map(p => `
-                <div class="card" onclick="openItem('photo', '${p.id}', '${p.id}', '${p.title}')">
-                    <img class="card-img" src="${driveImg(p.id, 'w300')}" alt="${p.title}">
-                </div>
-            `).join('');
+        body {
+            background-color: #ecfdfd;
+            font-family: 'Heebo', sans-serif;
         }
-        if (data.texts.length) {
-            document.getElementById('home-texts').innerHTML = data.texts.slice(0, 3).map(t => `
-                <div class="card" onclick="openItem('text', '${t.content_link}', '${t.id}', '${t.title}', '${t.author}')">
-                    <div class="card-content">
-                        <h3 class="card-title">${t.title}</h3>
-                        <p class="card-snippet">${t.snippet || ''}</p>
-                        <div class="card-meta"><span>${t.author || 'ברק לב שלם'}</span><span>${t.date || ''}</span></div>
-                    </div>
-                </div>
-            `).join('');
-        }
-    }
-
-    function renderPhotos() {
-        const container = document.getElementById('photo-grid');
-        if (!data.photos.length) return container.innerHTML = "<p>אין תמונות כרגע</p>";
-        container.innerHTML = data.photos.map(p => `
-            <div class="card" onclick="openItem('photo', '${p.id}', '${p.id}', '${p.title}')">
-                <img class="card-img" src="${driveImg(p.id)}" alt="${p.title}">
-                <div class="card-content">
-                    <h3 class="card-title">${p.title || 'תמונה'}</h3>
-                    <div class="card-meta"><span>${p.date || ''}</span></div>
-                </div>
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- TopAppBar Shell -->
+<header class="fixed top-0 w-full z-50 border-b border-slate-100 dark:border-slate-800 bg-white/90 backdrop-blur-md shadow-sm transition-all duration-300 ease-in-out">
+<div class="flex justify-between items-center h-16 px-6 md:px-12 max-w-7xl mx-auto">
+<div class="text-xl font-bold text-slate-800 dark:text-slate-100 tracking-tight font-title-lg">
+                Barak Lev Shalem
             </div>
-        `).join('');
-    }
-
-    function renderTexts(list) {
-        const container = document.getElementById('text-grid');
-        if (!list.length) return container.innerHTML = "<p>לא נמצאו יצירות</p>";
-        container.innerHTML = list.map(t => `
-            <div class="card" onclick="openItem('text', '${t.content_link}', '${t.id}', '${t.title}', '${t.author}')">
-                <div class="card-content">
-                    <div>
-                        <span style="background:#ffdcc5; color:#301400; font-size:12px; padding:2px 8px; border-radius:4px;">${t.category || 'כתבים'}</span>
-                        <h3 class="card-title" style="margin-top:8px;">${t.title}</h3>
-                        <p class="card-snippet">${t.snippet || ''}</p>
-                    </div>
-                    <div class="card-meta"><span>${t.author || 'ברק לב שלם'}</span><span>${t.date || ''}</span></div>
-                </div>
+<nav class="hidden md:flex items-center gap-8 font-['Heebo'] font-medium text-sm tracking-wide">
+<a class="text-slate-500 hover:text-slate-800 transition-colors" href="#">בית</a>
+<a class="text-slate-500 hover:text-slate-800 transition-colors" href="#">גלריה</a>
+<a class="text-slate-500 hover:text-slate-800 transition-colors" href="#">יצירות</a>
+<a class="text-slate-900 border-b-2 border-orange-500 pb-1" href="#">בדיחות</a>
+<a class="text-slate-500 hover:text-slate-800 transition-colors" href="#">על ברק</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="bg-primary text-on-primary px-5 py-2 rounded-lg font-label-lg transition-all hover:opacity-90">
+                    לצירוף זכרון</button>
+</div>
+</div>
+</header>
+<main class="pt-32 pb-xl px-6 md:px-12 max-w-7xl mx-auto min-h-screen">
+<!-- Hero Title Section -->
+<div class="mb-xl text-center">
+<h1 class="font-display-md text-primary mb-xs">ההומור של ברק - מאגר הבדיחות</h1>
+<p class="font-body-lg text-on-surface-variant max-w-2xl mx-auto">
+                ברק תמיד ידע להצחיק אותנו ברגעים הנכונים. כאן ריכזנו את הבדיחות האהובות עליו, את השנינות שלו ואת רגעי הצחוק שחלקנו.
+            </p>
+</div>
+<!-- Search & Filter Bar -->
+<div class="mb-lg flex flex-col md:flex-row gap-md items-center justify-between">
+<div class="relative w-full md:w-1/2">
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pr-12 pl-4 py-3 bg-white border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all font-body-md" placeholder="חפשו בדיחה או מילת מפתח..." type="text">
+</div>
+<div class="flex gap-xs overflow-x-auto pb-2 w-full md:w-auto no-scrollbar">
+<button class="px-6 py-2 bg-primary text-on-primary rounded-full font-label-lg whitespace-nowrap">הכל</button>
+<button class="px-6 py-2 bg-white text-on-surface-variant border border-outline-variant rounded-full font-label-lg whitespace-nowrap hover:bg-surface-container transition-all">בדיחות קרש</button>
+<button class="px-6 py-2 bg-white text-on-surface-variant border border-outline-variant rounded-full font-label-lg whitespace-nowrap hover:bg-surface-container transition-all">הומור צבאי</button>
+<button class="px-6 py-2 bg-white text-on-surface-variant border border-outline-variant rounded-full font-label-lg whitespace-nowrap hover:bg-surface-container transition-all">שנינויות</button>
+</div>
+</div>
+<!-- Jokes Grid (Asymmetric / Bento Style) -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Joke Card 1 (Large) -->
+<div class="md:col-span-8 bg-white p-md rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow group">
+<div class="flex justify-between items-start mb-sm">
+<span class="bg-secondary-container/10 text-secondary px-3 py-1 rounded-full text-label-sm font-medium">בדיחות קרש</span>
+<span class="material-symbols-outlined text-outline group-hover:text-secondary-container transition-colors">sentiment_very_satisfied</span>
+</div>
+<p class="font-headline-md text-primary leading-relaxed mb-md">
+                    "למה פילים לא משתמשים במחשב? כי הם מפחדים מהעכבר."
+                </p>
+<div class="pt-sm border-t border-slate-50 flex justify-between items-center">
+<span class="text-label-sm text-outline">שותף ע"י משפחת לוי</span>
+<button class="flex items-center gap-1 text-label-sm text-primary hover:text-secondary-container transition-colors">
+<span class="material-symbols-outlined text-sm">share</span> שיתוף
+                    </button>
+</div>
+</div>
+<!-- Joke Card 2 -->
+<div class="md:col-span-4 bg-white p-md rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow group">
+<div class="flex justify-between items-start mb-sm">
+<span class="bg-primary-container/10 text-primary px-3 py-1 rounded-full text-label-sm font-medium">שנינויות</span>
+<span class="material-symbols-outlined text-outline group-hover:text-secondary-container transition-colors">mood</span>
+</div>
+<p class="font-body-lg text-on-surface leading-relaxed mb-md">
+                    "החיים הם כמו אופניים, אם קשה לך - סימן שאתה בעלייה."
+                </p>
+<div class="pt-sm border-t border-slate-50">
+<span class="text-label-sm text-outline italic">מהמשפטים שברק אמר כל בוקר</span>
+</div>
+</div>
+<!-- Image Break (Memorial Image) -->
+<div class="md:col-span-4 h-64 rounded-xl overflow-hidden relative group">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A candid, warm black and white photograph of a young man laughing heartily with friends in a sunlit outdoor garden. The lighting is soft and golden, capturing a moment of pure joy and genuine connection. The style is respectful and professional, matching a minimalist memorial aesthetic with high clarity and emotional depth." src="https://lh3.googleusercontent.com/aida-public/AB6AXuChDdFaTrmeR9R1_Gnt2d6G1aCSbxOI8_aUDwslsgAeL_OtyUqB3KVeF3-ClYxt3SZ4oHRc6DndcZSFsx99wq54i8Z8Kgwn1iD1I3fYPq6QdvUBFiS-YmjkxBL0eeJ4yxMGfPAktrkzYseZVkmkUAA2qekUCjiaSAXK9AtoScg-apY8PlRBqGQKMVZsU-9Nz_YQ1ybh1kX7DXvIc8yVNA4LspoAqtYxSYfQ1Wtk1RPd9qB8FFg2oV0Lf5begeGDOfj-v12CMWxqpvUA">
+<div class="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent flex flex-col justify-end p-md">
+<p class="text-white font-title-lg">החיוך שתמיד היה שם</p>
+</div>
+</div>
+<!-- Joke Card 3 -->
+<div class="md:col-span-4 bg-white p-md rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow group">
+<div class="flex justify-between items-start mb-sm">
+<span class="bg-tertiary-container/10 text-tertiary px-3 py-1 rounded-full text-label-sm font-medium">הומור צבאי</span>
+<span class="material-symbols-outlined text-outline group-hover:text-secondary-container transition-colors">military_tech</span>
+</div>
+<p class="font-body-lg text-on-surface leading-relaxed mb-md">
+                    "המפקד: 'למה לא היית באימון הסוואה אתמול?' החייל: 'תודה רבה המפקד!'"
+                </p>
+<div class="pt-sm border-t border-slate-50 flex justify-between items-center">
+<span class="text-label-sm text-outline">מתוך יומן המילואים</span>
+</div>
+</div>
+<!-- Joke Card 4 -->
+<div class="md:col-span-4 bg-white p-md rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow group">
+<div class="flex justify-between items-start mb-sm">
+<span class="bg-secondary-container/10 text-secondary px-3 py-1 rounded-full text-label-sm font-medium">בדיחות קרש</span>
+<span class="material-symbols-outlined text-outline group-hover:text-secondary-container transition-colors">chat_bubble</span>
+</div>
+<p class="font-body-lg text-on-surface leading-relaxed mb-md">
+                    "מה המאכל האהוב על קוסמים? פוקוס-פוקוס."
+                </p>
+<div class="pt-sm border-t border-slate-50 flex justify-between items-center">
+<span class="text-label-sm text-outline">סיפר בארוחת ערב שישי</span>
+</div>
+</div>
+<!-- Joke Card 5 (Long Content) -->
+<div class="md:col-span-12 bg-white p-md rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow group">
+<div class="flex justify-between items-start mb-sm">
+<div class="flex gap-2">
+<span class="bg-primary-container/10 text-primary px-3 py-1 rounded-full text-label-sm font-medium">סיפור משעשע</span>
+<span class="bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-label-sm font-medium">מומלץ</span>
+</div>
+<span class="material-symbols-outlined text-outline">history_edu</span>
+</div>
+<div class="grid md:grid-cols-2 gap-md">
+<div>
+<h3 class="font-title-lg text-primary mb-xs">הסיפור על הטיול לצפון</h3>
+<p class="font-body-md text-on-surface-variant leading-relaxed">
+                            כשנסענו לצפון והתברברנו בדרך, ברק לא איבד את העשתונות. הוא פשוט הסתכל על המפה ההפוכה ואמר: "חבר'ה, אנחנו לא טועים בדרך, אנחנו פשוט בודקים נתיבים חלופיים למקרה שגוגל מאפס יקרוס". בסוף הגענו למקום אחר לגמרי, אבל זה היה המקום הכי יפה שראינו בטיול.
+                        </p>
+</div>
+<div class="rounded-lg overflow-hidden h-48 md:h-full">
+<img class="w-full h-full object-cover" data-alt="A breathtaking panoramic view of the Galilee mountains in northern Israel during sunset. The sky is painted in hues of soft orange and dusky purple, illuminating the lush green valleys and rolling hills. The atmosphere is peaceful and majestic, reflecting the timeless beauty of nature in a professional, clean photographic style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBujUHAerYhLRNQ-b5ABl2rGvqo2JWbna_yOKYHapvGbnWnll29-UTVLTUcFSopJjZHkrRDvstdzRA7EnfXW_plRCjWJQlxsdLCfmMv3sGE5bxaYCvE-g7jxwuhK81zxu1pvAYpuL6dJZfEEN3DFehCWI7GLyjmTLdI1-yqhujrJ5exQnNLfIR5Qc5rUaEqHorDCw_ggyjLP0aLLCNCxyJ9EBxYNtm6HK5h9L50Z3JhyF8eCWwjr-fakE5U_A0CslbILokOm_ZsseTv">
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination / Load More -->
+<div class="mt-xl text-center">
+<button class="px-8 py-3 border-2 border-primary text-primary font-label-lg rounded-lg hover:bg-primary hover:text-on-primary transition-all duration-300">
+                טען בדיחות נוספות
+            </button>
+</div>
+</main>
+<!-- Footer Shell -->
+<footer class="w-full border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 mt-16 font-['Heebo']">
+<div class="flex flex-col md:flex-row justify-between items-center py-12 px-6 md:px-12 max-w-7xl mx-auto gap-6">
+<div class="text-sm font-semibold text-slate-600 dark:text-slate-300 uppercase tracking-widest">
+                Barak Lev Shalem
             </div>
-        `).join('');
-    }
-
-    function filterTexts() {
-        const query = document.getElementById('text-search').value.toLowerCase();
-        const cat = document.getElementById('text-category').value;
-        const filtered = data.texts.filter(t => {
-            const matchQ = t.title.toLowerCase().includes(query) || (t.snippet && t.snippet.toLowerCase().includes(query));
-            const matchC = !cat || t.category === cat;
-            return matchQ && matchC;
-        });
-        renderTexts(filtered);
-    }
-
-    function renderJokes() {
-        const container = document.getElementById('joke-grid');
-        if (!data.jokes.length) return container.innerHTML = "<p>אין בדיחות כרגע</p>";
-        const shuffled = [...data.jokes].sort(() => 0.5 - Math.random());
-        container.innerHTML = shuffled.map(j => `
-            <div class="bg-white rounded-xl p-6 shadow-sm border border-slate-100 flex gap-4 items-start text-right">
-                <span class="material-symbols-outlined text-orange-400 text-2xl mt-0.5">sentiment_satisfied</span>
-                <p class="text-slate-700 leading-relaxed font-medium text-base m-0">${j.content || Object.values(j)[0]}</p>
+<div class="text-xs text-slate-500 dark:text-slate-400 text-center md:text-right uppercase tracking-widest">
+                © 2024 In Memory of Barak Lev Shalem. May his memory be a blessing.
             </div>
-        `).join('');
-    }
+<div class="flex gap-8">
+<a class="text-slate-400 hover:text-slate-600 transition-opacity underline decoration-orange-500/30 underline-offset-4 text-xs uppercase tracking-widest" href="#">Privacy Policy</a>
+<a class="text-slate-400 hover:text-slate-600 transition-opacity underline decoration-orange-500/30 underline-offset-4 text-xs uppercase tracking-widest" href="#">Contact Family</a>
+<a class="text-slate-400 hover:text-slate-600 transition-opacity underline decoration-orange-500/30 underline-offset-4 text-xs uppercase tracking-widest" href="#">Terms of Remembrance</a>
+</div>
+</div>
+</footer>
+<!-- FAB Action (Contextual) -->
+<button class="fixed bottom-8 left-8 w-14 h-14 bg-secondary-container text-white rounded-full shadow-xl flex items-center justify-center hover:scale-110 transition-transform z-40 group">
+<span class="material-symbols-outlined" data-weight="fill">add</span>
+<span class="absolute right-full mr-4 bg-primary text-white px-3 py-1 rounded text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">הוסף בדיחה</span>
+</button>
 
-    async function openItem(type, link, id, title, author = "") {
-        document.getElementById('modal-title').innerText = title;
-        const body = document.getElementById('modal-body');
-        body.innerHTML = "טוען תוכן...";
-        document.getElementById('item-modal').style.display = 'flex';
-        
-        document.getElementById('modal-actions').innerHTML = `
-            <button class="bg-slate-200 text-slate-700 px-3 py-1.5 rounded-md text-xs font-medium cursor-pointer border-none" onclick="shareItem('${id}', '${title}')">שתף פריט זה</button>
-        `;
-        
-        document.getElementById('send-btn').onclick = () => sendComment(id);
 
-        if (type === 'photo') {
-            body.innerHTML = `<img src="${driveImg(link, 'w1200')}" style="width:100%; max-height:60vh; object-fit:contain; border-radius:8px;">`;
-        } else if (type === 'text' && link) {
-            try {
-                const res = await fetch(link);
-                const html = await res.text();
-                body.innerHTML = `<div class="prose max-w-none text-right">${html}</div>`;
-            } catch (e) {
-                body.innerHTML = "<p>שגיאה בטעינת התוכן. ייתכן וקובץ הטקסט חסר.</p>";
+</body></html>
+
+<!-- קוד מעודכן - לזכרו של ברק לב שלם -->
+<!DOCTYPE html><html dir="rtl" lang="he"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>לזכרו של ברק לב שלם</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@100..900&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#2c3e50",
+                        accent: "#e67e22",
+                        surface: "#ecfdfd",
+                        "surface-container": "#e1f1f2",
+                        "on-surface": "#0f1e1f",
+                        "on-surface-variant": "#43474c",
+                        outline: "#74777d",
+                        "outline-variant": "#c4c6cd"
+                    },
+                    fontFamily: {
+                        sans: ['Heebo', 'sans-serif'],
+                    }
+                }
             }
         }
+    </script>
+<style>
+        body { font-family: 'Heebo', sans-serif; background-color: #ecfdfd; color: #0f1e1f; margin: 0; direction: rtl; }
+        
+        /* Navigation */
+        header { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(8px); border-bottom: 1px solid #f1f5f9; position: fixed; top: 0; width: 100%; z-index: 1000; height: 64px; display: flex; align-items: center; }
+        .nav-container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.25rem; font-weight: 700; color: #1e293b; cursor: pointer; }
+        .nav-links { display: flex; gap: 24px; align-items: center; }
+        .nav-links a { color: #64748b; text-decoration: none; font-weight: 500; font-size: 0.875rem; cursor: pointer; transition: 0.2s; position: relative; }
+        .nav-links a:hover { color: #1e293b; }
+        .nav-links a.active { color: #1e293b; }
+        .nav-links a.active::after { content: ''; position: absolute; bottom: -4px; right: 0; width: 100%; height: 2px; background: #e67e22; }
+        .hamburger { display: none; font-size: 24px; cursor: pointer; color: #1e293b; }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; flex-direction: column; position: absolute; top: 64px; left: 0; width: 100%; background: white; padding: 24px; gap: 16px; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); }
+            .nav-links.active { display: flex; }
+            .hamburger { display: block; }
+            .nav-cta { display: none; }
+        }
+
+        /* Hero */
+        .hero { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; padding: 64px 0; margin-top: 32px; }
+        .hero-img { aspect-ratio: 1; border-radius: 24px; overflow: hidden; box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1); background: #d5e6e7; }
+        .hero-img img { width: 100%; height: 100%; object-fit: cover; }
+        .hero-text h1 { font-size: 3rem; font-weight: 800; color: #2c3e50; margin-bottom: 16px; }
+        .hero-text p { font-size: 1.125rem; line-height: 1.75; color: #43474c; max-width: 480px; }
+        
+        @media (max-width: 768px) {
+            .hero { grid-template-columns: 1fr; text-align: center; gap: 32px; padding: 40px 0; }
+            .hero-img { max-width: 320px; margin: 0 auto; order: -1; }
+            .hero-text h1 { font-size: 2.25rem; }
+            .hero-text p { margin: 0 auto; }
+        }
+
+        /* Container & Grid */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px 64px; }
+        .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin: 48px 0 24px; }
+        .section-header h2, .section-header h3 { font-size: 1.75rem; font-weight: 700; color: #2c3e50; margin: 0; }
+        .grid { display: grid; grid-template-columns: repeat(1, minmax(0, 1fr)); gap: 24px; }
+        @media (min-width: 768px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+        @media (min-width: 1024px) { .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+        /* Card Styles */
+        .card { background: white; border-radius: 16px; overflow: hidden; border: 1px solid #f1f5f9; transition: all 0.3s ease; display: flex; flex-direction: column; cursor: pointer; height: 100%; }
+        .card:hover { transform: translateY(-4px); box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1); }
+        .card-img { aspect-ratio: 4/3; overflow: hidden; position: relative; }
+        .card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+        .card:hover .card-img img { transform: scale(1.05); }
+        .card-content { padding: 24px; flex-grow: 1; display: flex; flex-direction: column; }
+        .tag { display: inline-block; padding: 4px 12px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; margin-bottom: 12px; align-self: flex-start; }
+        .tag-gallery { background: #ffdcc5; color: #713700; }
+        .tag-works { background: #d1e4fb; color: #091d2e; }
+        .tag-jokes { background: #f1f5f9; color: #475569; }
+        .card-title { font-size: 1.25rem; font-weight: 600; color: #2c3e50; margin-bottom: 8px; }
+        .card-desc { font-size: 0.9375rem; color: #43474c; line-height: 1.6; margin-bottom: 16px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+        .card-footer { margin-top: auto; padding-top: 16px; border-top: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center; color: #64748b; font-size: 0.8125rem; }
+
+        /* Jokes Styling */
+        .joke-card { background: white; border-radius: 16px; padding: 32px; border-right: 4px solid #e67e22; box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1); }
+        .joke-quote { font-size: 1.125rem; font-style: italic; color: #1e293b; line-height: 1.8; }
+
+        /* Search Area */
+        .search-area { background: white; border-radius: 16px; padding: 24px; border: 1px solid #f1f5f9; margin-bottom: 32px; }
+        .search-input { width: 100%; padding: 12px 16px; border-radius: 12px; border: 1px solid #cbd5e1; font-size: 1rem; transition: 0.2s; }
+        .search-input:focus { outline: none; border-color: #2c3e50; ring: 2px #2c3e50; }
+
+        /* Modal */
+        .modal { display: none; position: fixed; z-index: 2000; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); justify-content: center; align-items: center; }
+        .modal-content { background: white; width: 95%; max-width: 800px; max-height: 90vh; border-radius: 24px; overflow-y: auto; padding: 40px; position: relative; direction: rtl; }
+        .external-content-wrapper { all: revert; direction: rtl !important; }
+
+        /* Buttons */
+        .btn-primary { background: #2c3e50; color: white; padding: 10px 24px; border-radius: 10px; font-weight: 500; font-size: 0.875rem; transition: 0.2s; border: none; cursor: pointer; }
+        .btn-primary:hover { opacity: 0.9; }
+        .btn-outline { border: 1.5px solid #2c3e50; color: #2c3e50; padding: 8px 20px; border-radius: 10px; font-weight: 500; font-size: 0.875rem; background: transparent; cursor: pointer; transition: 0.2s; }
+        .btn-outline:hover { background: rgba(44, 62, 80, 0.05); }
+
+        /* Footer */
+        footer { border-top: 1px solid #e2e8f0; background: #f8fafc; padding: 48px 0; margin-top: 64px; }
+        .footer-content { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; flex-direction: column; md-flex-direction: row; justify-content: space-between; align-items: center; gap: 24px; }
+        .footer-brand { color: #475569; font-weight: 600; font-size: 0.875rem; }
+        .footer-text { font-family: 'Heebo'; font-size: 0.75rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; text-align: center; }
+    </style>
+</head>
+<body>
+<header>
+<div class="nav-container">
+<div class="logo" onclick="showPage('home')">לזכרו של ברק לב שלם ז"ל</div>
+<div class="hamburger" onclick="toggleMenu()"><span class="material-symbols-outlined">menu</span></div>
+<div class="nav-links" id="nav-links">
+<a onclick="showPage('home'); toggleMenu()" class="active">בית</a>
+<a onclick="showPage('gallery'); toggleMenu()" class="">גלריה</a>
+<a onclick="showPage('texts'); toggleMenu()" class="">יצירות</a>
+<a onclick="showPage('jokes'); toggleMenu()" class="">בדיחות</a>
+<a onclick="showPage('about'); toggleMenu()" class="">אודות</a>
+<a class="nav-cta btn-primary" href="mailto:baraklevshalem@gmail.com" style="color: white; margin-right: 16px;">אני רוצה להוסיף זיכרון לאתר</a>
+</div>
+</div>
+</header>
+<div class="container" id="main-content" style="margin-top: 64px;">
+            <div class="hero">
+                <div class="hero-text">
+                    <h1>ברק לב שלם</h1>
+                    <p>ברוכים הבאים לאתר הזיכרון של ברק. מקום שבו אספנו את המילים שלו, החיוך שלו והבדיחות שתמיד ידע לספר. כאן תוכלו למצוא פיסות מהחיים שהיו מלאים בצחוק, יצירה ואור.</p>
+                    <div style="margin-top:32px;">
+                        <button class="btn-outline" onclick="showPage('about')">קראו עוד עליו</button>
+                    </div>
+                </div>
+                <div class="hero-img"><img src="https://drive.google.com/thumbnail?id=1S-KFrVUHzS9dJsN1ag8EwfNyiXwFHqC-&amp;sz=w800" alt="ברק"></div>
+            </div>
+            <div id="dynamic-home-content"><p style="text-align:center; padding:40px;">טוען תוכן נוסף...</p></div>
+        </div>
+<footer>
+<div class="footer-content">
+<div class="footer-brand">Barak Lev Shalem</div>
+<div class="footer-text">© 2024 IN MEMORY OF BARAK LEV SHALEM. MAY HIS MEMORY BE A BLESSING.</div>
+<div class="flex gap-6">
+<a class="footer-text hover:text-slate-600 underline decoration-orange-500/30 underline-offset-4" href="mailto:baraklevshalem@gmail.com">Contact Family</a>
+</div>
+</div>
+</footer>
+<div class="modal" id="item-modal" onclick="closeModal()">
+<div class="modal-content" onclick="event.stopPropagation()">
+<button class="material-symbols-outlined" onclick="closeModal()" style="position: absolute; top: 20px; left: 20px; font-size: 32px; cursor: pointer; background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; color: rgb(100, 116, 139);">close</button>
+<div id="modal-actions" style="margin-bottom:24px;"></div>
+<div id="modal-body"></div>
+<div id="comment-area"></div>
+</div>
+</div>
+<script>
+    const JOKES_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSR74JGStqevOMg4uFKqudbSRFEQVRisiEgSwTuxnLjsTUx7TShIVuzPkdRgOZiJq8Pz3H-zoa_3mK3/pub?gid=0&single=true&output=csv';
+    const PHOTOS_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSevdjPZljQNazIav8vcVOszHVu5iKOA-AtYUjwhZGuZUibJpjgnJHC_tsrZY11p9aAE_iQytePZsAZ/pub?output=csv';
+    const VIDEOS_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSevdjPZljQNazIav8vcVOszHVu5iKOA-AtYUjwhZGuZUibJpjgnJHC_tsrZY11p9aAE_iQytePZsAZ/pub?gid=2135730881&single=true&output=csv';
+    const TEXTS_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSXdGMnIRS-ydFn4BRfngLIAbdveYx7L7eS96kCvpruVDca1-uGk3qyQY9Nh9C_eTpbjKoojzB2zlFn/pub?gid=1983290067&single=true&output=csv';
+    const COMMENTS_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRLoH5kw3YDw4HGqSflNsJfe-Gaq34n-5916WzKs-wFlAiCOUiit6ZqmkUiKprnAyJ6ezB0bwQhkGej/pub?output=csv';
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby5P7mLEeCeZJU3Yj3NZgoQ9r8Em8S1--uZyQwuXph7mLIr2DimiGvrtiW4yxcWzFs5Gw/exec';
+
+    const MAIN_PHOTO_ID = '1S-KFrVUHzS9dJsN1ag8EwfNyiXwFHqC-';
+    let data = { jokes: [], photos: [], texts: [], comments: [] };
+
+    function getPhotoUrl(id, size = 'w800') { return `https://drive.google.com/thumbnail?id=${id}&sz=${size}`; }
+    function toggleMenu() { document.getElementById('nav-links').classList.toggle('active'); }
+
+    async function init() {
+        const container = document.getElementById('main-content');
+        renderStaticHome(container);
+
+        const cachedData = localStorage.getItem('barak_site_data');
+        if (cachedData) {
+            data = JSON.parse(cachedData);
+            updateHomeWithDynamicContent();
+        }
+
+        try {
+            const [j, p, v, t, c] = await Promise.all([
+                fetchCSV(JOKES_URL, true), fetchCSV(PHOTOS_URL, true), 
+                fetchCSV(VIDEOS_URL, true), fetchCSV(TEXTS_URL, true), 
+                fetchCSV(COMMENTS_URL, true)
+            ]);
+            data = { jokes: j, photos: [...p, ...v], texts: t, comments: c.filter(r => r.Approve === "YES") };
+            
+            localStorage.setItem('barak_site_data', JSON.stringify(data));
+            
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('item')) openFromUrl(urlParams.get('item'));
+            else updateHomeWithDynamicContent();
+
+        } catch (e) { console.error("Data fetch error", e); }
+    }
+
+    function fetchCSV(url, header) {
+        return new Promise((res, rej) => Papa.parse(url, { 
+            download: true, header, skipEmptyLines: true, 
+            complete: r => res(r.data), error: e => rej(e) 
+        }));
+    }
+
+    function renderStaticHome(container) {
+        container.innerHTML = `
+            <div class="hero">
+                <div class="hero-text">
+                    <h1>ברק לב שלם</h1>
+                    <p>ברוכים הבאים לאתר הזיכרון של ברק. מקום שבו אספנו את המילים שלו, החיוך שלו והבדיחות שתמיד ידע לספר. כאן תוכלו למצוא פיסות מהחיים שהיו מלאים בצחוק, יצירה ואור.</p>
+                    <div style="margin-top:32px;">
+                        <button class="btn-outline" onclick="showPage('about')">קראו עוד עליו</button>
+                    </div>
+                </div>
+                <div class="hero-img"><img src="${getPhotoUrl(MAIN_PHOTO_ID)}" alt="ברק"></div>
+            </div>
+            <div id="dynamic-home-content"><p style="text-align:center; padding:40px;">טוען תוכן נוסף...</p></div>
+        `;
+    }
+
+    function updateHomeWithDynamicContent() {
+        const target = document.getElementById('dynamic-home-content');
+        if (!target || !data.jokes.length) return;
+
+        const randomJoke = data.jokes[Math.floor(Math.random() * data.jokes.length)];
+        const samplePhotos = [...data.photos].sort(() => 0.5 - Math.random()).slice(0, 4);
+        const sampleTexts = [...data.texts].sort(() => 0.5 - Math.random()).slice(0, 3);
+
+        target.innerHTML = `
+            <div class="section-header"><h3>ההומור של ברק</h3><button class="btn-outline" onclick="showPage('jokes')">לעוד בדיחות</button></div>
+            <div class="joke-card flex flex-col md:flex-row items-center gap-6">
+                <div class="p-4 bg-orange-50 rounded-full"><span class="material-symbols-outlined text-accent text-4xl" style="font-variation-settings: 'FILL' 1;">mood</span></div>
+                <div class="joke-quote flex-1">"${randomJoke['Joke Content']}"</div>
+            </div>
+
+            <div class="section-header"><h3>רגעים שנשארו איתנו</h3><button class="btn-outline" onclick="showPage('gallery')">לגלריה המלאה</button></div>
+            <div class="grid">${samplePhotos.map(renderPhotoCard).join('')}</div>
+
+            <div class="section-header"><h3>יצירות וסיפורים</h3><button class="btn-outline" onclick="showPage('texts')">לכל היצירות</button></div>
+            <div class="grid">${sampleTexts.map(renderTextCard).join('')}</div>
+        `;
+    }
+
+    function showPage(pageId) {
+        const container = document.getElementById('main-content');
+        window.scrollTo(0,0);
+        
+        // Update Nav Link Active state
+        document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+        const activeLink = Array.from(document.querySelectorAll('.nav-links a')).find(a => a.textContent.includes(
+            pageId === 'home' ? 'בית' : 
+            pageId === 'gallery' ? 'גלריה' : 
+            pageId === 'texts' ? 'יצירות' : 
+            pageId === 'jokes' ? 'בדיחות' : 'אודות'
+        ));
+        if(activeLink) activeLink.classList.add('active');
+
+        if (pageId === 'home') { renderStaticHome(container); updateHomeWithDynamicContent(); }
+        else if (pageId === 'gallery') renderArchive(container, 'גלריה', data.photos, renderPhotoCard, true);
+        else if (pageId === 'texts') renderArchive(container, 'יצירות וסיפורים', data.texts, renderTextCard, true, true);
+        else if (pageId === 'jokes') renderArchive(container, 'מאגר הבדיחות', data.jokes, renderJokeCard, true);
+        else if (pageId === 'about') renderAbout(container);
+    }
+
+    function renderArchive(container, title, items, cardFunc, hasSearch = false, isDeep = false) {
+        const categories = [...new Set(items.map(item => item.category || item.Categories || item.type))].filter(Boolean);
+        container.innerHTML = `
+            <div class="section-header" style="margin-top:100px;"><h2>${title}</h2></div>
+            ${hasSearch ? `
+                <div class="search-area">
+                    <div style="position:relative;">
+                        <span class="material-symbols-outlined" style="position:absolute; right:12px; top:50%; transform:translateY(-50%); color:#94a3b8;">search</span>
+                        <input type="text" class="search-input" style="padding-right:44px;" placeholder="חיפוש מהיר..." oninput="fastSearch(this.value)">
+                    </div>
+                    <div class="filter-buttons" style="margin-top: 16px; display: flex; gap: 8px; flex-wrap: wrap;">
+                        <button onclick="fastSearch('')" class="px-4 py-2 rounded-full border border-slate-200 bg-white text-slate-600 text-sm font-medium cursor-pointer hover:bg-slate-50 transition-all">הכל</button>
+                        ${categories.map(cat => `
+                            <button onclick="fastSearch('${cat}')" class="px-4 py-2 rounded-full border border-slate-200 bg-white text-slate-600 text-sm font-medium cursor-pointer hover:bg-slate-50 transition-all">${cat}</button>
+                        `).join('')}
+                    </div>
+                    ${isDeep ? `<button class="btn-primary" onclick="deepSearch()" style="margin-top:16px; background:#e67e22;">🔍 חיפוש מורחב בתוך תוכן היצירות</button>` : ''}
+                </div>` : ''}
+            <div class="grid" id="archive-grid">${items.map(cardFunc).join('')}</div>
+        `;
+    }
+
+    function fastSearch(query) {
+        const q = query.toLowerCase();
+        document.querySelectorAll('.card').forEach(card => {
+            const text = card.innerText.toLowerCase() + (card.getAttribute('data-search') || '').toLowerCase();
+            card.style.display = text.includes(q) ? 'flex' : 'none';
+        });
+    }
+
+    async function deepSearch() {
+        const query = prompt("הכנס מילת חיפוש:");
+        if (!query) return;
+        const grid = document.getElementById('archive-grid');
+        grid.innerHTML = "מחפש...";
+        let results = [];
+        for (let item of data.texts) {
+            try {
+                const res = await fetch(item.content_link);
+                const html = await res.text();
+                if (html.toLowerCase().includes(query.toLowerCase())) results.push(item);
+            } catch (e) {}
+        }
+        grid.innerHTML = results.length ? results.map(renderTextCard).join('') : "אין תוצאות.";
+    }
+
+    function renderPhotoCard(p) {
+        const isVideo = p.type === 'video';
+        const thumbUrl = isVideo ? `https://img.youtube.com/vi/${p.id}/0.jpg` : getPhotoUrl(p.id, 'w600');
+        const safeTitle = p.title.replace(/'/g, "\\'");
+        
+        return `<div class="card" data-search="${p.category}" onclick="openItem('${p.type}', '${p.id}', '${p.id}', '${safeTitle}')">
+            <div class="card-img">
+                <img src="${thumbUrl}" loading="lazy">
+                ${isVideo ? `<div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.2);"><span class="material-symbols-outlined text-white text-6xl" style="font-variation-settings: 'FILL' 1;">play_circle</span></div>` : ''}
+                <div class="tag tag-gallery" style="position:absolute; top:12px; right:12px; margin:0;">${p.category}</div>
+            </div>
+            <div class="card-content">
+                <h4 class="card-title">${p.title}</h4>
+                <div class="card-footer"><span>${isVideo ? 'סרטון' : 'תמונה'}</span><span class="material-symbols-outlined" style="font-size:18px;">open_in_new</span></div>
+            </div>
+        </div>`;
+    }
+
+    function renderTextCard(t) {
+        const searchData = `${t.author} ${t.description} ${t.keywords} ${t.type}`;
+        const safeTitle = t.title.replace(/'/g, "\\'");
+        const safeAuthor = (t.author || "").replace(/'/g, "\\'");
+        
+        return `<div class="card" data-search="${searchData}" onclick="openItem('text', '${t.content_link}', '${t.id}', '${safeTitle}', '${safeAuthor}')">
+            <div class="card-content">
+                <div class="tag tag-works">${t.type}</div>
+                <h4 class="card-title">${t.title}</h4>
+                <p class="card-desc">${t.description || ''}</p>
+                <div class="card-footer">
+                    <span style="font-weight:600; color:#2c3e50;">${t.author || 'לא ידוע'}</span>
+                    <span class="material-symbols-outlined" style="font-size:18px;">article</span>
+                </div>
+            </div>
+        </div>`;
+    }
+
+    function renderJokeCard(j) {
+        return `<div class="joke-card" data-search="${j.Categories}" style="margin-bottom:24px;">
+            <div class="tag tag-jokes">${j.Categories}</div>
+            <div class="joke-quote">"${j['Joke Content']}"</div>
+        </div>`;
+    }
+
+    async function openItem(type, path, id, title, author = "") {
+        const modal = document.getElementById('item-modal');
+        const body = document.getElementById('modal-body');
+        modal.style.display = 'flex';
+        body.innerHTML = 'טוען...';
+        document.getElementById('modal-actions').innerHTML = `<button class="btn-outline" onclick="shareItem('${id}', '${title.replace(/'/g, "\\'")}')">🔗 שתף יצירה</button>`;
+        
+        if (type === 'video') {
+            body.innerHTML = `<h3 class="card-title" style="font-size:1.75rem; margin-bottom:24px;">${title}</h3>
+                <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:16px;">
+                    <iframe src="https://www.youtube.com/embed/${id}?autoplay=1" style="position:absolute; top:0; left:0; width:100%; height:100%;" frameborder="0" allowfullscreen></iframe>
+                </div>`;
+        } else if (type === 'photo') {
+            body.innerHTML = `<h3 class="card-title" style="font-size:1.75rem; margin-bottom:24px;">${title}</h3><img src="${getPhotoUrl(path, 'w1200')}" style="width:100%; border-radius:16px; display:block; margin:0 auto;">`;
+        } else {
+            try {
+                const res = await fetch(path);
+                const html = await res.text();
+                body.innerHTML = `<h2 class="card-title" style="font-size:2rem; margin-bottom:8px;">${title}</h2><p style="color:#64748b; margin-bottom:24px;"><strong>מאת: ${author}</strong></p><hr style="border:none; border-top:1px solid #f1f5f9; margin-bottom:32px;"><div class="external-content-wrapper">${html}</div>`;
+            } catch (e) { body.innerHTML = "שגיאה בטעינת הקובץ."; }
+        }
+        renderComments(id);
+    }
+
+    function renderComments(itemId) {
+        const filtered = data.comments.filter(c => c.item_id === itemId);
+        const listHtml = filtered.map(c => `<div style="border-bottom:1px solid #f1f5f9; padding:16px 0;"><strong>${c.name}:</strong><p style="margin:4px 0 0; color:#43474c;">${c.content}</p></div>`).join('');
+        document.getElementById('comment-area').innerHTML = `<div style="margin-top:48px; border-top:1px solid #f1f5f9; padding-top:32px;">
+            <h4 class="card-title">תגובות</h4>
+            <div style="max-height:300px; overflow-y:auto; margin-bottom:24px;">${listHtml || '<p style="color:#94a3b8;">אין עדיין תגובות. מוזמנים להיות הראשונים.</p>'}</div>
+            <div style="background:#f8fafc; padding:24px; border-radius:16px;">
+                <input type="text" id="c-name" placeholder="שם" style="width:100%; padding:12px; border-radius:8px; border:1px solid #cbd5e1; margin-bottom:12px; font-family:inherit;">
+                <textarea id="c-content" placeholder="כתבו תגובה או זיכרון..." style="width:100%; padding:12px; border-radius:8px; border:1px solid #cbd5e1; margin-bottom:12px; height:80px; font-family:inherit;"></textarea>
+                <button id="send-btn" class="btn-primary" style="width:100%; padding:14px; background:#e67e22;" onclick="sendComment('${itemId}')">שלח תגובה לאישור</button>
+            </div></div>`;
     }
 
     async function sendComment(id) {
-        const name = document.getElementById('comment-name').value.trim();
-        const content = document.getElementById('comment-content').value.trim();
-        if (!name || !content) return alert("נא למלא שם ותוכן");
-        
+        const name = document.getElementById('c-name').value;
+        const content = document.getElementById('c-content').value;
+        if (!name || !content) return alert("מלא שם ותוכן");
         document.getElementById('send-btn').disabled = true;
+        document.getElementById('send-btn').innerText = 'שולח...';
         const params = new URLSearchParams({ name, relation: "", content, item_id: id });
         await fetch(APPS_SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: params });
-        alert("נשלח לאישור!");
+        alert("התגובה נשלחה ותוצג לאחר אישור המערכת. תודה!");
         closeModal();
     }
 
     function shareItem(id, title) {
         const url = `${window.location.origin}${window.location.pathname}?item=${id}`;
-        if (navigator.share) navigator.share({ title, url }); else prompt("קישור:", url);
+        if (navigator.share) navigator.share({ title, url }); else prompt("העתיקו את הקישור לשיתוף:", url);
     }
 
     function closeModal() { 
         document.getElementById('item-modal').style.display = 'none'; 
-        document.getElementById('modal-body').innerHTML = '';
+        document.getElementById('modal-body').innerHTML = ''; 
     }
     
     function openFromUrl(id) {
@@ -372,17 +1281,18 @@
     }
 
     async function renderAbout(container) {
-        container.innerHTML = `<h2>קורות חיים</h2><div id="cv-target">טוען...</div>`;
+        container.innerHTML = `<div class="section-header" style="margin-top:100px;"><h2>קורות חיים</h2></div><div id="cv-target" style="background:white; padding:40px; border-radius:24px; border:1px solid #f1f5f9;">טוען...</div>`;
         try {
             const res = await fetch('about_barak.html');
             const html = await res.text();
-            document.getElementById('cv-target').innerHTML = html;
+            document.getElementById('cv-target').innerHTML = `<div class="external-content-wrapper">${html}</div>`;
         } catch(e) {
-            document.getElementById('cv-target').innerHTML = "<p>קובץ קורות החיים (about_barak.html) לא נמצא בשרת.</p>";
+            document.getElementById('cv-target').innerHTML = `<p>טקסט אודות וקורות חיים יתווסף בקרוב.</p>`;
         }
     }
 
     window.onload = init;
 </script>
-</body>
-</html>
+
+
+</body></html>
