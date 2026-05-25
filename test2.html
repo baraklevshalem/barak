@@ -4,207 +4,87 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>לזכרו היקר של ברק לב שלם</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700;800&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
-    
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@100..900&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-    
-    <script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            "colors": {
-                    "surface-variant": "#d5e6e7",
-                    "secondary": "#944a00",
-                    "on-secondary-fixed-variant": "#713700",
-                    "on-primary-container": "#96a9be",
-                    "error-container": "#ffdad6",
-                    "on-tertiary-fixed": "#291802",
-                    "on-secondary-container": "#663100",
-                    "inverse-on-surface": "#e3f4f5",
-                    "tertiary": "#362308",
-                    "on-tertiary": "#ffffff",
-                    "secondary-container": "#fc8f34",
-                    "on-error": "#ffffff",
-                    "inverse-primary": "#b5c8df",
-                    "on-tertiary-fixed-variant": "#5a4225",
-                    "on-error-container": "#93000a",
-                    "on-surface": "#0f1e1f",
-                    "error": "#ba1a1a",
-                    "on-primary": "#ffffff",
-                    "surface-container-lowest": "#ffffff",
-                    "on-secondary-fixed": "#301400",
-                    "tertiary-container": "#4e381c",
-                    "on-background": "#0f1e1f",
-                    "outline": "#74777d",
-                    "inverse-surface": "#243334",
-                    "background": "#ecfdfd",
-                    "primary-fixed": "#d1e4fb",
-                    "on-primary-fixed": "#091d2e",
-                    "surface-tint": "#4e6073",
-                    "surface-container-low": "#e6f7f8",
-                    "surface-container-high": "#dbebec",
-                    "surface-container": "#e1f1f2",
-                    "on-tertiary-container": "#c1a17d",
-                    "surface-container-highest": "#d5e6e7",
-                    "surface": "#ecfdfd",
-                    "secondary-fixed-dim": "#ffb783",
-                    "on-secondary": "#ffffff",
-                    "outline-variant": "#c4c6cd",
-                    "primary-fixed-dim": "#b5c8df",
-                    "primary": "#162839",
-                    "on-surface-variant": "#43474c",
-                    "surface-dim": "#cdddde",
-                    "secondary-fixed": "#ffdcc5",
-                    "tertiary-fixed": "#ffddb7",
-                    "surface-bright": "#ecfdfd",
-                    "on-primary-fixed-variant": "#36485b",
-                    "tertiary-fixed-dim": "#e3c19b",
-                    "primary-container": "#2c3e50"
-            },
-            "borderRadius": {
-                    "DEFAULT": "0.25rem",
-                    "lg": "0.5rem",
-                    "xl": "0.75rem",
-                    "full": "9999px"
-            },
-            "spacing": {
-                    "xl": "64px",
-                    "md": "24px",
-                    "sm": "16px",
-                    "xs": "8px",
-                    "unit": "4px",
-                    "lg": "40px",
-                    "container-max": "1200px",
-                    "gutter": "24px"
-            },
-            "fontFamily": {
-                    "title-lg": ["Heebo"],
-                    "headline-md": ["Heebo"],
-                    "body-lg": ["Heebo"],
-                    "headline-lg": ["Heebo"],
-                    "display-lg": ["Heebo"],
-                    "body-md": ["Heebo"],
-                    "label-lg": ["Heebo"],
-                    "display-md": ["Heebo"],
-                    "label-sm": ["Heebo"]
-            },
-            "fontSize": {
-                    "title-lg": ["20px", {"lineHeight": "1.4", "fontWeight": "500"}],
-                    "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "500"}],
-                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
-                    "headline-lg": ["28px", {"lineHeight": "1.3", "fontWeight": "500"}],
-                    "display-lg": ["48px", {"lineHeight": "1.2", "fontWeight": "700"}],
-                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
-                    "label-lg": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "500"}],
-                    "display-md": ["36px", {"lineHeight": "1.2", "fontWeight": "700"}],
-                    "label-sm": ["12px", {"lineHeight": "1.4", "fontWeight": "400"}]
-            }
-          },
-        },
-      }
-    </script>
     <style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-            display: inline-block;
-            vertical-align: middle;
+        :root { 
+            --primary: #1e293b;      /* כחול נייבי עמוק ומכובד */
+            --primary-light: #334155;
+            --accent: #a17a42;       /* גוון זהב ברונזה עדין */
+            --accent-hover: #856132;
+            --bg: #f8fafc;           /* רקע בהיר ונעים לעין */
+            --white: #ffffff; 
+            --text: #0f172a; 
+            --text-muted: #64748b;
+            --card-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05), 0 2px 8px -1px rgba(0, 0, 0, 0.03);
+            --hover-shadow: 0 20px 25px -5px rgba(161, 122, 66, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
-        body {
-            font-family: 'Heebo', sans-serif;
-            background-color: #ecfdfd;
-            overflow-y: scroll;
-            scroll-behavior: smooth;
-        }
-        /* התאמת תפריט ההמבורגר הדינמי ל-Tailwind */
-        @media (max-width: 768px) {
-            .nav-links-mobile {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 64px;
-                left: 0;
-                width: 100%;
-                background: white;
-                padding: 20px;
-                gap: 15px;
-                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-                border-bottom: 1px solid #e2e8f0;
-            }
-            .nav-links-mobile.active {
-                display: flex;
-            }
-        }
-    </style>
-</head>
-<body class="bg-surface text-on-surface antialiased">
-
-    <header class="bg-white/90 backdrop-blur-md fixed top-0 w-full z-50 border-b border-slate-100 shadow-sm transition-all duration-300">
-        <nav class="flex justify-between items-center h-16 px-6 md:px-12 max-w-7xl mx-auto">
-            <div class="flex items-center gap-8">
-                <span class="text-xl font-bold text-slate-800 tracking-tight cursor-pointer" onclick="showPage('home')">Barak Lev Shalem</span>
-                <div id="nav-links" class="hidden md:flex items-center gap-6 font-medium text-sm tracking-wide">
-                    <a class="text-slate-900 border-b-2 border-orange-500 pb-1 cursor-pointer" onclick="showPage('home')">בית</a>
-                    <a class="text-slate-500 hover:text-slate-800 transition-colors cursor-pointer" onclick="showPage('gallery')">גלריה</a>
-                    <a class="text-slate-500 hover:text-slate-800 transition-colors cursor-pointer" onclick="showPage('texts')">יצירות וסיפורים</a>
-                    <a class="text-slate-500 hover:text-slate-800 transition-colors cursor-pointer" onclick="showPage('jokes')">ההומור של ברק</a>
-                    <a class="text-slate-500 hover:text-slate-800 transition-colors cursor-pointer" onclick="showPage('about')">אודות ברק</a>
-                </div>
-            </div>
-            
-            <div class="flex items-center gap-4">
-                <a class="hidden sm:inline-block bg-primary text-white px-5 py-2 rounded-lg font-label-lg hover:bg-slate-800 transition-all text-sm font-medium" href="mailto:baraklevshalem@gmail.com">אני רוצה להוסיף זכרון לאתר</a>
-                <button class="md:hidden text-slate-800 focus:outline-none text-2xl p-1" onclick="toggleMenu()">☰</button>
-            </div>
-        </nav>
         
-        <div id="nav-links-mobile" class="nav-links-mobile md:hidden">
-            <a class="text-slate-900 font-medium py-1" onclick="showPage('home'); toggleMenu()">בית</a>
-            <a class="text-slate-500 font-medium py-1" onclick="showPage('gallery'); toggleMenu()">גלריה</a>
-            <a class="text-slate-500 font-medium py-1" onclick="showPage('texts'); toggleMenu()">יצירות וסיפורים</a>
-            <a class="text-slate-500 font-medium py-1" onclick="showPage('jokes'); toggleMenu()">ההומור של ברק</a>
-            <a class="text-slate-500 font-medium py-1" onclick="showPage('about'); toggleMenu()">אודות ברק</a>
-            <a class="bg-primary text-white text-center py-2 rounded-md font-medium mt-2 block text-sm" href="mailto:baraklevshalem@gmail.com">להוספת זיכרון</a>
-        </div>
-    </header>
+        html { overflow-y: scroll; scroll-behavior: smooth; }
+        body { font-family: 'Assistant', 'Rubik', system-ui, sans-serif; background: var(--bg); margin: 0; color: var(--text); direction: rtl; line-height: 1.6; }
+        
+        /* Navigation & Header Modern Design */
+        header { background: var(--white); box-shadow: 0 1px 3px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #e2e8f0; }
+        nav { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; height: 75px; }
+        .logo-area { display: flex; flex-direction: column; cursor: pointer; }
+        .logo-main { font-size: 22px; font-weight: 800; color: var(--primary); tracking: -0.5px; }
+        .logo-sub { font-size: 12px; color: var(--accent); font-weight: 600; margin-top: -2px; letter-spacing: 0.5px; }
+        
+        .nav-links { display: flex; gap: 8px; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-weight: 600; font-size: 15px; padding: 10px 16px; border-radius: 8px; cursor: pointer; transition: all 0.25s ease; }
+        .nav-links a:hover, .nav-links a.active { color: var(--primary); background: #f1f5f9; }
+        .nav-links a.active { color: var(--accent); background: #fefcbf; color: #856132; background: rgba(161, 122, 66, 0.08); }
+        
+        .hamburger { display: none; background: none; border: none; font-size: 24px; cursor: pointer; color: var(--primary); padding: 8px; border-radius: 8px; }
+        .hamburger:hover { background: #f1f5f9; }
 
-    <main class="pt-24 pb-xl max-w-7xl mx-auto px-6 md:px-12">
-
-        <div id="home-page" class="page">
-            <section class="grid grid-cols-1 md:grid-cols-2 gap-lg items-center mb-xl pt-6">
-                <div class="order-2 md:order-1">
-                    <h1 class="font-display-lg text-4xl md:text-5xl text-primary font-bold mb-md">ברק לב שלם</h1>
-                    <p class="font-body-lg text-on-surface-variant max-w-xl leading-relaxed text-lg">
-                        ברוכים הבאים לאתר הזיכרון של ברק. מקום שבו אספנו את המילים שלו, החיוך שלו והבדיחות שתמיד ידע לספר. כאן תוכלו למצוא פיסות מהחיים שהיו מלאים בצחוק, יצירה ואור.
-                    </p>
-                    <div class="mt-lg">
-                        <button onclick="showPage('about')" class="border border-primary text-primary px-8 py-3 rounded-xl font-label-lg hover:bg-primary/5 transition-all font-medium">
-                            קראו עוד עליו
-                        </button>
-                    </div>
-                </div>
-                <div class="order-1 md:order-2">
-                    <div class="aspect-square rounded-2xl overflow-hidden shadow-xl bg-surface-container-highest">
-                        <img class="w-full h-full object-cover" src="barak.jpg" alt="ברק לב שלם">
-                    </div>
-                </div>
-            </section>
-
-            <section class="mb-xl">
-                <div class="bg-white rounded-xl p-lg shadow-sm border border-slate-100 flex flex-col md:flex-row items-center gap-md">
-                    <div class="bg-secondary-container/10 p-md rounded-full flex items-center justify-center">
-                        <span class="material-symbols-outlined text-secondary text-4xl">mood</span>
-                    </div>
-                    <div class="flex-1 text-center md:text-right">
-                        <h3 class="font-headline-md text-xl font-bold text-primary mb-xs">ההומור של ברק</h3>
-                        <p id="random-joke" class="font-body-lg italic text-on-surface leading-relaxed text-lg">טוען בדיחה...</p>
-                    </div>
-                    <div>
-                        <button onclick="showPage('jokes')" class="bg-primary text-white px-6 py-2.5 rounded-lg text-sm font-medium hover:bg-slate-800 transition-all">
-                            כל הבדיחות
-                        </button>
-                    </div>
-                </div>
-            </section>
-        </div>
+        /* Container Main Grid Layout */
+        .main-container { max-width: 1200px; margin: 40px auto; padding: 0 24px; min-height: calc(100vh - 300px); box-sizing: border-box; }
+        
+        /* Page Display Logic */
+        .page { display: none; animation: fadeIn 0.4s ease-in-out; }
+        .page.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* Hero Section Component */
+        .hero-banner { background: var(--white); border-radius: 24px; padding: 48px; margin-bottom: 48px; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 40px; align-items: center; box-shadow: var(--card-shadow); border: 1px solid rgba(226, 232, 240, 0.8); }
+        .hero-content h1 { font-size: 42px; font-weight: 800; color: var(--primary); margin: 0 0 16px 0; }
+        .hero-content p { font-size: 18px; color: var(--text-muted); margin: 0 0 24px 0; max-width: 540px; line-height: 1.7; }
+        .hero-image-wrapper { display: flex; justify-content: center; }
+        .hero-image { width: 280px; height: 280px; object-fit: cover; border-radius: 50%; border: 6px solid var(--white); box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.05); background: #e2e8f0; }
+        
+        /* Interactive Action Buttons */
+        .btn-group { display: flex; gap: 12px; }
+        .btn { padding: 12px 24px; border-radius: 12px; font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; border: none; }
+        .btn-primary { background: var(--primary); color: var(--white); }
+        .btn-primary:hover { background: var(--primary-light); transform: translateY(-1px); }
+        .btn-accent { background: var(--accent); color: var(--white); }
+        .btn-accent:hover { background: var(--accent-hover); transform: translateY(-1px); }
+        .btn-outline { background: transparent; color: var(--primary); border: 2px solid #e2e8f0; }
+        .btn-outline:hover { background: #f1f5f9; border-color: #cbd5e1; }
+        
+        /* Dashboard Section Headers */
+        .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; margin-top: 16px; border-bottom: 2px solid #e2e8f0; padding-bottom: 12px; }
+        .section-header h2 { font-size: 24px; font-weight: 700; color: var(--primary); margin: 0; position: relative; }
+        .section-header h2::after { content: ''; position: absolute; bottom: -14px; right: 0; width: 60px; height: 2px; background: var(--accent); }
+        
+        /* Grid Layout Modules */
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 32px; padding: 8px 0; }
+        .photos-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
+        
+        /* Cards UI Architecture */
+        .card { background: var(--white); border-radius: 16px; overflow: hidden; box-shadow: var(--card-shadow); cursor: pointer; transition: All 0.35s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-direction: column; border: 1px solid rgba(226, 232, 240, 0.5); height: 100%; position: relative; }
+        .card:hover { transform: translateY(-6px) scale(1.01); box-shadow: var(--hover-shadow); border-color: rgba(161, 122, 66, 0.2); }
+        
+        /* Photo Card Modification */
+        .photo-card { aspect-ratio: 1; position: relative; border-radius: 16px; overflow: hidden; box-shadow: var(--card-shadow); cursor: pointer; transition: all 0.3s ease; }
+        .photo-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+        .photo-card:hover { transform: translateY(-4px); box-shadow: var(--hover-shadow); }
+        .photo-card:hover img { transform: scale(1.05); }
+        .photo-overlay { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(15,23,42,0.85) 0%, rgba(15,23,42,0.4) 60%, transparent 100%); padding: 24px 16px 16px 16px; color: var(--white); opacity: 0; transition: opacity 0.3s ease; display: flex; flex-direction: column; justify-content: flex-end; height: 50%; }
+        .photo-card:hover .photo-overlay { opacity: 1; }
+        .photo-overlay-title { font-size: 15px; font-weight: 700; margin-bottom: 4px; text-shadow: 0 1px 2px rgba(0,0,0,0.5); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .photo-overlay-meta { font-size: 12px; opacity: 0.8; text-shadow: 0 1px 1px rgba(0,0,0,0.5); }
