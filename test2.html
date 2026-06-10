@@ -1,453 +1,108 @@
-<!DOCTYPE html>
-<html lang="he" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>לזכרו של ברק לב שלם</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700;800&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
-    <style>
-        :root { 
-            --primary: #1e293b;      /* כחול נייבי עמוק ומכובד */
-            --primary-light: #334155;
-            --accent: #a17a42;       /* גוון זהב ברונזה עדין */
-            --accent-hover: #856132;
-            --bg: #f8fafc;           /* רקע בהיר ונעים לעין */
-            --white: #ffffff; 
-            --text: #1e293b; 
-            --text-muted: #64748b;
-            --border: #e2e8f0;
-            --radius-sm: 8px;
-            --radius-md: 12px;
-            --radius-lg: 20px;
-            --shadow: 0 4px 20px rgba(0,0,0,0.05);
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+<!DOCTYPE html><html dir="rtl" lang="he"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>לזכר ברק לב שלם</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries\"></script>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@100..900&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#2c3e50",
+                        accent: "#e67e22",
+                        surface: "#ecfdfd",
+                        "surface-container": "#e1f1f2",
+                        "on-surface": "#0f1e1f",
+                        "on-surface-variant": "#43474c",
+                        outline: "#74777d",
+                        "outline-variant": "#c4c6cd"
+                    },\n                    fontFamily: {\n                        sans: ['Heebo', 'sans-serif'],\n                    }\n                }\n            }\n        }\n    </script>
+<style>
+        body { font-family: 'Heebo', system-ui, sans-serif; background-color: #fdfcfb; color: #333; margin: 0; direction: rtl; }
+        nav { background-color: #2c3e50; color: white; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; position: sticky; top: 0; z-index: 1000; height: 65px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .logo { font-size: 24px; font-weight: bold; cursor: pointer; }
+        .nav-links { display: flex; gap: 20px; }
+        .nav-links a { color: white; text-decoration: none; font-weight: 500; cursor: pointer; transition: color 0.2s; }
+        .nav-links a:hover { color: #e67e22; }
+        .hamburger { display: none; font-size: 24px; background: none; border: none; color: white; cursor: pointer; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; box-sizing: border-box; }
         
-        html { overflow-y: scroll; scroll-behavior: smooth; }
-        body { 
-            font-family: 'Assistant', 'Rubik', system-ui, sans-serif; 
-            background: var(--bg); 
-            margin: 0; 
-            color: var(--text); 
-            direction: rtl; 
-            line-height: 1.6;
-        }
-        
-        /* סרגל ניווט מודרני */
-        nav { 
-            background: rgba(30, 41, 59, 0.96); 
-            backdrop-filter: blur(10px);
-            color: white; 
-            padding: 0 24px; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            position: sticky; 
-            top: 0; 
-            z-index: 1000; 
-            height: 70px; 
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        .logo { 
-            cursor: pointer; 
-            font-weight: 800; 
-            font-size: 1.35rem; 
-            letter-spacing: -0.5px;
-            transition: var(--transition);
-        }
-        .logo:hover { color: var(--accent); }
-        
-        .nav-links { display: flex; gap: 8px; }
-        .nav-links a { 
-            color: rgba(255, 255, 255, 0.9); 
-            text-decoration: none; 
-            font-weight: 500; 
-            cursor: pointer; 
-            padding: 8px 16px;
-            border-radius: var(--radius-sm);
-            transition: var(--transition); 
-        }
-        .nav-links a:hover { 
-            color: var(--white); 
-            background: rgba(255,255,255,0.08);
-        }
-        
-        .hamburger { 
-            display: none; 
-            font-size: 28px; 
-            cursor: pointer; 
-            background: none; 
-            border: none; 
-            color: white; 
-            padding: 5px;
-            transition: var(--transition);
-        }
-        .hamburger:hover { color: var(--accent); }
-
         @media (max-width: 768px) {
-            .nav-links { 
-                display: none; 
-                flex-direction: column; 
-                position: absolute; 
-                top: 70px; 
-                left: 0; 
-                width: 100%; 
-                background: var(--primary); 
-                padding: 20px; 
-                gap: 10px; 
-                box-shadow: 0 10px 15px rgba(0,0,0,0.15); 
-                box-sizing: border-box;
-                border-top: 1px solid rgba(255,255,255,0.05);
-            }
+            .nav-links { display: none; flex-direction: column; position: absolute; top: 65px; left: 0; width: 100%; background-color: #2c3e50; padding: 20px; gap: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
             .nav-links.active { display: flex; }
             .hamburger { display: block; }
         }
 
-        /* איזור ראשי (Hero Section) */
-        .hero { 
-            display: flex; 
-            align-items: center; 
-            gap: 48px; 
-            padding: 48px; 
-            margin-bottom: 30px; 
-            background: linear-gradient(135deg, rgba(30, 41, 59, 0.02) 0%, rgba(161, 122, 66, 0.04) 100%);
-            border-radius: var(--radius-lg);
-            border: 1px solid rgba(161, 122, 66, 0.1);
-            box-shadow: var(--shadow);
-        }
-        .hero-img { flex: 0 0 260px; }
-        .hero-img img { 
-            width: 100%; 
-            border-radius: 50%; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15); 
-            border: 4px solid var(--accent);
-            object-fit: cover; 
-            aspect-ratio: 1; 
-            transition: var(--transition);
-        }
-        .hero-img img:hover { transform: scale(1.03); }
-        .hero-text { flex-grow: 1; }
-        .hero-text h1 { 
-            font-size: 2.8rem; 
-            margin: 0 0 16px 0; 
-            color: var(--primary); 
-            font-weight: 800;
-        }
-        .hero-text p { 
-            font-size: 1.2rem; 
-            line-height: 1.7; 
-            margin: 0; 
-            color: var(--text-muted);
-            max-width: 700px;
-        }
+        .hero { display: flex; align-items: center; gap: 40px; background: #fff; padding: 40px; border-radius: 24px; margin-bottom: 40px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); border: 1px solid #f1f5f9; }
+        .hero-img { flex: 0 0 200px; height: 200px; border-radius: 50%; overflow: hidden; border: 4px solid #e67e22; box-shadow: 0 8px 16px rgba(0,0,0,0.1); }
+        .hero-img img { width: 100%; height: 100%; object-fit: cover; }
+        .hero-text h1 { font-size: 40px; margin: 0 0 10px 0; color: #2c3e50; font-weight: 800; }
+        .hero-text p { font-size: 18px; color: #666; margin: 0; line-height: 1.6; }
 
         @media (max-width: 768px) {
-            .hero { flex-direction: column; text-align: center; gap: 24px; padding: 32px 20px; }
-            .hero-img { flex: 0 0 auto; width: 180px; margin: 0 auto; }
-            .hero-text h1 { font-size: 2.1rem; }
-            .hero-text p { font-size: 1.1rem; }
+            .hero { flex-direction: column; text-align: center; padding: 30px 20px; gap: 20px; }
+            .hero-img { flex: 0 0 160px; height: 160px; }
+            .hero-text h1 { font-size: 32px; }
+            .hero-text p { font-size: 16px; }
         }
 
-        /* גריד ועימוד */
-        .container { max-width: 1100px; margin: 0 auto; padding: 20px; box-sizing: border-box; }
-        
-        /* דעיכה חלקה במעבר דפים */
-        .page-fade-in {
-            animation: fadeIn 0.4s ease-out forwards;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        .section-header { display: flex; justify-content: space-between; align-items: center; margin: 40px 0 20px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        .section-header h3, .section-header h2 { font-size: 24px; color: #2c3e50; margin: 0; font-weight: 700; }
+        .show-all-btn { background: none; border: 2px solid #e67e22; color: #e67e22; padding: 6px 16px; border-radius: 20px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        .show-all-btn:hover { background: #e67e22; color: white; }
 
-        /* חיפוש וסינון */
-        .search-area { 
-            margin-bottom: 40px; 
-            background: var(--white); 
-            padding: 28px; 
-            border-radius: var(--radius-md); 
-            box-shadow: var(--shadow);
-            border: 1px solid var(--border);
-        }
-        .search-input { 
-            width: 100%; 
-            padding: 14px 18px; 
-            border-radius: var(--radius-sm); 
-            border: 1.5px solid var(--border); 
-            font-size: 1rem; 
-            box-sizing: border-box; 
-            font-family: inherit;
-            transition: var(--transition);
-        }
-        .search-input:focus {
-            border-color: var(--accent);
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(161, 122, 66, 0.15);
-        }
-        .filter-buttons { margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap; }
-        .filter-btn {
-            padding: 8px 18px;
-            border-radius: 20px;
-            border: 1.5px solid var(--border);
-            background: var(--white);
-            cursor: pointer;
-            font-size: 0.88rem;
-            font-weight: 500;
-            font-family: inherit;
-            transition: var(--transition);
-            color: var(--text-muted);
-        }
-        .filter-btn:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-            transform: translateY(-1px);
-        }
-        .filter-btn.active {
-            background: var(--primary);
-            border-color: var(--primary);
-            color: var(--white);
-        }
-        
-        .deep-search-btn { 
-            margin-top: 15px; 
-            background: var(--primary-light); 
-            color: white; 
-            border: none; 
-            padding: 10px 20px; 
-            border-radius: var(--radius-sm); 
-            cursor: pointer; 
-            font-size: 0.9rem; 
-            font-family: inherit;
-            font-weight: 600;
-            transition: var(--transition);
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .deep-search-btn:hover { background: var(--primary); transform: translateY(-1px); }
-
-        /* כותרות סקשנים */
-        .section-header { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            border-bottom: 2px solid var(--border); 
-            margin: 50px 0 25px; 
-            padding-bottom: 12px; 
-            position: relative;
-        }
-        .section-header h3, .section-header h2 { 
-            margin: 0; 
-            color: var(--primary); 
-            font-weight: 700;
-            font-size: 1.6rem;
-        }
-        .section-header::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            right: 0;
-            width: 70px;
-            height: 3px;
-            background: var(--accent);
-            border-radius: 4px;
-        }
-        
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; }
-        .show-all-btn { 
-            background: none; 
-            border: 1.5px solid var(--accent); 
-            color: var(--accent); 
-            padding: 6px 16px; 
-            border-radius: 20px; 
-            cursor: pointer; 
-            font-size: 0.88rem; 
-            font-weight: 700; 
-            font-family: inherit;
-            transition: var(--transition);
-        }
-        .show-all-btn:hover { background: var(--accent); color: white; }
-
-        /* כרטיסיות (Cards) */
-        .card { 
-            background: var(--white); 
-            border-radius: var(--radius-md); 
-            overflow: hidden; 
-            box-shadow: var(--shadow); 
-            cursor: pointer; 
-            display: flex; 
-            flex-direction: column; 
-            transition: var(--transition); 
-            height: 100%; 
-            border: 1px solid rgba(0,0,0,0.03); 
-            position: relative; 
-            box-sizing: border-box;
-        }
-        .card:hover { 
-            transform: translateY(-6px); 
-            box-shadow: 0 12px 30px rgba(0,0,0,0.08); 
-        }
-        .card img { width: 100%; height: 210px; object-fit: cover; background: #f1f5f9; transition: var(--transition); }
-        .card:hover img { transform: scale(1.02); }
         
-        .card-content { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; text-align: right; }
-        .card-content h4 { margin: 0 0 8px 0; font-size: 1.15rem; color: var(--primary); font-weight: 700; }
-        .card-content p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.5; margin: 0 0 12px 0; }
+        .card { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.03); cursor: pointer; transition: all 0.3s; display: flex; flex-direction: column; border: 1px solid #f1f5f9; height: 100%; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 12px 24px rgba(0,0,0,0.08); }
+        .card-img-wrapper { position: relative; width: 100%; height: 200px; background: #f7f7f7; overflow: hidden; }
+        .card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+        .card:hover .card-img-wrapper img { transform: scale(1.03); }
+        .card-content { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
+        .card-content h4 { font-size: 18px; color: #2c3e50; margin: 0 0 10px 0; font-weight: 700; }
+        .card-content p { color: #666; font-size: 14px; margin: 0; line-height: 1.5; }
         
-        .tag { 
-            align-self: flex-start;
-            display: inline-block; 
-            background: rgba(161, 122, 66, 0.08); 
-            color: var(--accent); 
-            padding: 4px 12px; 
-            border-radius: 20px; 
-            font-size: 0.78rem; 
-            font-weight: 700; 
-            margin-bottom: 12px; 
-        }
-        .author-tag { font-size: 0.82rem; color: var(--text-muted); font-style: italic; margin-top: auto; display: block; border-top: 1px solid var(--border); padding-top: 10px; }
-        
-        /* כרטיסיית בדיחה אקראית ייעודית */
-        .random-joke-card {
-            background: var(--white);
-            padding: 30px;
-            border-radius: var(--radius-md);
-            border-right: 5px solid var(--accent);
-            margin-bottom: 40px;
-            box-shadow: var(--shadow);
-            position: relative;
-        }
-        .joke-text {
-            font-size: 1.2rem;
-            line-height: 1.7;
-            font-style: italic;
-            margin: 0;
-            color: var(--primary-light);
-        }
+        .tag { display: inline-block; background: #f0f4f8; color: #2c3e50; padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: 600; margin-bottom: 10px; align-self: flex-start; }
+        .author { font-size: 13px; color: #888; font-style: italic; margin-top: auto; padding-top: 15px; border-top: 1px solid #f1f5f9; }
 
-        /* נגן וידאו מובנה */
-        .play-overlay { 
-            position: absolute; 
-            top: 105px; 
-            left: 50%; 
-            transform: translate(-50%, -50%); 
-            background: rgba(30, 41, 59, 0.85); 
-            backdrop-filter: blur(4px);
-            color: white; 
-            width: 56px; 
-            height: 56px; 
-            border-radius: 50%; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            font-size: 20px; 
-            pointer-events: none; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            transition: var(--transition);
-        }
-        .card:hover .play-overlay { background: var(--accent); transform: translate(-50%, -50%) scale(1.1); }
+        .joke-card { background: white; border-right: 5px solid #e67e22; padding: 24px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.03); margin-bottom: 30px; }
+        .joke-text { font-size: 18px; font-style: italic; color: #444; line-height: 1.6; margin: 0; }
 
-        /* מודל (Modal) מעוצב */
-        .modal { 
-            display: none; 
-            position: fixed; 
-            z-index: 2000; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-            background: rgba(15, 23, 42, 0.8); 
-            backdrop-filter: blur(8px);
-            justify-content: center; 
-            align-items: center; 
-            padding: 20px;
-            box-sizing: border-box;
-        }
-        .modal-content { 
-            background: var(--white); 
-            width: 100%;
-            max-width: 850px; 
-            max-height: 90vh; 
-            border-radius: var(--radius-lg); 
-            overflow-y: auto; 
-            padding: 36px; 
-            position: relative; 
-            direction: rtl; 
-            text-align: right; 
-            box-sizing: border-box;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            animation: modalSlide 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-        @keyframes modalSlide {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        .close-modal-btn {
-            position: absolute; 
-            top: 20px; 
-            left: 20px; 
-            font-size: 32px; 
-            cursor: pointer; 
-            line-height: 1; 
-            color: var(--text-muted);
-            transition: var(--transition);
-        }
-        .close-modal-btn:hover { color: var(--primary); }
+        .play-overlay { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(44,62,80,0.9); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; transition: all 0.2s; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        .card:hover .play-overlay { background: #e67e22; transform: translate(-50%, -50%) scale(1.1); }
 
-        /* אזור שיתוף */
-        .share-btn {
-            background: #f1f5f9;
-            border: none;
-            padding: 8px 16px;
-            border-radius: var(--radius-sm);
-            cursor: pointer;
-            font-family: inherit;
-            font-weight: 600;
-            color: var(--primary);
-            transition: var(--transition);
-        }
-        .share-btn:hover { background: var(--accent); color: white; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 2000; justify-content: center; align-items: center; padding: 20px; box-sizing: border-box; backdrop-filter: blur(5px); }
+        .modal-content { background: white; width: 100%; max-width: 800px; max-height: 90vh; border-radius: 24px; overflow-y: auto; padding: 40px; position: relative; box-shadow: 0 20px 40px rgba(0,0,0,0.2); animation: modalOpen 0.3s ease-out; }
+        @keyframes modalOpen { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .close-btn { position: absolute; top: 20px; left: 20px; font-size: 30px; cursor: pointer; color: #aaa; transition: color 0.2s; line-height: 1; }
+        .close-btn:hover { color: #333; }
 
-        .external-content-wrapper { all: revert; direction: rtl !important; text-align: right !important; }
+        .search-bar { width: 100%; padding: 12px 20px; border-radius: 12px; border: 2px solid #e2e8f0; font-size: 16px; margin-bottom: 20px; box-sizing: border-box; transition: all 0.2s; }
+        .search-bar:focus { border-color: #e67e22; outline: none; box-shadow: 0 0 0 3px rgba(230,126,34,0.1); }
+        .filter-tags { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 30px; }
+        .filter-tag { padding: 6px 14px; background: white; border: 2px solid #e2e8f0; border-radius: 20px; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s; color: #666; }
+        .filter-tag:hover { border-color: #e67e22; color: #e67e22; }
+        .filter-tag.active { background: #2c3e50; border-color: #2c3e50; color: white; }
 
-        /* תגובות */
-        .comment-section { margin-top: 40px; background: #f8fafc; padding: 24px; border-radius: var(--radius-md); border: 1px solid var(--border); }
-        .comment-section h4 { margin-top: 0; margin-bottom: 20px; color: var(--primary); font-weight: 700; }
-        .comments-list { display: flex; flex-direction: column; gap: 15px; margin-bottom: 25px; }
-        .comment-item { border-bottom: 1px solid var(--border); padding-bottom: 12px; }
-        .comment-item:last-child { border-bottom: none; }
-        .comment-author { font-weight: 700; color: var(--primary-light); font-size: 0.95rem; display: block; margin-bottom: 4px; }
-        .comment-text { margin: 0; font-size: 0.92rem; color: var(--text); }
-        
-        .comment-form { display: flex; flex-direction: column; gap: 12px; margin-top: 25px; border-top: 1.5px solid var(--border); padding-top: 25px; }
-        .comment-form h5 { margin: 0 0 5px 0; font-size: 1rem; color: var(--primary); }
-        .form-input { width: 100%; padding: 10px 14px; border-radius: var(--radius-sm); border: 1.5px solid var(--border); box-sizing: border-box; font-family: inherit; font-size: 0.92rem; }
-        .form-input:focus, .form-textarea:focus { border-color: var(--accent); outline: none; }
-        .form-textarea { width: 100%; padding: 10px 14px; border-radius: var(--radius-sm); border: 1.5px solid var(--border); box-sizing: border-box; font-family: inherit; height: 75px; resize: vertical; font-size: 0.92rem; }
-        
-        .submit-btn { 
-            background: var(--accent); 
-            color: white; 
-            border: none; 
-            padding: 12px 20px; 
-            border-radius: var(--radius-sm); 
-            cursor: pointer; 
-            width: 100%; 
-            font-weight: 700; 
-            font-family: inherit;
-            transition: var(--transition); 
-        }
-        .submit-btn:hover { background: var(--accent-hover); }
+        .comments-section { margin-top: 40px; background: #f8fafc; padding: 30px; border-radius: 16px; border: 1px solid #edf2f7; }
+        .comment-form { display: flex; flex-direction: column; gap: 15px; margin-top: 25px; border-top: 2px solid #edf2f7; padding-top: 25px; }
+        .comment-input { width: 100%; padding: 10px 15px; border-radius: 8px; border: 1.5px solid #e2e8f0; box-sizing: border-box; }
+        .comment-textarea { width: 100%; padding: 10px 15px; border-radius: 8px; border: 1.5px solid #e2e8f0; box-sizing: border-box; height: 80px; resize: vertical; }
+        .submit-btn { background: #e67e22; color: white; border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: background 0.2s; }
+        .submit-btn:hover { background: #d35400; }
         .submit-btn:disabled { background: #cbd5e1; cursor: not-allowed; }
 
-        /* ספינר טעינה */
-        .spinner-wrapper { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px; gap: 12px; }
-        .spinner { width: 40px; height: 40px; border: 4px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; }
-        @keyframes spin { to { transform: rotate(30deg); } }
+        .spinner-container { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px; }
+        .spinner { width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid #e67e22; border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 15px; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(30deg); } }
+
+        .share-btn { background: #f1f5f9; border: none; padding: 8px 16px; border-radius: 8px; font-weight: 600; cursor: pointer; color: #2c3e50; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s; }
+        .share-btn:hover { background: #e2e8f0; }
+
+        .deep-search-btn { background: #2c3e50; color: white; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; margin-right: 10px; transition: background 0.2s; }
+        .deep-search-btn:hover { background: #1a252f; }
     </style>
 </head>
 <body>
@@ -468,8 +123,8 @@
 
 <div id="item-modal" class="modal" onclick="closeModal()">
     <div class="modal-content" onclick="event.stopPropagation()">
-        <span class="close-modal-btn" onclick="closeModal()">×</span>
-        <div id="modal-actions" style="margin-bottom:20px;"></div>
+        <span class="close-btn" onclick="closeModal()">×</span>
+        <div id="modal-actions" style="margin-bottom: 20px;"></div>
         <div id="modal-body"></div>
         <div id="comment-area"></div>
     </div>
@@ -479,4 +134,254 @@
     const JOKES_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSR74JGStqevOMg4uFKqudbSRFEQVRisiEgSwTuxnLjsTUx7TShIVuzPkdRgOZiJq8Pz3H-zoa_3mK3/pub?gid=0&single=true&output=csv';
     const PHOTOS_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSevdjPZljQNazIav8vcVOszHVu5iKOA-AtYUjwhZGuZUibJpjgnJHC_tsrZY11p9aAE_iQytePZsAZ/pub?output=csv';
     const VIDEOS_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSevdjPZljQNazIav8vcVOszHVu5iKOA-AtYUjwhZGuZUibJpjgnJHC_tsrZY11p9aAE_iQytePZsAZ/pub?gid=2135730881&single=true&output=csv';
-    const TEXTS_URL = '
+    const TEXTS_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSXdGMnIRS-ydFn4BRfngLIAbdveYx7L7eS96kCvpruVDca1-uGk3qyQY9Nh9C_eTpbjKoojzB2zlFn/pub?gid=1983290067&single=true&output=csv';
+    const COMMENTS_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRLoH5kw3YDw4HGqSflNsJfe-Gaq34n-5916WzKs-wFlAiCOUiit6ZqmkUiKprnAyJ6ezB0bwQhkGej/pub?output=csv';
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby5P7mLEeCeZJU3Yj3NZgoQ9r8Em8S1--uZyQwuXph7mLIr2DimiGvrtiW4yxcWzFs5Gw/exec';
+
+    const MAIN_PHOTO_ID = '1S-KFrVUHzS9dJsN1ag8EwfNyiXwFHqC-';
+    let data = { jokes: [], photos: [], texts: [], comments: [] };
+
+    function getPhotoUrl(id, size = 'w800') { return `https://drive.google.com/thumbnail?id=${id}&sz=${size}`; }
+    function toggleMenu() { document.getElementById('nav-links').classList.toggle('active'); }
+
+    async function init() {
+        const container = document.getElementById('main-content');
+        renderStaticHome(container);
+
+        const cached = localStorage.getItem('barak_data');
+        if (cached) { data = JSON.parse(cached); updateHomeDynamic(); }
+
+        try {
+            const [j, p, v, t, c] = await Promise.all([
+                fetchCSV(JOKES_URL, true), fetchCSV(PHOTOS_URL, true), 
+                fetchCSV(VIDEOS_URL, true), fetchCSV(TEXTS_URL, true), fetchCSV(COMMENTS_URL, true)
+            ]);
+            data = { jokes: j, photos: [...p, ...v], texts: t, comments: c.filter(r => r.Approve === "YES") };
+            localStorage.setItem('barak_data', JSON.stringify(data));
+            
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('item')) openFromUrl(urlParams.get('item'));
+            else updateHomeDynamic();
+        } catch (e) { console.error(e); }
+    }
+
+    function fetchCSV(url, header) {
+        return new Promise((res, rej) => Papa.parse(url, { download: true, header, skipEmptyLines: true, complete: r => res(r.data), error: e => rej(e) }));
+    }
+
+    function renderStaticHome(container) {
+        container.innerHTML = `
+            <div class="hero">
+                <div class="hero-img"><img src="${getPhotoUrl(MAIN_PHOTO_ID)}" alt="ברק לב שלם"></div>
+                <div class="hero-text">
+                    <h1>ברק לב שלם</h1>
+                    <p>אתר הנצחה לזכרו של ברק. כאן תוכלו למצוא את היצירות שלו, הבדיחות שאהב לספר, תמונות וסרטונים מתקופות שונות בחייו, ולהשאיר זיכרון משלכם.</p>
+                </div>
+            </div>
+            <div id="dynamic-home">
+                <div class="spinner-container"><div class="spinner"></div><p style="color:#666;">טועה תוכן דינמי...</p></div>
+            </div>`;
+    }
+
+    function updateHomeDynamic() {
+        const target = document.getElementById('dynamic-home');
+        if (!target || !data.jokes.length) return;
+        const randomJoke = data.jokes[Math.floor(Math.random() * data.jokes.length)];
+        const samplePhotos = [...data.photos].sort(() => 0.5 - Math.random()).slice(0, 4);
+        const sampleTexts = [...data.texts].sort(() => 0.5 - Math.random()).slice(0, 3);
+
+        target.innerHTML = `
+            <div class="section-header"><h3>בדיחה אקראית</h3><button class="show-all-btn" onclick="showPage('jokes')">כל הבדיחות</button></div>
+            <div class="joke-card"><p class="joke-text">"${randomJoke['Joke Content']}"</p></div>
+            <div class="section-header"><h3>מהגלריה</h3><button class="show-all-btn" onclick="showPage('gallery')">לכל הגלריה</button></div>
+            <div class="grid">${samplePhotos.map(renderPhotoCard).join('')}</div>
+            <div class="section-header"><h3>יצירות אחרונות</h3><button class="show-all-btn" onclick="showPage('texts')">לכל היצירות</button></div>
+            <div class="grid">${sampleTexts.map(renderTextCard).join('')}</div>`;
+    }
+
+    function showPage(pageId) {
+        const container = document.getElementById('main-content');
+        if (pageId === 'home') { renderStaticHome(container); updateHomeDynamic(); }
+        else if (pageId === 'gallery') renderArchive(container, 'גלריה ומדיה', data.photos, renderPhotoCard, true);
+        else if (pageId === 'texts') renderArchive(container, 'יצירות וסיפורים', data.texts, renderTextCard, true, true);
+        else if (pageId === 'jokes') renderArchive(container, 'מאגר הבדיחות', data.jokes, renderJokeCard, true);
+        else if (pageId === 'about') renderAbout(container);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function renderArchive(container, title, items, cardFunc, hasSearch = false, isDeep = false) {
+        const categories = [...new Set(items.map(item => item.category || item.Categories || item.type))].filter(Boolean);
+        container.innerHTML = `
+            <div class="section-header"><h2>${title}</h2></div>
+            ${hasSearch ? `
+                <input type="text" class="search-bar" placeholder="חיפוש חופשי..." oninput="fastSearch(this.value)">
+                <div class="filter-tags">
+                    <button onclick="fastSearch(''); setActiveFilter(this);" class="filter-tag active">הכל</button>
+                    ${categories.map(cat => `<button onclick="fastSearch('${cat}'); setActiveFilter(this);" class="filter-tag">${cat}</button>`).join('')}
+                    ${isDeep ? `<button class="deep-search-btn" onclick="deepSearch()">🔍 חיפוש בתוך הטקסטים</button>` : ''}
+                </div>` : ''}
+            <div class="grid" id="archive-grid">${items.map(cardFunc).join('')}</div>`;
+    }
+
+    function setActiveFilter(btn) {
+        btn.parentElement.querySelectorAll('.filter-tag').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+    }
+
+    function fastSearch(query) {
+        const q = query.toLowerCase();
+        document.querySelectorAll('.card').forEach(card => {
+            const text = card.innerText.toLowerCase() + (card.getAttribute('data-search') || '').toLowerCase();
+            card.style.display = text.includes(q) ? 'flex' : 'none';
+        });
+    }
+
+    async function deepSearch() {
+        const query = prompt("הזינו מילת חיפוש בתוך תוכן היצירות:");
+        if (!query) return;
+        const grid = document.getElementById('archive-grid');
+        grid.innerHTML = `<div class="spinner-container" style="grid-column: 1/-1;"><div class="spinner"></div><p>סורק את תוכן היצירות...</p></div>`;
+        let results = [];
+        for (let item of data.texts) {
+            try {
+                const res = await fetch(item.content_link);
+                const html = await res.text();
+                if (html.toLowerCase().includes(query.toLowerCase())) results.push(item);
+            } catch (e) {}
+        }
+        grid.innerHTML = results.length ? results.map(renderTextCard).join('') : "<p style='grid-column:1/-1; text-align:center; padding:40px; color:#666;'>לא נמצאו יצירות המכילות מילה זו.</p>";
+    }
+
+    function renderPhotoCard(p) {
+        const isVideo = p.type === 'video';
+        const thumbUrl = isVideo ? `https://img.youtube.com/vi/${p.id}/0.jpg` : getPhotoUrl(p.id, 'w400');
+        const safeTitle = p.title.replace(/'/g, "\\'");
+        return `
+            <div class="card" data-search="${p.category}" onclick="openItem('${p.type}', '${p.id}', '${p.id}', '${safeTitle}')">
+                <div class="card-img-wrapper">
+                    <img src="${thumbUrl}" loading="lazy">
+                    ${isVideo ? `<div class="play-overlay">▶</div>` : ''}
+                </div>
+                <div class="card-content">
+                    <span class="tag">${p.category}</span>
+                    <h4>${p.title}</h4>
+                </div>
+            </div>`;
+    }
+
+    function renderTextCard(t) {
+        const searchData = `${t.author} ${t.description} ${t.keywords} ${t.type}`;
+        const safeTitle = t.title.replace(/'/g, "\\'");
+        const safeAuthor = (t.author || "").replace(/'/g, "\\'");
+        return `
+            <div class="card" data-search="${searchData}" onclick="openItem('text', '${t.content_link}', '${t.id}', '${safeTitle}', '${safeAuthor}')">
+                <div class="card-content">
+                    <span class="tag">${t.type}</span>
+                    <h4>${t.title}</h4>
+                    <p>${t.description || ''}</p>
+                    <span class="author">מאת: ${t.author || 'לא ידוע'}</span>
+                </div>
+            </div>`;
+    }
+
+    function renderJokeCard(j) {
+        return `
+            <div class="card" data-search="${j.Categories}" style="cursor:default;">
+                <div class="card-content" style="justify-content:center;">
+                    <span class="tag">${j.Categories}</span>
+                    <p class="joke-text" style="font-size:16px;">"${j['Joke Content']}"</p>
+                </div>
+            </div>`;
+    }
+
+    async function openItem(type, path, id, title, author = "") {
+        const modal = document.getElementById('item-modal');
+        const body = document.getElementById('modal-body');
+        modal.style.display = 'flex';
+        body.innerHTML = `<div class="spinner-container"><div class="spinner"></div><p>טוען...</p></div>`;
+        document.getElementById('modal-actions').innerHTML = `<button class="share-btn" onclick="shareItem('${id}', '${title.replace(/'/g, "\\")}')">🔗 שיתוף קישור לפריט</button>`;
+        
+        if (type === 'video') {
+            body.innerHTML = `
+                <h3 style="margin-top:0; font-size:22px; color:#2c3e50; margin-bottom:15px;">${title}</h3>
+                <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:12px;">
+                    <iframe src="https://www.youtube.com/embed/${id}?autoplay=1" style="position:absolute; top:0; left:0; width:100%; height:100%;" frameborder="0" allowfullscreen></iframe>
+                </div>`;
+        } 
+        /* התיקון הממוקד: מניעת קריסת fetch ע"י בניית אלמנט תמונה המושך ישירות מגוגל דרייב */
+        else if (type === 'photo') {
+            body.innerHTML = `
+                <h3 style="margin-top:0; font-size:22px; color:#2c3e50; margin-bottom:15px;">${title}</h3>
+                <img src="${getPhotoUrl(id, 'w1200')}" style="max-width:100%; max-height:70vh; border-radius:12px; display:block; margin:0 auto; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">`;
+        } 
+        else {
+            try {
+                const res = await fetch(path);
+                const html = await res.text();
+                body.innerHTML = `
+                    <h2 style="margin-top:0; font-size:26px; color:#2c3e50; margin-bottom:5px;">${title}</h2>
+                    <p style="color:#888; font-style:italic; margin-bottom:20px;">מאת: ${author}</p>
+                    <div style="line-height:1.7; color:#333; font-size:16px;">${html}</div>`;
+            } catch (e) { body.innerHTML = "<p>שגיאה בטעינת הקובץ.</p>"; }
+        }
+        renderComments(id);
+    }
+
+    function renderComments(itemId) {
+        const filtered = data.comments.filter(c => c.item_id === itemId);
+        const listHtml = filtered.map(c => `<div style="border-bottom:1px solid #eee; padding:12px 0;"><strong style="color:#2c3e50; display:block; margin-bottom:4px;">${c.name}</strong><p style="margin:0; font-size:14px; color:#444;">${c.content}</p></div>`).join('');
+        
+        document.getElementById('comment-area').innerHTML = `
+            <div class="comments-section">
+                <h4 style="margin-top:0; color:#2c3e50; font-size:18px; font-weight:700;">תגובות (${filtered.length})</h4>
+                <div>${listHtml || '<p style="color:#888; font-size:14px;">אין עדיין תגובות לפריט זה. מוזמנים להוסיף תגובה ראשונה.</p>'}</div>
+                <div class="comment-form">
+                    <h5 style="margin:0; font-size:15px; color:#2c3e50;">הוספת תגובה לזכרו</h5>
+                    <input type="text" id="c-name" class="comment-input" placeholder="שמכם">
+                    <textarea id="c-content" class="comment-textarea" placeholder="כתבו משהו לזכרו..."></textarea>
+                    <button id="send-btn" class="submit-btn" onclick="sendComment('${itemId}')">שליחת תגובה לאישור</button>
+                </div>
+            </div>`;
+    }
+
+    async function sendComment(id) {
+        const name = document.getElementById('c-name').value;
+        const content = document.getElementById('c-content').value;
+        if (!name || !content) return alert("נא למלא שם ותוכן תגובה");
+        document.getElementById('send-btn').disabled = true;
+        const params = new URLSearchParams({ name, relation: "", content, item_id: id });
+        await fetch(APPS_SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: params });
+        alert("העברת התגובה בהצלחה! היא תופיע באתר לאחר אישור המשפחה.");
+        closeModal();
+    }
+
+    function shareItem(id, title) {
+        const url = `${window.location.origin}${window.location.pathname}?item=${id}`;
+        if (navigator.share) navigator.share({ title, url }); else prompt("העתיקו את הקישור לשיתוף:", url);
+    }
+
+    function closeModal() { 
+        document.getElementById('item-modal').style.display = 'none'; 
+        document.getElementById('modal-body').innerHTML = ''; 
+    }
+    
+    function openFromUrl(id) {
+        const photo = data.photos.find(p => p.id === id);
+        if (photo) return openItem(photo.type || 'photo', photo.id, photo.id, photo.title);
+        const text = data.texts.find(t => t.id === id);
+        if (text) return openItem('text', text.content_link, text.id, text.title, text.author);
+        showPage('home');
+    }
+
+    async function renderAbout(container) {
+        container.innerHTML = `<div class="section-header" style="margin-top:100px;"><h2>קורות חיים</h2></div><div id=\"cv-target\" style=\"background:white; padding:40px; border-radius:24px; border:1px solid #f1f5f9;\">טוען...</div>`;
+        try {
+            const res = await fetch('about_barak.html');
+            const html = await res.text();
+            document.getElementById('cv-target').innerHTML = `<div class="external-content-wrapper">${html}</div>`;
+        } catch (e) { document.getElementById('cv-target').innerHTML = "<p>שגיאה בטעינת קורות החיים.</p>"; }
+    }
+
+    window.onload = init;
+</script>
+</body></html>
