@@ -1,482 +1,438 @@
-<!DOCTYPE html>
-<html lang="he" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>לזכרו היקר של ברק לב שלם</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700;800&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
-    <style>
-        :root { 
-            --primary: #1e293b;      /* כחול נייבי עמוק ומכובד */
-            --primary-light: #334155;
-            --accent: #a17a42;       /* גוון זהב ברונזה עדין */
-            --accent-hover: #856132;
-            --bg: #f8fafc;           /* רקע בהיר ונעים לעין */
-            --white: #ffffff; 
-            --text: #1e293b; 
-            --text-muted: #64748b;
-            --border: #e2e8f0;
-            --radius-sm: 8px;
-            --radius-md: 12px;
-            --radius-lg: 20px;
-            --shadow: 0 4px 20px rgba(0,0,0,0.05);
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+<!DOCTYPE html><html dir="rtl" lang="he"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>לזכר ברק לב שלם</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@100..900&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#2c3e50",
+                        accent: "#e67e22",
+                        surface: "#ecfdfd",
+                        "surface-container": "#e1f1f2",
+                        "on-surface": "#0f1e1f",
+                        "on-surface-variant": "#43474c",
+                        outline: "#74777d",
+                        "outline-variant": "#c4c6cd"
+                    },
+                    fontFamily: {
+                        sans: ['Heebo', 'sans-serif'],
+                    }
+                }
+            }
         }
+    </script>
+<style>
+        body { font-family: 'Heebo', sans-serif; background-color: #ecfdfd; color: #0f1e1f; margin: 0; direction: rtl; }
         
-        html { overflow-y: scroll; scroll-behavior: smooth; }
-        body { 
-            font-family: 'Assistant', 'Rubik', system-ui, sans-serif; 
-            background: var(--bg); 
-            margin: 0; 
-            color: var(--text); 
-            direction: rtl; 
-            line-height: 1.6;
-        }
-        
-        /* סרגל ניווט מודרני */
-        nav { 
-            background: rgba(30, 41, 59, 0.96); 
-            backdrop-filter: blur(10px);
-            color: white; 
-            padding: 0 24px; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            position: sticky; 
-            top: 0; 
-            z-index: 1000; 
-            height: 70px; 
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        .logo { 
-            cursor: pointer; 
-            font-weight: 800; 
-            font-size: 1.35rem; 
-            letter-spacing: -0.5px;
-            transition: var(--transition);
-        }
-        .logo:hover { color: var(--accent); }
-        
-        .nav-links { display: flex; gap: 8px; }
-        .nav-links a { 
-            color: rgba(255, 255, 255, 0.9); 
-            text-decoration: none; 
-            font-weight: 500; 
-            cursor: pointer; 
-            padding: 8px 16px;
-            border-radius: var(--radius-sm);
-            transition: var(--transition); 
-        }
-        .nav-links a:hover { 
-            color: var(--white); 
-            background: rgba(255,255,255,0.08);
-        }
-        
-        .hamburger { 
-            display: none; 
-            font-size: 28px; 
-            cursor: pointer; 
-            background: none; 
-            border: none; 
-            color: white; 
-            padding: 5px;
-            transition: var(--transition);
-        }
-        .hamburger:hover { color: var(--accent); }
+        /* Navigation */
+        header { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(8px); border-bottom: 1px solid #f1f5f9; position: fixed; top: 0; width: 100%; z-index: 1000; height: 64px; display: flex; align-items: center; }
+        .nav-container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.25rem; font-weight: 700; color: #1e293b; cursor: pointer; }
+        .nav-links { display: flex; gap: 24px; align-items: center; }
+        .nav-links a { color: #64748b; text-decoration: none; font-weight: 500; font-size: 0.875rem; cursor: pointer; transition: 0.2s; position: relative; }
+        .nav-links a:hover { color: #1e293b; }
+        .nav-links a.active { color: #1e293b; }
+        .nav-links a.active::after { content: ''; position: absolute; bottom: -4px; right: 0; width: 100%; height: 2px; background: #e67e22; }
+        .hamburger { display: none; font-size: 24px; cursor: pointer; color: #1e293b; }
 
         @media (max-width: 768px) {
-            .nav-links { 
-                display: none; 
-                flex-direction: column; 
-                position: absolute; 
-                top: 70px; 
-                left: 0; 
-                width: 100%; 
-                background: var(--primary); 
-                padding: 20px; 
-                gap: 10px; 
-                box-shadow: 0 10px 15px rgba(0,0,0,0.15); 
-                box-sizing: border-box;
-                border-top: 1px solid rgba(255,255,255,0.05);
-            }
+            .nav-links { display: none; flex-direction: column; position: absolute; top: 64px; left: 0; width: 100%; background: white; padding: 24px; gap: 16px; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); }
             .nav-links.active { display: flex; }
             .hamburger { display: block; }
+            .nav-cta { display: none; }
         }
 
-        /* איזור ראשי (Hero Section) */
-        .hero { 
-            display: flex; 
-            align-items: center; 
-            gap: 48px; 
-            padding: 48px; 
-            margin-bottom: 30px; 
-            background: linear-gradient(135deg, rgba(30, 41, 59, 0.02) 0%, rgba(161, 122, 66, 0.04) 100%);
-            border-radius: var(--radius-lg);
-            border: 1px solid rgba(161, 122, 66, 0.1);
-            box-shadow: var(--shadow);
-        }
-        .hero-img { flex: 0 0 260px; }
-        .hero-img img { 
-            width: 100%; 
-            border-radius: 50%; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15); 
-            border: 4px solid var(--accent);
-            object-fit: cover; 
-            aspect-ratio: 1; 
-            transition: var(--transition);
-        }
-        .hero-img img:hover { transform: scale(1.03); }
-        .hero-text { flex-grow: 1; }
-        .hero-text h1 { 
-            font-size: 2.8rem; 
-            margin: 0 0 16px 0; 
-            color: var(--primary); 
-            font-weight: 800;
-        }
-        .hero-text p { 
-            font-size: 1.2rem; 
-            line-height: 1.7; 
-            margin: 0; 
-            color: var(--text-muted);
-            max-width: 700px;
-        }
-
+        /* Hero */
+        .hero { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; padding: 64px 0; margin-top: 32px; }
+        .hero-img { aspect-ratio: 1; border-radius: 24px; overflow: hidden; box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1); background: #d5e6e7; }
+        .hero-img img { width: 100%; height: 100%; object-fit: cover; }
+        .hero-text h1 { font-size: 3rem; font-weight: 800; color: #2c3e50; margin-bottom: 16px; }
+        .hero-text p { font-size: 1.125rem; line-height: 1.75; color: #43474c; max-width: 480px; }
+        
         @media (max-width: 768px) {
-            .hero { flex-direction: column; text-align: center; gap: 24px; padding: 32px 20px; }
-            .hero-img { flex: 0 0 auto; width: 180px; margin: 0 auto; }
-            .hero-text h1 { font-size: 2.1rem; }
-            .hero-text p { font-size: 1.1rem; }
+            .hero { grid-template-columns: 1fr; text-align: center; gap: 32px; padding: 40px 0; }
+            .hero-img { max-width: 320px; margin: 0 auto; order: -1; }
+            .hero-text h1 { font-size: 2.25rem; }
+            .hero-text p { margin: 0 auto; }
         }
 
-        /* גריד ועימוד */
-        .container { max-width: 1100px; margin: 0 auto; padding: 20px; box-sizing: border-box; }
-        
-        /* דעיכה חלקה במעבר דפים */
-        .page-fade-in {
-            animation: fadeIn 0.4s ease-out forwards;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        /* Container & Grid */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px 64px; }
+        .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin: 48px 0 24px; }
+        .section-header h2, .section-header h3 { font-size: 1.75rem; font-weight: 700; color: #2c3e50; margin: 0; }
+        .grid { display: grid; grid-template-columns: repeat(1, minmax(0, 1fr)); gap: 24px; }
+        @media (min-width: 768px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+        @media (min-width: 1024px) { .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 
-        /* חיפוש וסינון */
-        .search-area { 
-            margin-bottom: 40px; 
-            background: var(--white); 
-            padding: 28px; 
-            border-radius: var(--radius-md); 
-            box-shadow: var(--shadow);
-            border: 1px solid var(--border);
-        }
-        .search-input { 
-            width: 100%; 
-            padding: 14px 18px; 
-            border-radius: var(--radius-sm); 
-            border: 1.5px solid var(--border); 
-            font-size: 1rem; 
-            box-sizing: border-box; 
-            font-family: inherit;
-            transition: var(--transition);
-        }
-        .search-input:focus {
-            border-color: var(--accent);
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(161, 122, 66, 0.15);
-        }
-        .filter-buttons { margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap; }
-        .filter-btn {
-            padding: 8px 18px;
-            border-radius: 20px;
-            border: 1.5px solid var(--border);
-            background: var(--white);
-            cursor: pointer;
-            font-size: 0.88rem;
-            font-weight: 500;
-            font-family: inherit;
-            transition: var(--transition);
-            color: var(--text-muted);
-        }
-        .filter-btn:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-            transform: translateY(-1px);
-        }
-        .filter-btn.active {
-            background: var(--primary);
-            border-color: var(--primary);
-            color: var(--white);
-        }
-        
-        .deep-search-btn { 
-            margin-top: 15px; 
-            background: var(--primary-light); 
-            color: white; 
-            border: none; 
-            padding: 10px 20px; 
-            border-radius: var(--radius-sm); 
-            cursor: pointer; 
-            font-size: 0.9rem; 
-            font-family: inherit;
-            font-weight: 600;
-            transition: var(--transition);
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .deep-search-btn:hover { background: var(--primary); transform: translateY(-1px); }
+        /* Card Styles */
+        .card { background: white; border-radius: 16px; overflow: hidden; border: 1px solid #f1f5f9; transition: all 0.3s ease; display: flex; flex-direction: column; cursor: pointer; height: 100%; }
+        .card:hover { transform: translateY(-4px); box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1); }
+        .card-img { aspect-ratio: 4/3; overflow: hidden; position: relative; }
+        .card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+        .card:hover .card-img img { transform: scale(1.05); }
+        .card-content { padding: 24px; flex-grow: 1; display: flex; flex-direction: column; }
+        .tag { display: inline-block; padding: 4px 12px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; margin-bottom: 12px; align-self: flex-start; }
+        .tag-gallery { background: #ffdcc5; color: #713700; }
+        .tag-works { background: #d1e4fb; color: #091d2e; }
+        .tag-jokes { background: #f1f5f9; color: #475569; }
+        .card-title { font-size: 1.25rem; font-weight: 600; color: #2c3e50; margin-bottom: 8px; }
+        .card-desc { font-size: 0.9375rem; color: #43474c; line-height: 1.6; margin-bottom: 16px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+        .card-footer { margin-top: auto; padding-top: 16px; border-top: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center; color: #64748b; font-size: 0.8125rem; }
 
-        /* כותרות סקשנים */
-        .section-header { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            border-bottom: 2px solid var(--border); 
-            margin: 50px 0 25px; 
-            padding-bottom: 12px; 
-            position: relative;
-        }
-        .section-header h3, .section-header h2 { 
-            margin: 0; 
-            color: var(--primary); 
-            font-weight: 700;
-            font-size: 1.6rem;
-        }
-        .section-header::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            right: 0;
-            width: 70px;
-            height: 3px;
-            background: var(--accent);
-            border-radius: 4px;
-        }
-        
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; }
-        .show-all-btn { 
-            background: none; 
-            border: 1.5px solid var(--accent); 
-            color: var(--accent); 
-            padding: 6px 16px; 
-            border-radius: 20px; 
-            cursor: pointer; 
-            font-size: 0.88rem; 
-            font-weight: 700; 
-            font-family: inherit;
-            transition: var(--transition);
-        }
-        .show-all-btn:hover { background: var(--accent); color: white; }
+        /* Jokes Styling */
+        .joke-card { background: white; border-radius: 16px; padding: 32px; border-right: 4px solid #e67e22; box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1); }
+        .joke-quote { font-size: 1.125rem; font-style: italic; color: #1e293b; line-height: 1.8; }
 
-        /* כרטיסיות (Cards) */
-        .card { 
-            background: var(--white); 
-            border-radius: var(--radius-md); 
-            overflow: hidden; 
-            box-shadow: var(--shadow); 
-            cursor: pointer; 
-            display: flex; 
-            flex-direction: column; 
-            transition: var(--transition); 
-            height: 100%; 
-            border: 1px solid rgba(0,0,0,0.03); 
-            position: relative; 
-            box-sizing: border-box;
-        }
-        .card:hover { 
-            transform: translateY(-6px); 
-            box-shadow: 0 12px 30px rgba(0,0,0,0.08); 
-        }
-        .card img { width: 100%; height: 210px; object-fit: cover; background: #f1f5f9; transition: var(--transition); }
-        .card:hover img { transform: scale(1.02); }
-        
-        .card-content { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; text-align: right; }
-        .card-content h4 { margin: 0 0 8px 0; font-size: 1.15rem; color: var(--primary); font-weight: 700; }
-        .card-content p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.5; margin: 0 0 12px 0; }
-        
-        .tag { 
-            align-self: flex-start;
-            display: inline-block; 
-            background: rgba(161, 122, 66, 0.08); 
-            color: var(--accent); 
-            padding: 4px 12px; 
-            border-radius: 20px; 
-            font-size: 0.78rem; 
-            font-weight: 700; 
-            margin-bottom: 12px; 
-        }
-        .author-tag { font-size: 0.82rem; color: var(--text-muted); font-style: italic; margin-top: auto; display: block; border-top: 1px solid var(--border); padding-top: 10px; }
-        
-        /* כרטיסיית בדיחה אקראית ייעודית */
-        .random-joke-card {
-            background: var(--white);
-            padding: 30px;
-            border-radius: var(--radius-md);
-            border-right: 5px solid var(--accent);
-            margin-bottom: 40px;
-            box-shadow: var(--shadow);
-            position: relative;
-        }
-        .joke-text {
-            font-size: 1.2rem;
-            line-height: 1.7;
-            font-style: italic;
-            margin: 0;
-            color: var(--primary-light);
-        }
+        /* Search Area */
+        .search-area { background: white; border-radius: 16px; padding: 24px; border: 1px solid #f1f5f9; margin-bottom: 32px; }
+        .search-input { width: 100%; padding: 12px 16px; border-radius: 12px; border: 1px solid #cbd5e1; font-size: 1rem; transition: 0.2s; }
+        .search-input:focus { outline: none; border-color: #2c3e50; ring: 2px #2c3e50; }
 
-        /* נגן וידאו מובנה */
-        .play-overlay { 
-            position: absolute; 
-            top: 105px; 
-            left: 50%; 
-            transform: translate(-50%, -50%); 
-            background: rgba(30, 41, 59, 0.85); 
-            backdrop-filter: blur(4px);
-            color: white; 
-            width: 56px; 
-            height: 56px; 
-            border-radius: 50%; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            font-size: 20px; 
-            pointer-events: none; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            transition: var(--transition);
-        }
-        .card:hover .play-overlay { background: var(--accent); transform: translate(-50%, -50%) scale(1.1); }
+        /* Modal */
+        .modal { display: none; position: fixed; z-index: 2000; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); justify-content: center; align-items: center; }
+        .modal-content { background: white; width: 95%; max-width: 800px; max-height: 90vh; border-radius: 24px; overflow-y: auto; padding: 40px; position: relative; direction: rtl; }
+        .external-content-wrapper { all: revert; direction: rtl !important; }
 
-        /* מודל (Modal) מעוצב */
-        .modal { 
-            display: none; 
-            position: fixed; 
-            z-index: 2000; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-            background: rgba(15, 23, 42, 0.8); 
-            backdrop-filter: blur(8px);
-            justify-content: center; 
-            align-items: center; 
-            padding: 20px;
-            box-sizing: border-box;
-        }
-        .modal-content { 
-            background: var(--white); 
-            width: 100%;
-            max-width: 850px; 
-            max-height: 90vh; 
-            border-radius: var(--radius-lg); 
-            overflow-y: auto; 
-            padding: 36px; 
-            position: relative; 
-            direction: rtl; 
-            text-align: right; 
-            box-sizing: border-box;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            animation: modalSlide 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-        @keyframes modalSlide {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        .close-modal-btn {
-            position: absolute; 
-            top: 20px; 
-            left: 20px; 
-            font-size: 32px; 
-            cursor: pointer; 
-            line-height: 1; 
-            color: var(--text-muted);
-            transition: var(--transition);
-        }
-        .close-modal-btn:hover { color: var(--primary); }
+        /* Buttons */
+        .btn-primary { background: #2c3e50; color: white; padding: 10px 24px; border-radius: 10px; font-weight: 500; font-size: 0.875rem; transition: 0.2s; border: none; cursor: pointer; }
+        .btn-primary:hover { opacity: 0.9; }
+        .btn-outline { border: 1.5px solid #2c3e50; color: #2c3e50; padding: 8px 20px; border-radius: 10px; font-weight: 500; font-size: 0.875rem; background: transparent; cursor: pointer; transition: 0.2s; }
+        .btn-outline:hover { background: rgba(44, 62, 80, 0.05); }
 
-        /* אזור שיתוף */
-        .share-btn {
-            background: #f1f5f9;
-            border: none;
-            padding: 8px 16px;
-            border-radius: var(--radius-sm);
-            cursor: pointer;
-            font-family: inherit;
-            font-weight: 600;
-            color: var(--primary);
-            transition: var(--transition);
-        }
-        .share-btn:hover { background: var(--accent); color: white; }
-
-        .external-content-wrapper { all: revert; direction: rtl !important; text-align: right !important; }
-
-        /* תגובות */
-        .comment-section { margin-top: 40px; background: #f8fafc; padding: 24px; border-radius: var(--radius-md); border: 1px solid var(--border); }
-        .comment-section h4 { margin-top: 0; margin-bottom: 20px; color: var(--primary); font-weight: 700; }
-        .comments-list { display: flex; flex-direction: column; gap: 15px; margin-bottom: 25px; }
-        .comment-item { border-bottom: 1px solid var(--border); padding-bottom: 12px; }
-        .comment-item:last-child { border-bottom: none; }
-        .comment-author { font-weight: 700; color: var(--primary-light); font-size: 0.95rem; display: block; margin-bottom: 4px; }
-        .comment-text { margin: 0; font-size: 0.92rem; color: var(--text); }
-        
-        .comment-form { display: flex; flex-direction: column; gap: 12px; margin-top: 25px; border-top: 1.5px solid var(--border); padding-top: 25px; }
-        .comment-form h5 { margin: 0 0 5px 0; font-size: 1rem; color: var(--primary); }
-        .form-input { width: 100%; padding: 10px 14px; border-radius: var(--radius-sm); border: 1.5px solid var(--border); box-sizing: border-box; font-family: inherit; font-size: 0.92rem; }
-        .form-input:focus, .form-textarea:focus { border-color: var(--accent); outline: none; }
-        .form-textarea { width: 100%; padding: 10px 14px; border-radius: var(--radius-sm); border: 1.5px solid var(--border); box-sizing: border-box; font-family: inherit; height: 75px; resize: vertical; font-size: 0.92rem; }
-        
-        .submit-btn { 
-            background: var(--accent); 
-            color: white; 
-            border: none; 
-            padding: 12px 20px; 
-            border-radius: var(--radius-sm); 
-            cursor: pointer; 
-            width: 100%; 
-            font-weight: 700; 
-            font-family: inherit;
-            transition: var(--transition); 
-        }
-        .submit-btn:hover { background: var(--accent-hover); }
-        .submit-btn:disabled { background: #cbd5e1; cursor: not-allowed; }
-
-        /* ספינר טעינה */
-        .spinner-wrapper { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px; gap: 12px; }
-        .spinner { width: 40px; height: 40px; border: 4px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; }
-        @keyframes spin { to { transform: rotate(30deg); } }
+        /* Footer */
+        footer { border-top: 1px solid #e2e8f0; background: #f8fafc; padding: 48px 0; margin-top: 64px; }
+        .footer-content { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; flex-direction: column; md-flex-direction: row; justify-content: space-between; align-items: center; gap: 24px; }
+        .footer-brand { color: #475569; font-weight: 600; font-size: 0.875rem; }
+        .footer-text { font-family: 'Heebo'; font-size: 0.75rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; text-align: center; }
     </style>
 </head>
 <body>
-
-<nav>
-    <div class="logo" onclick="showPage('home')">ברק לב שלם</div>
-    <button class="hamburger" onclick="toggleMenu()">☰</button>
-    <div class="nav-links" id="nav-links">
-        <a onclick="showPage('home'); toggleMenu()">בית</a>
-        <a onclick="showPage('gallery'); toggleMenu()">גלריה</a>
-        <a onclick="showPage('texts'); toggleMenu()">יצירות</a>
-        <a onclick="showPage('jokes'); toggleMenu()">בדיחות</a>
-        <a onclick="showPage('about'); toggleMenu()">קורות חיים</a>
-    </div>
-</nav>
-
-<div class="container" id="main-content"></div>
-
-<div id="item-modal" class="modal" onclick="closeModal()">
-    <div class="modal-content" onclick="event.stopPropagation()">
-        <span class="close-modal-btn" onclick="closeModal()">×</span>
-        <div id="modal-actions" style="margin-bottom:20px;"></div>
-        <div id="modal-body"></div>
-        <div id="comment-area"></div>
-    </div>
+<header>
+<div class="nav-container">
+<div class="logo" onclick="showPage('home')">לזכרו של ברק לב שלם ז"ל</div>
+<div class="hamburger" onclick="toggleMenu()"><span class="material-symbols-outlined">menu</span></div>
+<div class="nav-links" id="nav-links">
+<a onclick="showPage('home'); toggleMenu()" class="active">בית</a>
+<a onclick="showPage('gallery'); toggleMenu()" class="">גלריה</a>
+<a onclick="showPage('texts'); toggleMenu()" class="">יצירות</a>
+<a onclick="showPage('jokes'); toggleMenu()" class="">בדיחות</a>
+<a onclick="showPage('about'); toggleMenu()" class="">אודות</a>
+<a class="nav-cta btn-primary" href="mailto:baraklevshalem@gmail.com" style="color: white; margin-right: 16px;">אני רוצה להוסיף זיכרון לאתר</a>
 </div>
-
+</div>
+</header>
+<div class="container" id="main-content" style="margin-top: 64px;">
+            <div class="hero">
+                <div class="hero-text">
+                    <h1>ברק לב שלם</h1>
+                    <p>ברוכים הבאים לאתר הזיכרון של ברק. מקום שבו אספנו את המילים שלו, החיוך שלו והבדיחות שתמיד ידע לספר. כאן תוכלו למצוא פיסות מהחיים שהיו מלאים בצחוק, יצירה ואור.</p>
+                    <div style="margin-top:32px;">
+                        <button class="btn-outline" onclick="showPage('about')">קראו עוד עליו</button>
+                    </div>
+                </div>
+                <div class="hero-img"><img src="https://drive.google.com/thumbnail?id=1S-KFrVUHzS9dJsN1ag8EwfNyiXwFHqC-&amp;sz=w800" alt="ברק"></div>
+            </div>
+            <div id="dynamic-home-content"><p style="text-align:center; padding:40px;">טוען תוכן נוסף...</p></div>
+        </div>
+<footer>
+<div class="footer-content">
+<div class="footer-brand">Barak Lev Shalem</div>
+<div class="footer-text">© 2024 IN MEMORY OF BARAK LEV SHALEM. MAY HIS MEMORY BE A BLESSING.</div>
+<div class="flex gap-6">
+<a class="footer-text hover:text-slate-600 underline decoration-orange-500/30 underline-offset-4" href="mailto:baraklevshalem@gmail.com">Contact Family</a>
+</div>
+</div>
+</footer>
+<div class="modal" id="item-modal" onclick="closeModal()">
+<div class="modal-content" onclick="event.stopPropagation()">
+<button class="material-symbols-outlined" onclick="closeModal()" style="position: absolute; top: 20px; left: 20px; font-size: 32px; cursor: pointer; background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; color: rgb(100, 116, 139);">close</button>
+<div id="modal-actions" style="margin-bottom:24px;"></div>
+<div id="modal-body"></div>
+<div id="comment-area"></div>
+</div>
+</div>
 <script>
     const JOKES_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSR74JGStqevOMg4uFKqudbSRFEQVRisiEgSwTuxnLjsTUx7TShIVuzPkdRgOZiJq8Pz3H-zoa_3mK3/pub?gid=0&single=true&output=csv';
     const PHOTOS_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSevdjPZljQNazIav8vcVOszHVu5iKOA-AtYUjwhZGuZUibJpjgnJHC_tsrZY11p9aAE_iQytePZsAZ/pub?output=csv';
     const VIDEOS_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSevdjPZljQNazIav8vcVOszHVu5iKOA-AtYUjwhZGuZUibJpjgnJHC_tsrZY11p9aAE_iQytePZsAZ/pub?gid=2135730881&single=true&output=csv';
-    const TEXTS_URL = '
+    const TEXTS_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSXdGMnIRS-ydFn4BRfngLIAbdveYx7L7eS96kCvpruVDca1-uGk3qyQY9Nh9C_eTpbjKoojzB2zlFn/pub?gid=1983290067&single=true&output=csv';
+    const COMMENTS_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRLoH5kw3YDw4HGqSflNsJfe-Gaq34n-5916WzKs-wFlAiCOUiit6ZqmkUiKprnAyJ6ezB0bwQhkGej/pub?output=csv';
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby5P7mLEeCeZJU3Yj3NZgoQ9r8Em8S1--uZyQwuXph7mLIr2DimiGvrtiW4yxcWzFs5Gw/exec';
+
+    const MAIN_PHOTO_ID = '1S-KFrVUHzS9dJsN1ag8EwfNyiXwFHqC-';
+    let data = { jokes: [], photos: [], texts: [], comments: [] };
+
+    function getPhotoUrl(id, size = 'w800') { return `https://drive.google.com/thumbnail?id=${id}&sz=${size}`; }
+    function toggleMenu() { document.getElementById('nav-links').classList.toggle('active'); }
+
+    async function init() {
+        const container = document.getElementById('main-content');
+        renderStaticHome(container);
+
+        const cachedData = localStorage.getItem('barak_site_data');
+        if (cachedData) {
+            data = JSON.parse(cachedData);
+            updateHomeWithDynamicContent();
+        }
+
+        try {
+            const [j, p, v, t, c] = await Promise.all([
+                fetchCSV(JOKES_URL, true), fetchCSV(PHOTOS_URL, true), 
+                fetchCSV(VIDEOS_URL, true), fetchCSV(TEXTS_URL, true), 
+                fetchCSV(COMMENTS_URL, true)
+            ]);
+            data = { jokes: j, photos: [...p, ...v], texts: t, comments: c.filter(r => r.Approve === "YES") };
+            
+            localStorage.setItem('barak_site_data', JSON.stringify(data));
+            
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('item')) openFromUrl(urlParams.get('item'));
+            else updateHomeWithDynamicContent();
+
+        } catch (e) { console.error("Data fetch error", e); }
+    }
+
+    function fetchCSV(url, header) {
+        return new Promise((res, rej) => Papa.parse(url, { 
+            download: true, header, skipEmptyLines: true, 
+            complete: r => res(r.data), error: e => rej(e) 
+        }));
+    }
+
+    function renderStaticHome(container) {
+        container.innerHTML = `
+            <div class="hero">
+                <div class="hero-text">
+                    <h1>ברק לב שלם</h1>
+                    <p>ברוכים הבאים לאתר הזיכרון של ברק. מקום שבו אספנו את המילים שלו, החיוך שלו והבדיחות שתמיד ידע לספר. כאן תוכלו למצוא פיסות מהחיים שהיו מלאים בצחוק, יצירה ואור.</p>
+                    <div style="margin-top:32px;">
+                        <button class="btn-outline" onclick="showPage('about')">קראו עוד עליו</button>
+                    </div>
+                </div>
+                <div class="hero-img"><img src="${getPhotoUrl(MAIN_PHOTO_ID)}" alt="ברק"></div>
+            </div>
+            <div id="dynamic-home-content"><p style="text-align:center; padding:40px;">טוען תוכן נוסף...</p></div>
+        `;
+    }
+
+    function updateHomeWithDynamicContent() {
+        const target = document.getElementById('dynamic-home-content');
+        if (!target || !data.jokes.length) return;
+
+        const randomJoke = data.jokes[Math.floor(Math.random() * data.jokes.length)];
+        const samplePhotos = [...data.photos].sort(() => 0.5 - Math.random()).slice(0, 4);
+        const sampleTexts = [...data.texts].sort(() => 0.5 - Math.random()).slice(0, 3);
+
+        target.innerHTML = `
+            <div class="section-header"><h3>ההומור של ברק</h3><button class="btn-outline" onclick="showPage('jokes')">לעוד בדיחות</button></div>
+            <div class="joke-card flex flex-col md:flex-row items-center gap-6">
+                <div class="p-4 bg-orange-50 rounded-full"><span class="material-symbols-outlined text-accent text-4xl" style="font-variation-settings: 'FILL' 1;">mood</span></div>
+                <div class="joke-quote flex-1">"${randomJoke['Joke Content']}"</div>
+            </div>
+
+            <div class="section-header"><h3>רגעים שנשארו איתנו</h3><button class="btn-outline" onclick="showPage('gallery')">לגלריה המלאה</button></div>
+            <div class="grid">${samplePhotos.map(renderPhotoCard).join('')}</div>
+
+            <div class="section-header"><h3>יצירות וסיפורים</h3><button class="btn-outline" onclick="showPage('texts')">לכל היצירות</button></div>
+            <div class="grid">${sampleTexts.map(renderTextCard).join('')}</div>
+        `;
+    }
+
+    function showPage(pageId) {
+        const container = document.getElementById('main-content');
+        window.scrollTo(0,0);
+        
+        // Update Nav Link Active state
+        document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+        const activeLink = Array.from(document.querySelectorAll('.nav-links a')).find(a => a.textContent.includes(
+            pageId === 'home' ? 'בית' : 
+            pageId === 'gallery' ? 'גלריה' : 
+            pageId === 'texts' ? 'יצירות' : 
+            pageId === 'jokes' ? 'בדיחות' : 'אודות'
+        ));
+        if(activeLink) activeLink.classList.add('active');
+
+        if (pageId === 'home') { renderStaticHome(container); updateHomeWithDynamicContent(); }
+        else if (pageId === 'gallery') renderArchive(container, 'גלריה', data.photos, renderPhotoCard, true);
+        else if (pageId === 'texts') renderArchive(container, 'יצירות וסיפורים', data.texts, renderTextCard, true, true);
+        else if (pageId === 'jokes') renderArchive(container, 'מאגר הבדיחות', data.jokes, renderJokeCard, true);
+        else if (pageId === 'about') renderAbout(container);
+    }
+
+    function renderArchive(container, title, items, cardFunc, hasSearch = false, isDeep = false) {
+        const categories = [...new Set(items.map(item => item.category || item.Categories || item.type))].filter(Boolean);
+        container.innerHTML = `
+            <div class="section-header" style="margin-top:100px;"><h2>${title}</h2></div>
+            ${hasSearch ? `
+                <div class="search-area">
+                    <div style="position:relative;">
+                        <span class="material-symbols-outlined" style="position:absolute; right:12px; top:50%; transform:translateY(-50%); color:#94a3b8;">search</span>
+                        <input type="text" class="search-input" style="padding-right:44px;" placeholder="חיפוש מהיר..." oninput="fastSearch(this.value)">
+                    </div>
+                    <div class="filter-buttons" style="margin-top: 16px; display: flex; gap: 8px; flex-wrap: wrap;">
+                        <button onclick="fastSearch('')" class="px-4 py-2 rounded-full border border-slate-200 bg-white text-slate-600 text-sm font-medium cursor-pointer hover:bg-slate-50 transition-all">הכל</button>
+                        ${categories.map(cat => `
+                            <button onclick="fastSearch('${cat}')" class="px-4 py-2 rounded-full border border-slate-200 bg-white text-slate-600 text-sm font-medium cursor-pointer hover:bg-slate-50 transition-all">${cat}</button>
+                        `).join('')}
+                    </div>
+                    ${isDeep ? `<button class="btn-primary" onclick="deepSearch()" style="margin-top:16px; background:#e67e22;">🔍 חיפוש מורחב בתוך תוכן היצירות</button>` : ''}
+                </div>` : ''}
+            <div class="grid" id="archive-grid">${items.map(cardFunc).join('')}</div>
+        `;
+    }
+
+    function fastSearch(query) {
+        const q = query.toLowerCase();
+        document.querySelectorAll('.card').forEach(card => {
+            const text = card.innerText.toLowerCase() + (card.getAttribute('data-search') || '').toLowerCase();
+            card.style.display = text.includes(q) ? 'flex' : 'none';
+        });
+    }
+
+    async function deepSearch() {
+        const query = prompt("הכנס מילת חיפוש:");
+        if (!query) return;
+        const grid = document.getElementById('archive-grid');
+        grid.innerHTML = "מחפש...";
+        let results = [];
+        for (let item of data.texts) {
+            try {
+                const res = await fetch(item.content_link);
+                const html = await res.text();
+                if (html.toLowerCase().includes(query.toLowerCase())) results.push(item);
+            } catch (e) {}
+        }
+        grid.innerHTML = results.length ? results.map(renderTextCard).join('') : "אין תוצאות.";
+    }
+
+    function renderPhotoCard(p) {
+        const isVideo = p.type === 'video';
+        const thumbUrl = isVideo ? `https://img.youtube.com/vi/${p.id}/0.jpg` : getPhotoUrl(p.id, 'w600');
+        const safeTitle = p.title.replace(/'/g, "\\'");
+        
+        return `<div class="card" data-search="${p.category}" onclick="openItem('${p.type}', '${p.id}', '${p.id}', '${safeTitle}')">
+            <div class="card-img">
+                <img src="${thumbUrl}" loading="lazy">
+                ${isVideo ? `<div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.2);"><span class="material-symbols-outlined text-white text-6xl" style="font-variation-settings: 'FILL' 1;">play_circle</span></div>` : ''}
+                <div class="tag tag-gallery" style="position:absolute; top:12px; right:12px; margin:0;">${p.category}</div>
+            </div>
+            <div class="card-content">
+                <h4 class="card-title">${p.title}</h4>
+                <div class="card-footer"><span>${isVideo ? 'סרטון' : 'תמונה'}</span><span class="material-symbols-outlined" style="font-size:18px;">open_in_new</span></div>
+            </div>
+        </div>`;
+    }
+
+    function renderTextCard(t) {
+        const searchData = `${t.author} ${t.description} ${t.keywords} ${t.type}`;
+        const safeTitle = t.title.replace(/'/g, "\\'");
+        const safeAuthor = (t.author || "").replace(/'/g, "\\'");
+        
+        return `<div class="card" data-search="${searchData}" onclick="openItem('text', '${t.content_link}', '${t.id}', '${safeTitle}', '${safeAuthor}')">
+            <div class="card-content">
+                <div class="tag tag-works">${t.type}</div>
+                <h4 class="card-title">${t.title}</h4>
+                <p class="card-desc">${t.description || ''}</p>
+                <div class="card-footer">
+                    <span style="font-weight:600; color:#2c3e50;">${t.author || 'לא ידוע'}</span>
+                    <span class="material-symbols-outlined" style="font-size:18px;">article</span>
+                </div>
+            </div>
+        </div>`;
+    }
+
+    function renderJokeCard(j) {
+        return `<div class="joke-card" data-search="${j.Categories}" style="margin-bottom:24px;">
+            <div class="tag tag-jokes">${j.Categories}</div>
+            <div class="joke-quote">"${j['Joke Content']}"</div>
+        </div>`;
+    }
+
+    async function openItem(type, path, id, title, author = "") {
+        const modal = document.getElementById('item-modal');
+        const body = document.getElementById('modal-body');
+        modal.style.display = 'flex';
+        body.innerHTML = 'טוען...';
+        document.getElementById('modal-actions').innerHTML = `<button class="btn-outline" onclick="shareItem('${id}', '${title.replace(/'/g, "\\'")}')">🔗 שתף יצירה</button>`;
+        
+        if (type === 'video') {
+            body.innerHTML = `<h3 class="card-title" style="font-size:1.75rem; margin-bottom:24px;">${title}</h3>
+                <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:16px;">
+                    <iframe src="https://www.youtube.com/embed/${id}?autoplay=1" style="position:absolute; top:0; left:0; width:100%; height:100%;" frameborder="0" allowfullscreen></iframe>
+                </div>`;
+        } else if (type === 'photo') {
+            body.innerHTML = `<h3 class="card-title" style="font-size:1.75rem; margin-bottom:24px;">${title}</h3><img src="${getPhotoUrl(path, 'w1200')}" style="width:100%; border-radius:16px; display:block; margin:0 auto;">`;
+        } else {
+            try {
+                const res = await fetch(path);
+                const html = await res.text();
+                body.innerHTML = `<h2 class="card-title" style="font-size:2rem; margin-bottom:8px;">${title}</h2><p style="color:#64748b; margin-bottom:24px;"><strong>מאת: ${author}</strong></p><hr style="border:none; border-top:1px solid #f1f5f9; margin-bottom:32px;"><div class="external-content-wrapper">${html}</div>`;
+            } catch (e) { body.innerHTML = "שגיאה בטעינת הקובץ."; }
+        }
+        renderComments(id);
+    }
+
+    function renderComments(itemId) {
+        const filtered = data.comments.filter(c => c.item_id === itemId);
+        const listHtml = filtered.map(c => `<div style="border-bottom:1px solid #f1f5f9; padding:16px 0;"><strong>${c.name}:</strong><p style="margin:4px 0 0; color:#43474c;">${c.content}</p></div>`).join('');
+        document.getElementById('comment-area').innerHTML = `<div style="margin-top:48px; border-top:1px solid #f1f5f9; padding-top:32px;">
+            <h4 class="card-title">תגובות</h4>
+            <div style="max-height:300px; overflow-y:auto; margin-bottom:24px;">${listHtml || '<p style="color:#94a3b8;">אין עדיין תגובות. מוזמנים להיות הראשונים.</p>'}</div>
+            <div style="background:#f8fafc; padding:24px; border-radius:16px;">
+                <input type="text" id="c-name" placeholder="שם" style="width:100%; padding:12px; border-radius:8px; border:1px solid #cbd5e1; margin-bottom:12px; font-family:inherit;">
+                <textarea id="c-content" placeholder="כתבו תגובה או זיכרון..." style="width:100%; padding:12px; border-radius:8px; border:1px solid #cbd5e1; margin-bottom:12px; height:80px; font-family:inherit;"></textarea>
+                <button id="send-btn" class="btn-primary" style="width:100%; padding:14px; background:#e67e22;" onclick="sendComment('${itemId}')">שלח תגובה לאישור</button>
+            </div></div>`;
+    }
+
+    async function sendComment(id) {
+        const name = document.getElementById('c-name').value;
+        const content = document.getElementById('c-content').value;
+        if (!name || !content) return alert("מלא שם ותוכן");
+        document.getElementById('send-btn').disabled = true;
+        document.getElementById('send-btn').innerText = 'שולח...';
+        const params = new URLSearchParams({ name, relation: "", content, item_id: id });
+        await fetch(APPS_SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: params });
+        alert("התגובה נשלחה ותוצג לאחר אישור המערכת. תודה!");
+        closeModal();
+    }
+
+    function shareItem(id, title) {
+        const url = `${window.location.origin}${window.location.pathname}?item=${id}`;
+        if (navigator.share) navigator.share({ title, url }); else prompt("העתיקו את הקישור לשיתוף:", url);
+    }
+
+    function closeModal() { 
+        document.getElementById('item-modal').style.display = 'none'; 
+        document.getElementById('modal-body').innerHTML = ''; 
+    }
+    
+    function openFromUrl(id) {
+        const photo = data.photos.find(p => p.id === id);
+        if (photo) return openItem(photo.type || 'photo', photo.id, photo.id, photo.title);
+        const text = data.texts.find(t => t.id === id);
+        if (text) return openItem('text', text.content_link, text.id, text.title, text.author);
+        showPage('home');
+    }
+
+    async function renderAbout(container) {
+        container.innerHTML = `<div class="section-header" style="margin-top:100px;"><h2>קורות חיים</h2></div><div id="cv-target" style="background:white; padding:40px; border-radius:24px; border:1px solid #f1f5f9;">טוען...</div>`;
+        try {
+            const res = await fetch('about_barak.html');
+            const html = await res.text();
+            document.getElementById('cv-target').innerHTML = `<div class="external-content-wrapper">${html}</div>`;
+        } catch(e) {
+            document.getElementById('cv-target').innerHTML = `<p>טקסט אודות וקורות חיים יתווסף בקרוב.</p>`;
+        }
+    }
+
+    window.onload = init;
+</script>
+
+
+</body></html>
