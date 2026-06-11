@@ -1,7 +1,7 @@
 <!DOCTYPE html><html dir="rtl" lang="he"><head>
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
-<title>לזכר ברק לב שלם</title>
+<title>לזכרו של ברק לב שלם</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@100..900&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
@@ -315,7 +315,7 @@
         const thumbUrl = isVideo ? `https://img.youtube.com/vi/${p.id}/0.jpg` : getPhotoUrl(p.id, 'w600');
         const safeTitle = p.title.replace(/'/g, "\\'");
         
-        return `<div class="card" data-search="${p.category}" onclick="openItem('${p.type}', '${p.id}', '${p.id}', '${safeTitle}')">
+return `<div class="card" data-search="${p.category}" onclick="openItem('${p.type}', '${p.id}', '${p.id}', '${safeTitle}')">
             <div class="card-img">
                 <img src="${thumbUrl}" loading="lazy">
                 ${isVideo ? `<div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.2);"><span class="material-symbols-outlined text-white text-6xl" style="font-variation-settings: 'FILL' 1;">play_circle</span></div>` : ''}
@@ -365,7 +365,7 @@
                 <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:16px;">
                     <iframe src="https://www.youtube.com/embed/${id}?autoplay=1" style="position:absolute; top:0; left:0; width:100%; height:100%;" frameborder="0" allowfullscreen></iframe>
                 </div>`;
-        } else if (type === 'photo') {
+       } else if (type === 'photo') {
             body.innerHTML = `<h3 class="card-title" style="font-size:1.75rem; margin-bottom:24px;">${title}</h3><img src="${getPhotoUrl(id, 'w1200')}" style="width:100%; border-radius:16px; display:block; margin:0 auto;">`;
         } else {
             try {
@@ -414,9 +414,17 @@
     
     function openFromUrl(id) {
         const photo = data.photos.find(p => p.id === id);
-        if (photo) return openItem(photo.type || 'photo', photo.id, photo.id, photo.title);
+        if (photo) {
+            const actualType = (photo.type && photo.type.trim()) ? photo.type : 'photo';
+            const safePhotoTitle = photo.title ? photo.title.replace(/'/g, "\\'") : '';
+            return openItem(actualType, photo.id, photo.id, safePhotoTitle);
+        }
         const text = data.texts.find(t => t.id === id);
-        if (text) return openItem('text', text.content_link, text.id, text.title, text.author);
+        if (text) {
+            const safeTextTitle = text.title ? text.title.replace(/'/g, "\\'") : '';
+            const safeAuthor = text.author ? text.author.replace(/'/g, "\\'") : '';
+            return openItem('text', text.content_link, text.id, safeTextTitle, safeAuthor);
+        }
         showPage('home');
     }
 
